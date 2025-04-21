@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login Page</title>
+  <link rel="stylesheet" href="login.css" />
+</head>
+<body>
+  <div class="login-container">
+    <div class="logo-wrapper">
+      <img src="logo.jpeg" alt="Logo" class="logo" />
+    </div>
+    <form class="login-form" onsubmit="login(event)">
+      <input type="text" id="email" placeholder="Email or User ID" required autocomplete="email" />
+      <div class="password-wrapper">
+        <input type="password" id="password" placeholder="Password" required autocomplete="current-password" />
+        <span class="toggle-password" onclick="togglePassword()">👁️</span>
+      </div>
+      <button type="submit">Login</button>
+    </form>
+    <p class="signup-link">Don't have an account? <a href="registration.html">Sign up</a></p>
+  </div>
+
+  <script src="dummy.js"></script>
+</body>
+</html>

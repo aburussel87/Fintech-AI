@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign Up Page</title>
+  <link rel="stylesheet" href="registration.css" />
+</head>
+
+<body>
+  <div class="container">
+    <div class="logo-wrapper">
+      <div class="Header">
+        <img src="logo.jpeg" alt="Logo" class="logo" />
+      </div>
+
+      <div class="header">
+        Registration Form
+      </div>
+    </div>
+    <form class="signup-form" onsubmit="signup(event)">
+
+      <!-- Personal Information Section -->
+      <h2>Personal Information</h2>
+      <div class="personal_info">
+
+        <input type="text" id="first-name" placeholder="First Name" required />
+        <input type="text" id="last-name" placeholder="Last Name" required />
+        <input type="number" id="age" placeholder="Age" required />
+        <label class="date" for="date">Select DOB:</label>
+        <input type="date" id="date" name="date" required>
+
+        
+
+        <label class="marry">Marital Status:</label>
+        <select id="marry" required>
+          <option value="">Select</option>
+          <option value="Married">Married</option>
+          <option value="Single">Single</option>
+        </select>
+
+        <label class="blood" for="blood-group">Blood Group:</label>
+        <select id="blood-group" required>
+          <option value="">Select</option>
+          <option value="A+">A+</option>
+          <option value="A-">A-</option>
+          <option value="B+">B+</option>
+          <option value="B-">B-</option>
+          <option value="AB+">AB+</option>
+          <option value="AB-">AB-</option>
+          <option value="O+">O+</option>
+          <option value="O-">O-</option>
+        </select>
+      </div>
+
+      <!-- Address Section -->
+      <h2>Address</h2>
+      <div class="address">
+        <input type="text" id="country" placeholder="Bangladesh" value="Bangladesh" disabled />
+        <select id="division">
+          <option>Select</option>
+        </select>
+        <select id="district">
+          <option>Select</option>
+        </select>
+      </div>
+
+      <!-- Verification Section -->
+      <h2>Verification</h2>
+      <div class="verification">
+        <input type="email" id="email" placeholder="Email (used as username)" required />
+        <button type="button" onclick="sendVerificationCode()" id="verificationCodeButton">Send Verification
+          Code</button>
+        <input type="text" id="verification-code" placeholder="Enter Verification Code" required />
+        <button type="button" id="verify">Verify</button>
+      </div>
+
+      <!-- Password Setup Section -->
+      <h2>Password Setup</h2>
+      <div class="password">
+        <input type="password" id="password" placeholder="Create Password" required />
+        <input type="password" id="confirm-password" placeholder="Confirm Password" required />
+      </div>
+
+      <button type="submit">Sign Up</button>
+    </form>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <script>
+    emailjs.init("FWxppjTWqOBWHlgoC");
+  </script>
+  <script src="dummy.js"></script>
+  <script src="Address.js"> </script>
+</body>
+
+</html>
