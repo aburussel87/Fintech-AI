@@ -1,0 +1,15 @@
+@font-face {
+    font-family: 'century';
+    src: url('../assets/fonts/GOTHIC.TTF');
+}
+
+body {
+    font-family: 'century', sans-serif;
+    /* background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; */
+}
