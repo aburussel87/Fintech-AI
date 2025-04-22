@@ -191,7 +191,7 @@ input::placeholder {
 }
 
 .header {
-  text-align: center;
+  text-align: right;
   flex-grow: 1;
   font-size: 2vh;
   /* background-color: #7a0000; */
