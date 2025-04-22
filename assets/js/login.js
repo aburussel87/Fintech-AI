@@ -7,14 +7,17 @@ function login(e) {
   let users = JSON.parse(localStorage.getItem("users")) || [];
   const user = users.find(user => user.email === email);
 
-  if (!user || user.password !== password) {
-    alert("Invalid User or Password");
-    return;
-  }
+
+  // change it later
+
+  // if (!user || user.password !== password) {
+  //   alert("Invalid User or Password");
+  //   return;
+  // }
 
   console.log("Login successful!");
   localStorage.setItem("user", email);
-  window.location.href = "homepage.html";
+  window.location.href = "dashboard.html";
 }
 
 function togglePassword() {
