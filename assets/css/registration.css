@@ -8,7 +8,7 @@ body {
 }
 
 ::placeholder {
-  color: #cfcfcf !important;
+  color: #6a5f5f !important;
   opacity: 1;
 }
 
@@ -25,10 +25,7 @@ body {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
 
-.container input, drop{
-  background-color: rgb(46, 46, 46) ;
-  border: 0;
-}
+
 
 .logo {
   width: 80px;
@@ -44,10 +41,6 @@ body {
   text-transform: uppercase;
 }
 
-.heda{
-  /* ssdfkjdsfsfds */
-}
-
 
 h2 {
   border-left: 4px solid #0dcaf0;
@@ -59,8 +52,8 @@ h2 {
 
 .form-control,
 .form-select {
-  background-color: rgba(255, 255, 255, 0.05); /* Darker background for input */
-  color: #897d7d;
+  background-color: rgba(221, 217, 217, 0.05); /* Darker background for input */
+  color: #fbfbfb;
   border: 1px solid #5a5e6b;
 }
 
@@ -75,7 +68,7 @@ h2 {
 /* Dropdown options styling */
 .form-select option {
   background-color: #2e3b47;
-  color: #ffffff51;
+  color: #ffffff;
 }
 
 .form-select option:hover {
@@ -83,14 +76,14 @@ h2 {
   color: #2e3b47;
 }
 
-.btn-primary {
-  background-color: #0dcaf0;
-  border-color: #0dcaf0;
-}
-
-.btn-primary:hover {
-  background-color: #31d2f2;
-  border-color: #31d2f2;
+.btn-next{
+  margin-top: 10px;
+  background-color: #0fb19f;
+  border-color: #248ea3;
+  color: #000000;
+  font-weight: bold;
+  padding: 5px 10px;
+  border-radius: 5px;
 }
 
 .btn-secondary,
@@ -130,3 +123,4 @@ html {
   margin-bottom: 30px;
   padding: 40px;
 }
+
