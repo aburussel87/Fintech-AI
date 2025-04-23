@@ -13,6 +13,7 @@ function login(e) {
 
   console.log("Login successful!");
   localStorage.setItem("user", email);
+  localStorage.setItem("loggedInEmail", email);
   window.location.href = "dashboard.html";
 }
 
