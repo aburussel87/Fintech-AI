@@ -2,7 +2,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(135deg, #2e3b47, #4e5b71);
+  background: linear-gradient(135deg, #090141, #1a3741, #080350);
   color: #eaeaea;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
@@ -19,10 +19,15 @@ body {
   margin-top: 40px;
   margin-bottom: 100px;
   padding: 30px;
-  background: rgba(255, 255, 255, 0.1);
+  background: #ffffff1a;
   border-radius: 15px;
   backdrop-filter: blur(15px);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.container input, drop{
+  background-color: rgb(46, 46, 46) ;
+  border: 0;
 }
 
 .logo {
@@ -49,7 +54,7 @@ h2 {
 
 .form-control,
 .form-select {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.05); /* Darker background for input */
   color: #897d7d;
   border: 1px solid #5a5e6b;
 }
@@ -64,13 +69,13 @@ h2 {
 
 /* Dropdown options styling */
 .form-select option {
-  background-color: #2e3b47; /* Dark background for options */
-  color: #ffffff; /* White text for better contrast */
+  background-color: #2e3b47;
+  color: #ffffff51;
 }
 
 .form-select option:hover {
-  background-color: #0dcaf0; /* Highlight color when hovering */
-  color: #2e3b47; /* Dark text color on hover for better visibility */
+  background-color: #0dcaf0;
+  color: #2e3b47;
 }
 
 .btn-primary {
@@ -89,6 +94,9 @@ h2 {
   border-color: #555b6e;
   color: #eaeaea;
 }
+
+
+
 
 .btn-secondary:hover,
 .btn-success:hover {

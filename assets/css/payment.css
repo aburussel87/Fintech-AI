@@ -1,0 +1,60 @@
+body {
+    font-family: 'Share Tech Mono', monospace;
+    background: linear-gradient(135deg, #090141, #1a3741, #080350);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    color: #e0e0e0;
+  }
+
+  .glass-card {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 1rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 2rem;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .form-control,
+  textarea {
+
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    color: #f7eeee;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+  }
+  .form-select{
+      background-color: rgba(33, 20, 56, 0.626) !important;
+    color: #ffffff;
+    border: 1px solid rgba(232, 184, 184, 0.15);
+  }
+
+  .form-control:focus,
+  .form-select:focus,
+  textarea:focus {
+    box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.25);
+  }
+
+  .logo {
+    border-radius: 50%;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  }
+
+  
+
+  ::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .btn-primary, .btn-success {
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    border: none;
+  }
+
+  .btn-primary:hover, .btn-success:hover {
+    filter: brightness(1.1);
+  }
