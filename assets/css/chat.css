@@ -115,9 +115,9 @@ button:hover {
 
 .chat-container::before {
     content: "";
-    background: url('../logo.jpeg') no-repeat center center;
-    background-size: 200px; /* adjust as needed */
-    opacity: 0.1; /* faded effect */
+    background: url('../logo.png') no-repeat center center;
+    background-size: 300px; /* adjust as needed */
+    opacity: 0.2; /* faded effect */
     position: absolute;
     top: 50%;
     left: 50%;
