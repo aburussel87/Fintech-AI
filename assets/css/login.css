@@ -1,137 +1,79 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: 'Segoe UI', sans-serif;
-}
-
 body {
-    background: linear-gradient(135deg, #74ebd5, #acb6e5);
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  background: linear-gradient(to right, #0f0c29, #302b63, #24243e);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #f0f0f0;
+  font-family: 'Segoe UI', sans-serif;
 }
 
 .login-container {
-    background-color: rgb(242, 187, 187);
-    padding: 40px 30px;
-    border-radius: 12px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    width: 100%;
-    max-width: 360px;
-    text-align: center;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 2rem;
+  border-radius: 1rem;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
 }
 
-.login-container:hover {
-    transform: scale(1.02);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
-    transition: all 0.3s ease;
+.logo-wrapper {
+  text-align: center;
+  margin-bottom: 1.5rem;
 }
 
-
-.login-container h2 {
-    margin-bottom: 20px;
-    color: #333333;
+.logo {
+  width: 80px;
+  filter: drop-shadow(0 0 8px #00f7ff);
 }
 
-.login-form input {
-    width: 100%;
-    padding: 12px 15px;
-    margin: 10px 0;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    transition: 0.3s ease;
+.form-control {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: #fff;
 }
 
-.login-form input:focus {
-    border-color: #74ebd5;
-    outline: none;
-    box-shadow: 0 0 5px #74ebd5;
+.form-control::placeholder {
+  color: #ccc;
 }
 
-.password-wrapper {
-    position: relative;
-    width: 100%;
-  }
-  
-  .password-wrapper input {
-    width: 100%;
-    padding-right: 30px;
-    padding: 12px 15px;
-    margin: 10px 0;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    transition: 0.3s ease;
-  }
-  
-  .toggle-password {
-    position: absolute;
-    top: 50%;
-    right: 12px;
-    transform: translateY(-50%);
-    cursor: pointer;
-    font-size: 18px;
-    color: #888;
-  }
-  
-  .toggle-password:hover {
-    color: #333;
-  }
-  
-
-  .logo-wrapper {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .logo {
-    max-width: 100px;
-    width: 100%;
-    height: auto;
-    transition: transform 0.3s;
-  }
-  
-  .logo:hover {
-    transform: scale(1.05);
-  }
-
-.login-form input:hover {
-    border-color: #1a2221;
-    box-shadow: 0 0 5px #74ebd5;
-    transition: all 0.3s ease;
-  }
-  
-
-.login-form button {
-    width: 100%;
-    padding: 12px;
-    background-color: #74ebd5;
-    border: none;
-    color: rgb(32, 30, 30);
-    font-size: 16px;
-    font-weight: bold;
-    /* font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; */
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease;
+.form-control:focus {
+  box-shadow: 0 0 0 0.2rem rgba(0, 247, 255, 0.25);
 }
 
-.login-form button:hover {
-    background-color: #4ab9c2;
-    transform: scale(1.05);
+.toggle-password {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  user-select: none;
+  color: #aaa;
+}
+
+.btn-primary {
+  background-color: #00f7ff;
+  border: none;
+  color: #000;
+}
+
+.btn-primary:hover {
+  background-color: #00d1d1;
 }
 
 .signup-link {
-    margin-top: 15px;
-    font-size: 14px;
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 0.9rem;
 }
 
 .signup-link a {
-    color: #2506d3;
-    text-decoration: none;
+  color: #00f7ff;
+  text-decoration: none;
 }
 
 .signup-link a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }

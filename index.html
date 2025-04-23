@@ -3,27 +3,36 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Login Page</title>
+  <title>Login Page | Finguard AI</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/login.css" />
-  <link rel ="stylesheet" href="assets/css/styles.css" />
-  <link rel="icon" type="image" href="assets/logo.png" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <link rel="icon" type="image/png" href="assets/logo.png" />
 </head>
 <body>
   <div class="login-container">
     <div class="logo-wrapper">
-      <img src="assets/logo.png" alt="Logo" class="logo" />
+      <img src="assets/logo.png" alt="Finguard Logo" class="logo" />
     </div>
     <form class="login-form" onsubmit="login(event)">
-      <input type="text" id="email" placeholder="Email or User ID" required autocomplete="email" />
-      <div class="password-wrapper">
-        <input type="password" id="password" placeholder="Password" required autocomplete="current-password" />
+      <div class="mb-3">
+        <input type="text" class="form-control" id="email" placeholder="Email or User ID" required autocomplete="email" />
+      </div>
+      <div class="mb-3 position-relative">
+        <input type="password" class="form-control" id="password" placeholder="Password" required autocomplete="current-password" />
         <span class="toggle-password" onclick="togglePassword()">👁️</span>
       </div>
-      <button type="submit">Login</button>
+      <button type="submit" class="btn btn-primary w-100">Login</button>
     </form>
     <p class="signup-link">Don't have an account? <a href="registration.html">Sign up</a></p>
   </div>
 
   <script src="assets/js/login.js"></script>
+  <script>
+    function togglePassword() {
+      const password = document.getElementById("password");
+      password.type = password.type === "password" ? "text" : "password";
+    }
+  </script>
 </body>
 </html>
