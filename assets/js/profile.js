@@ -19,7 +19,7 @@ window.onload = () => {
     document.getElementById("user-blood").textContent = user.bloodGroup || "N/A";
     document.getElementById("user-dob").textContent = user.dob || "N/A";
     document.getElementById("user-joining").textContent = user.joiningDate || "N/A";
-    document.getElementById("user-address").textContent = `${user.division}, ${user.district}, ${user.country}`;
+    document.getElementById("user-address").textContent = `${user.district}, ${user.division}, ${user.country}`;
     document.getElementById("user-phone").textContent = user.phone || "N/A";
     document.getElementById("user-email").textContent = user.email;
 };

@@ -80,6 +80,8 @@ function sendVerificationCode() {
     .then(function (response) {
       alert("Verification code sent!");
       console.log("SUCCESS!", response.status, response.text);
+      document.getElementById("verificationCodeButton").disabled = true;
+      document.getElementById("verificationCodeButton").textContent = "Verification Code Sent";
     }, function (error) {
       console.log("FAILED...", error);
       alert("Failed to send verification code.");
@@ -136,6 +138,20 @@ document.getElementById("email").addEventListener("input", () => {
   verifyBtn.disabled = false;
 });
 
+function generateUniqueId(joiningYear) {
+  const yearPart = joiningYear.toString().slice(-2);
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  let randomPart = '';
+  
+  for (let i = 0; i < 10; i++) {
+      const randomIndex = Math.floor(Math.random() * chars.length);
+      randomPart += chars[randomIndex];
+  }
+
+  return yearPart + randomPart;
+}
+
+
 function signup(event) {
   event.preventDefault();
 
@@ -172,6 +188,11 @@ function signup(event) {
     return;
   }
 
+  const today = new Date();
+  const options = { day: '2-digit', month: 'long', year: 'numeric' };
+  const joiningDate = today.toLocaleDateString('en-GB', options);
+
+  const id = generateUniqueId(today.getFullYear());
   const newUser = {
     firstName,
     lastName,
@@ -184,7 +205,9 @@ function signup(event) {
     district,
     email,
     password,
-    phone
+    phone,
+    joiningDate,
+    id
   };
 
   let users = JSON.parse(localStorage.getItem("users")) || [];
