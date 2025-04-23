@@ -4,97 +4,141 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sign Up Page</title>
-  <link rel="stylesheet" href="assets/css/registration.css" />
-  <link rel ="stylesheet" href="assets/css/styles.css" />
-  <link rel="icon" type="image" href="assets/logo.jpeg" />
+  <title>Sign Up</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
+  <style>
+    .container {
+      max-width: 800px;
+      margin-top: 30px;
+      padding: 20px;
+      background-color: #f8f9fa;
+      border-radius: 10px;
+    }
+
+    .logo {
+      max-height: 80px;
+    }
+
+    .header {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin: 15px 0;
+    }
+
+    h2 {
+      margin-top: 30px;
+    }
+  </style>
 </head>
 
 <body>
-  <div class="container">
-    <div class="logo-wrapper">
-      <div class="Header">
-        <img src="assets/logo.jpeg" alt="Logo" class="logo" />
-      </div>
-
-      <div class="header">
-        Registration Form
-      </div>
+  <div class="container shadow">
+    <div class="text-center mb-4">
+      <img src="assets/logo.jpeg" alt="Logo" class="logo mb-2" />
+      <div class="header">Registration Form</div>
     </div>
-    <form class="signup-form" onsubmit="signup(event)">
 
+    <form onsubmit="signup(event)">
       <!-- Personal Information Section -->
       <h2>Personal Information</h2>
-      <div class="personal_info">
-
-        <input type="text" id="first-name" placeholder="First Name" required />
-        <input type="text" id="last-name" placeholder="Last Name" required />
-        <input type="number" id="age" placeholder="Age" required />
-        <label class="date" for="date">Select DOB:</label>
-        <input type="date" id="date" name="date" required>
-
-        
-
-        <label class="marry">Marital Status:</label>
-        <select id="marry" required>
-          <option value="">Select</option>
-          <option value="Married">Married</option>
-          <option value="Single">Single</option>
-        </select>
-
-        <label class="blood" for="blood-group">Blood Group:</label>
-        <select id="blood-group" required>
-          <option value="">Select</option>
-          <option value="A+">A+</option>
-          <option value="A-">A-</option>
-          <option value="B+">B+</option>
-          <option value="B-">B-</option>
-          <option value="AB+">AB+</option>
-          <option value="AB-">AB-</option>
-          <option value="O+">O+</option>
-          <option value="O-">O-</option>
-        </select>
+      <div class="row g-3">
+        <div class="col-md-6">
+          <input type="text" class="form-control" id="first-name" placeholder="First Name" required />
+        </div>
+        <div class="col-md-6">
+          <input type="text" class="form-control" id="last-name" placeholder="Last Name" required />
+        </div>
+        <div class="col-md-6">
+          <input type="number" class="form-control" id="age" placeholder="Age" required />
+        </div>
+        <div class="col-md-6">
+          <label for="date" class="form-label">Date of Birth</label>
+          <input type="date" class="form-control" id="date" name="date" required>
+        </div>
+        <div class="col-md-6">
+          <label for="marry" class="form-label">Marital Status</label>
+          <select class="form-select" id="marry" required>
+            <option value="">Select</option>
+            <option value="Married">Married</option>
+            <option value="Single">Single</option>
+          </select>
+        </div>
+        <div class="col-md-6">
+          <label for="blood-group" class="form-label">Blood Group</label>
+          <select class="form-select" id="blood-group" required>
+            <option value="">Select</option>
+            <option value="A+">A+</option>
+            <option value="A-">A-</option>
+            <option value="B+">B+</option>
+            <option value="B-">B-</option>
+            <option value="AB+">AB+</option>
+            <option value="AB-">AB-</option>
+            <option value="O+">O+</option>
+            <option value="O-">O-</option>
+          </select>
+        </div>
       </div>
 
       <!-- Address Section -->
       <h2>Address</h2>
-      <div class="address">
-        <input type="text" id="country" placeholder="Bangladesh" value="Bangladesh" disabled />
-        <select id="division">
-          <option>Select</option>
-        </select>
-        <select id="district">
-          <option>Select</option>
-        </select>
+      <div class="row g-3">
+        <div class="col-md-4">
+          <input type="text" class="form-control" id="country" value="Bangladesh" disabled />
+        </div>
+        <div class="col-md-4">
+          <select class="form-select" id="division">
+            <option>Select Division</option>
+          </select>
+        </div>
+        <div class="col-md-4">
+          <select class="form-select" id="district">
+            <option>Select District</option>
+          </select>
+        </div>
       </div>
 
       <!-- Verification Section -->
       <h2>Verification</h2>
-      <div class="verification">
-        <input type="email" id="email" placeholder="Email (used as username)" required />
-        <button type="button" onclick="sendVerificationCode()" id="verificationCodeButton">Send Verification
-          Code</button>
-        <input type="text" id="verification-code" placeholder="Enter Verification Code" required />
-        <button type="button" id="verify">Verify</button>
+      <div class="row g-3 align-items-center">
+        <div class="col-md-6">
+          <input type="email" class="form-control" id="email" placeholder="Email (used as username)" required />
+        </div>
+        <div class="col-md-6 d-grid">
+          <button type="button" class="btn btn-secondary" onclick="sendVerificationCode()" id="verificationCodeButton">Send Verification Code</button>
+        </div>
+        <div class="col-md-6">
+          <input type="text" class="form-control" id="verification-code" placeholder="Enter Verification Code" required />
+        </div>
+        <div class="col-md-6 d-grid">
+          <button type="button" class="btn btn-success" id="verify">Verify</button>
+        </div>
       </div>
 
-      <!-- Password Setup Section -->
+      <!-- Password Section -->
       <h2>Password Setup</h2>
-      <div class="password">
-        <input type="password" id="password" placeholder="Create Password" required />
-        <input type="password" id="confirm-password" placeholder="Confirm Password" required />
+      <div class="row g-3">
+        <div class="col-md-6">
+          <input type="password" class="form-control" id="password" placeholder="Create Password" required />
+        </div>
+        <div class="col-md-6">
+          <input type="password" class="form-control" id="confirm-password" placeholder="Confirm Password" required />
+        </div>
       </div>
 
-      <button type="submit">Sign Up</button>
+      <div class="text-center mt-4">
+        <button type="submit" class="btn btn-primary w-50">Sign Up</button>
+      </div>
     </form>
   </div>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
   <script>
     emailjs.init("FWxppjTWqOBWHlgoC");
   </script>
+  <script src="assets/js/login.js"></script>
   <script src="assets/js/Address.js"></script>
-  <script src="assets/js/login.js"> </script>
 </body>
 
 </html>
