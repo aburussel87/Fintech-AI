@@ -75,6 +75,7 @@ function sendVerificationCode() {
       console.log("SUCCESS!", response.status, response.text);
       document.getElementById("verificationCodeButton").disabled = true;
       document.getElementById("verificationCodeButton").textContent = "Verification Code Sent";
+      document.getElementById("email").disabled = true;
     }, function (error) {
       console.log("FAILED...", error);
       alert("Failed to send verification code.");

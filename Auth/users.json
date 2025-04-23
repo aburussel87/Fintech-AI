@@ -46,5 +46,21 @@
         "phone": "01303501932",
         "joiningDate": "24 April 2025",
         "id": "252P1GQNAFJC"
+    },
+    {
+        "firstName": "David",
+        "lastName": "Beckham",
+        "age": "17",
+        "dob": "2025-04-01",
+        "maritalStatus": "Single",
+        "bloodGroup": "A-",
+        "country": "Bangladesh",
+        "division": "Barisal",
+        "district": "Pirojpur",
+        "email": "2205157@ugrad.cse.buet.ac.bd",
+        "password": "scrypt:32768:8:1$lggagBkzjZQS3mW7$f6fc180c2b0a3964b09b51261726f86e6233be231ffe6cbf5721c72e19938bb325d565820151accad22698e056812edd24e64bbe77de32495d912ef6a56eba31",
+        "phone": "01784878641",
+        "joiningDate": "24 April 2025",
+        "id": "25CNF7W0X64Z"
     }
 ]
