@@ -51,14 +51,7 @@ function showNextSection(nextSectionId) {
 
 
 function sendVerificationCode() {
-  const email = document.getElementById("email").value;
-  let users = JSON.parse(localStorage.getItem("users")) || [];
-
-  if (users.some(user => user.email === email)) {
-    alert("This email is already registered.");
-    return;
-  }
-
+  const email = document.getElementById("email").value.trim();
   if (!email || !validateEmail(email)) {
     alert("Please enter a valid email address.");
     return;
@@ -152,7 +145,7 @@ function generateUniqueId(joiningYear) {
 }
 
 
-function signup(event) {
+async function signup(event) {
   event.preventDefault();
 
   const firstName = document.getElementById("first-name").value.trim();
@@ -210,17 +203,27 @@ function signup(event) {
     id
   };
 
-  let users = JSON.parse(localStorage.getItem("users")) || [];
-
-  if (users.some(user => user.email === email)) {
-    alert("This email is already registered.");
-    return;
-  }
-
-  users.push(newUser);
-  localStorage.setItem("users", JSON.stringify(users));
-
-  alert("Sign up successful!");
-  localStorage.removeItem("verified");
-  window.location.href = "index.html";
+  
+  fetch("http://localhost:8000/register", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(newUser)
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.success) {
+      alert("Sign up successful!");
+      localStorage.removeItem("verified");
+      window.location.href = "index.html"; // ✅ correct here
+    } else {
+      alert(data.message || "Sign up failed.");
+    }
+  })
+  .catch(error => {
+    console.error("Registration error:", error);
+    alert("Something went wrong. Please try again.");
+  });
+  
 }

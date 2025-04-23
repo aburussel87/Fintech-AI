@@ -1,0 +1,50 @@
+[
+    {
+        "firstName": "John",
+        "lastName": "Doe",
+        "id": "1",
+        "age": 30,
+        "maritalStatus": "Single",
+        "bloodGroup": "O+",
+        "dob": "1995-05-15",
+        "joiningDate": "2020-01-01",
+        "district": "Springfield",
+        "division": "Illinois",
+        "country": "USA",
+        "phone": "+1-555-1234",
+        "email": "john@example.com",
+        "password": "123456"
+    },
+    {
+        "firstName": "Jane",
+        "lastName": "Smith",
+        "id": "2",
+        "age": 28,
+        "maritalStatus": "Married",
+        "bloodGroup": "A-",
+        "dob": "1997-03-20",
+        "joiningDate": "2021-06-15",
+        "district": "Riverside",
+        "division": "California",
+        "country": "USA",
+        "phone": "+1-555-5678",
+        "email": "jane.smith@example.com",
+        "password": "password456"
+    },
+    {
+        "firstName": "Abu",
+        "lastName": "Russel",
+        "age": "17",
+        "dob": "2025-04-02",
+        "maritalStatus": "Single",
+        "bloodGroup": "B-",
+        "country": "Bangladesh",
+        "division": "Khulna",
+        "district": "Satkhira",
+        "email": "aburussel87@gmail.com",
+        "password": "scrypt:32768:8:1$zQX9baWgD7W2ToB1$a59be4dec93468b171950b40dd6853f9150e5094cee3fee36f8860f38a9c427166a7cef74a04731eaed860d649ae5182ba2eb362f77e949be7c4b0ed823ce32d",
+        "phone": "01303501932",
+        "joiningDate": "24 April 2025",
+        "id": "252P1GQNAFJC"
+    }
+]
