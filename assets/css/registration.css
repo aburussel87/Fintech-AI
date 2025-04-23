@@ -1,253 +1,119 @@
-/* Global Reset */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 body {
-  /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
-  background: linear-gradient(to right, #e3f2fd, #fce4ec);
-  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px;
+  background: linear-gradient(135deg, #2e3b47, #4e5b71);
+  color: #eaeaea;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+::placeholder {
+  color: #cfcfcf !important;
+  opacity: 1;
+}
+
+/* Glassmorphism Effect */
 .container {
-  background-color: #ffffff;
+  color: rgb(31, 248, 255);
+  max-width: 850px;
+  margin-top: 40px;
+  margin-bottom: 100px;
   padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 1000px;
-  /* font-family: 'Times New Roman', Times, serif; */
-  transition: transform 0.3s ease;
-}
-
-/* Hover Effect */
-.container:hover {
-  transform: translateY(-3px);
-}
-
-/* Section Headings */
-h2 {
-  text-align: center;
-  margin-bottom: 15px;
-  color: #333;
-  font-size: 22px;
-  border-bottom: 1px solid #ddd;
-  padding-bottom: 5px;
-}
-
-/* Form Section Spacing */
-.personal_info,
-.address,
-.verification,
-.password {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 25px;
-  padding: 2%;
-  background-color: #e9f0fb;
-  border-radius: 20px;
-  transition: all 0.3s ease;
-}
-
-
-.personal_info:hover,
-.address:hover,
-.verification:hover,
-.password:hover {
-  background-color: #d6e4fa;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  transform: scale(1.02);
-}
-
-
-
-input[type="text"],
-input[type="email"],
-input[type="number"],
-input[type="password"],
-select {
-  width: 90%;
-  padding: 12px;
-  margin: 10px 10px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  transition: border-color 0.3s, background-color 0.3s, box-shadow 0.3s;
-  font-size: 15px;
-  /* font-family: 'Times New Roman', Times, serif; */
-}
-
-input[type="text"]:hover,
-input[type="email"]:hover,
-input[type="number"]:hover,
-input[type="password"]:hover,
-select:hover {
-  border-color: #1976d2;
-  background-color: #f0f7ff;
-  box-shadow: 0 0 5px rgba(25, 118, 210, 0.2);
-}
-
-
-.personal_info {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 5px;
-  margin-bottom: 20px;
-  padding: 2%;
-  background-color: #e9f0fb;
-  border-radius: 20px;
-  transition: all 0.3s ease;
-}
-
-.personal_info input[type="text"],
-.personal_info input[type="number"],
-.personal_info select {
-  width: 46%
-}
-
-/* Radio Buttons */
-label {
-  font-size: 14px;
-  display: inline-block;
-  margin: 5px 8px 5px 0;
-}
-
-input[type="radio"] {
-  margin-right: 5px;
-}
-
-/* Buttons */
-button {
-  width: 100%;
-  padding: 12px;
-  background-color: #1976d2;
-  color: white;
-  font-size: 16px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  margin-top: 10px;
-  transition: background-color 0.3s, transform 0.2s;
-}
-
-button:hover {
-  background-color: #0d47a1;
-  transform: scale(1.03);
-}
-
-button:active {
-  transform: scale(0.98);
-}
-
-/* Placeholder */
-input::placeholder {
-  color: #aaa;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  .container {
-    padding: 20px;
-  }
-
-  h2 {
-    font-size: 20px;
-  }
-}
-
-@media (max-width: 480px) {
-  h2 {
-    font-size: 18px;
-  }
-
-  input,
-  select,
-  button {
-    font-size: 14px;
-  }
-}
-
-.logo-wrapper {
-  display: flex;
-  background-color: #ddd;
-  height: 5vh;
-  justify-content: space-between;
-  align-items: center;
-  text-align: right;
-  margin-bottom: 0px;
-}
-
-.Header {
-  text-align: right;
-  flex: 0 0 auto;
-}
-
-.header {
-  text-align: right;
-  flex-grow: 1;
-  font-size: 2vh;
-  /* background-color: #7a0000; */
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  backdrop-filter: blur(15px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
 
 .logo {
-  max-width: 100px;
-  width: 100%;
+  width: 80px;
   height: auto;
-  max-height: 10vh;
-  min-height: 5vh;
-  transition: transform 0.3s;
 }
 
-.logo:hover {
-  transform: scale(1.05);
+.header {
+  text-align: center;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2rem;
+  letter-spacing: 2px;
+  color: #00ffe7;
+  text-transform: uppercase;
 }
 
-#verify {
-  width: auto;
-  padding: 10px 18px;
-  background-color: #324fdf;
-  color: white;
-  font-weight: bold;
-  font-size: 15px;
-  border: none;
-  border-radius: 8px;
+h2 {
+  border-left: 4px solid #0dcaf0;
+  padding-left: 10px;
+  margin-top: 40px;
+  color: #0dcaf0;
   cursor: pointer;
-  margin-left: 10px;
-  margin-top: 10px;
-  transition: background-color 0.3s, transform 0.2s;
 }
 
-#verify:hover {
-  background-color: #6a54c5;
-  transform: scale(1.05);
+.form-control,
+.form-select {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #897d7d;
+  border: 1px solid #5a5e6b;
 }
 
-#verify:active {
-  transform: scale(0.95);
+.form-control:focus,
+.form-select:focus {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #f1f1f1;
+  border-color: #0dcaf0;
+  box-shadow: 0 0 0 0.25rem rgba(13, 202, 240, 0.25);
 }
 
-.date,
-#date {
-  width: 20%;
-  height: 5vh;
-  /* font-family: 'Times New Roman', Times, serif; */
-  font-size: larger;
-  border-radius: 10px;
+/* Dropdown options styling */
+.form-select option {
+  background-color: #2e3b47; /* Dark background for options */
+  color: #ffffff; /* White text for better contrast */
 }
 
-.marry,
-#marry,
-.blood,
-#blood-group {
-  width: 20%;
-  font-size: larger;
+.form-select option:hover {
+  background-color: #0dcaf0; /* Highlight color when hovering */
+  color: #2e3b47; /* Dark text color on hover for better visibility */
+}
 
+.btn-primary {
+  background-color: #0dcaf0;
+  border-color: #0dcaf0;
+}
+
+.btn-primary:hover {
+  background-color: #31d2f2;
+  border-color: #31d2f2;
+}
+
+.btn-secondary,
+.btn-success {
+  background-color: #44495a;
+  border-color: #555b6e;
+  color: #eaeaea;
+}
+
+.btn-secondary:hover,
+.btn-success:hover {
+  background-color: #5a6075;
+  border-color: #6c738c;
+}
+
+/* Smooth Animated Transitions */
+section {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+section.active {
+  display: block;
+  opacity: 1;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Optional: Adjust space between sections */
+.section {
+  margin-bottom: 30px;
+  padding: 40px;
 }
