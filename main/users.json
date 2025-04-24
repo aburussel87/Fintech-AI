@@ -62,5 +62,21 @@
         "phone": "01784878641",
         "joiningDate": "24 April 2025",
         "id": "25CNF7W0X64Z"
+    },
+    {
+        "firstName": "Rahat",
+        "lastName": "Mahmud",
+        "age": "17",
+        "dob": "2025-04-03",
+        "maritalStatus": "Married",
+        "bloodGroup": "O+",
+        "country": "Bangladesh",
+        "division": "Rajshahi",
+        "district": "Bogura",
+        "email": "2205157@cse.buet.ac.bd",
+        "password": "scrypt:32768:8:1$XOb8yUUqBqImuZSM$0098fa8cdf551b36555fff12c72c32267b0b340ffe5145c8d6456dda9b76032d93925df3519f01589e0aa15682bfc112ac955509dfea2325fed6950143e8f5ab",
+        "phone": "01784878641",
+        "joiningDate": "24 April 2025",
+        "id": "25YNTE10XJVD"
     }
 ]

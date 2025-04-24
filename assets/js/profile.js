@@ -1,7 +1,7 @@
 window.onload = async () => {
     try {
         const token = localStorage.getItem("access_token");
-        console.log(token); // Log the token to check if it's being retrieved correctly
+        
         if (!token) {
             alert("You are not logged in. Redirecting to login page.");
             window.location.href = "index.html"; // Redirect to login page if not logged in
@@ -14,6 +14,19 @@ window.onload = async () => {
                 'Authorization': `Bearer ${token}`  // Send the token with the request
             }
         });
+
+        // Check if the response status is ok (status 200)
+        if (!response.ok) {
+            // If not 200, handle different status codes
+            if (response.status === 401) {
+                alert("Unauthorized access. Please log in again.");
+                localStorage.removeItem("access_token");
+                window.location.href = "index.html"; // Redirect to login page on unauthorized access
+                return;
+            }
+            alert("Failed to load profile. Please try again later.");
+            return;
+        }
 
         const data = await response.json(); // 👈 Extract the JSON body here
 
@@ -38,6 +51,6 @@ window.onload = async () => {
 
     } catch (error) {
         console.error('Error fetching user data:', error);
-        alert('Failed to load user data.');
+        alert('Failed to load user data. Please check your connection or try again later.');
     }
 };
