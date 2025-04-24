@@ -1,76 +1,21 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
   <title>FinGuardAI Chatbot</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" type="image/png" href="assets/logo.png" />
   <link rel="stylesheet" href="assets/css/chat.css">
-  <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 
 <body>
   <div class="chat-container">
-    <!-- <h1>FinGuardAI Chatbot</h1> -->
-    <!-- <p>Ask me anything about finance!</p> -->
-    <!-- <h2>FinGuardAI Chat</h2> -->
     <div id="chatbox" class="chat-box"></div>
     <div class="input-area">
       <input type="text" id="userInput" placeholder="Ask something..." />
-      <button onclick="sendMessageAi()">Send</button>
+      <button type="button" id="send">Send</button> <!-- Make sure this button is type="button" -->
     </div>
   </div>
-
-  <script>
-    async function sendMessageAi() {
-      const inputField = document.getElementById("userInput");
-      const message = inputField.value.trim();
-      if (!message) return;
-
-      const chatbox = document.getElementById("chatbox");
-      // chatbox.innerHTML += `<div><b>You:</b> ${message}</div>`;
-      addMessage(message, 'user');
-      inputField.value = "";
-
-      try {
-        const res = await fetch("http://localhost:5000/chat", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ message })
-        });
-
-        if (!res.ok) throw new Error("Server error");
-
-        const data = await res.json();
-        // chatbox.innerHTML += `<div><b>FinGuardAI:</b> ${data.response}</div>`;
-        addMessage(data.response, 'bot');
-      } catch (err) {
-        // chatbox.innerHTML += `<div><b>FinGuardAI:</b> Error: Could not connect to server.</div>`;
-        addMessage("Error: Could not connect to server.", 'bot');
-      }
-
-      chatbox.scrollTop = chatbox.scrollHeight;
-    }
-
-    document.getElementById("userInput").addEventListener("keydown", function (event) {
-      if (event.key === "Enter") sendMessage();
-    });
-
-    function addMessage(message, sender) {
-      const chatBox = document.getElementById('chatbox');
-      const messageDiv = document.createElement('div');
-      messageDiv.classList.add('message', sender);
-      messageDiv.textContent = message;
-      chatBox.appendChild(messageDiv);
-      chatBox.scrollTop = chatBox.scrollHeight;
-    }
-
-    document.getElementById('userInput').addEventListener('keydown', function (event) {
-      if (event.key === 'Enter') {
-        sendMessageAi();
-      }
-    });
-
-  </script>
+  <script src="assets/js/chat.js"></script>
 </body>
-
 </html>

@@ -1,42 +1,57 @@
-from flask import Flask, request, jsonify,Blueprint
-from flask_cors import CORS
-import ollama
+from flask import Blueprint, jsonify, request
 from flask_jwt_extended import jwt_required, get_jwt_identity
+from datetime import datetime
+from utils import load_users, save_message
 
 chat_bp = Blueprint('chat', __name__)
-model = 'llama3.2:3b'
-# Initial context for the chatbot
-previous_messages = [
-    {'role': 'user', 'content': 'You are a FinanceGPT from Bangladesh, a large language model trained to assist with financial queries. You are helpful, creative, clever, and very friendly.'},
-    {'role': 'assistant', 'content': 'Hello! I am FinanceGPT, your friendly financial assistant. How can I help you today?'},
-    {'role': 'user', 'content': 'Your answers should not be too long, make them short and concise.'},
+
+chat_replies = [
+    {
+        "id": 1,
+        "message": "Hello! How can I assist you today?",
+        "timestamp": "2023-10-01T12:00:00Z"
+    },
+    {
+        "id": 2,
+        "message": "I'm here to help with your queries.",
+        "timestamp": "2023-10-01T12:05:00Z"
+    }
 ]
 
-@chat_bp.route('/chat', methods=['POST'])
-# app = Flask(__name__)
-# CORS(app)  # Enable CORS for all routes
+def get_message(user_id, sent_message):
+    # Get current timestamp
+    time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+    # Get a simple bot reply (could be improved with NLP later)
+    bot_reply = chat_replies[0]["message"]
+
+    # Save the conversation (Make sure save_message function is well-defined)
+    save_message(user_id, sent_message, bot_reply, time)
+
+    # Return the bot's reply
+    return bot_reply
 
 
-
-def get_response(prompt):
-    global previous_messages
-    print(f"User prompt: {prompt}")
-    previous_messages.append({'role': 'user', 'content': prompt})
-    
-    response = ollama.chat(model=model, messages=previous_messages)
-    bot_message = response['message']['content']
-    
-    previous_messages.append({'role': 'assistant', 'content': bot_message})
-    print(f"Bot response: {bot_message}")
-    
-    return bot_message
-
-# @app.route('/chat', methods=['POST'])
+@chat_bp.route("/chat", methods=["GET", "POST"])
+@jwt_required()
 def chat():
-    data = request.get_json()
-    user_message = data.get('message', '')
-    if not user_message:
-        return jsonify({'response': 'Please provide a valid message.'}), 400
+    try:
+        # Get sender's ID from JWT token
+        sender = get_jwt_identity()
+        users = load_users()  # Load user data from your storage system
+        data = request.get_json()  # Get JSON data from the request
+        sent_message = data.get("text")  # Match frontend key "text"
 
-    bot_response = get_response(user_message)
-    return jsonify({'response': bot_response})
+        # Find the user from the loaded users data
+        user = next((u for u in users if u["id"] == sender), None)
+
+        if user:
+            # Get the bot's response
+            reply = get_message(user["id"], sent_message)
+            return jsonify({"success": True, "message": reply}), 200
+        else:
+            # Return error if user not found
+            return jsonify({"success": False, "message": "User not found"}), 404
+    except Exception as e:
+        # Catch any unexpected errors and return a message
+        return jsonify({"success": False, "message": str(e)}), 500

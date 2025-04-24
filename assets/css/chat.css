@@ -18,7 +18,6 @@ html, body {
     height: 100vh;
     width: 100vw;
     background: linear-gradient(to right, #e3f2fd, #fce4ec);
-    backdrop-filter: blur(8px);
     border-radius: 20px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     margin: auto;
@@ -68,7 +67,6 @@ html, body {
     padding: 12px;
     border-top: 1px solid #ccc;
     background-color: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(6px);
     border-radius: 0 0 20px 20px;
 }
 
