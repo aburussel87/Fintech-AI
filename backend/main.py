@@ -1,6 +1,5 @@
 from fastapi import FastAPI
 from app.routes import auth, payment, dashboard
-
 app = FastAPI(title="FinGuardAI Backend")
 
 # Include route groups
