@@ -20,7 +20,7 @@ async function verifyReceiver() {
   }
 
   try {
-    const response = await fetch("http://localhost:8000/verifyReceiver", {
+    const response = await fetch("http://localhost:5000/verifyReceiver", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -71,7 +71,7 @@ async function submitPayment() {
     payerInfo: document.getElementById('payer-info').value.trim()
   };
 
-  const res = await fetch("http://localhost:8000/payment/submit", {
+  const res = await fetch("http://localhost:5000/payment/submit", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

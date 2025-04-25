@@ -8,7 +8,7 @@ window.onload = async () => {
             return;
         }
 
-        const response = await fetch('http://localhost:8000/profile', {
+        const response = await fetch('http://localhost:5000/profile', {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${token}`  // Send the token with the request
