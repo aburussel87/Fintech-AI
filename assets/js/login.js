@@ -21,7 +21,7 @@ async function login(e) {
     });
 
     const data = await res.json();
-    console.log(data);
+    
 
     // Handle failed login attempt
     if (!data.success) {
