@@ -30,14 +30,6 @@ async function verifyReceiver() {
       body: JSON.stringify(receiverData)
     });
 
-    if (!response.ok) {
-
-      alert("Unauthorized access. Please log in again.");
-      localStorage.removeItem("access_token");
-      window.location.href = "index.html"; // Redirect to login page on unauthorized access
-      return;
-
-    }
     const data = await response.json();
 
     if (data.success) {
