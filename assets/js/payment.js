@@ -15,7 +15,8 @@ async function verifyReceiver() {
   const token = localStorage.getItem("access_token");  // Assume token is stored in localStorage after login
   console.log(token);
   if (!token) {
-    alert("You are not authenticated. Please log in.");
+    alert("Unauthorized Access. Please log in.");
+    window.location.href = "index.html"; // Redirect to login page if not logged in
     return;
   }
 
@@ -29,6 +30,14 @@ async function verifyReceiver() {
       body: JSON.stringify(receiverData)
     });
 
+    if (!response.ok) {
+
+      alert("Unauthorized access. Please log in again.");
+      localStorage.removeItem("access_token");
+      window.location.href = "index.html"; // Redirect to login page on unauthorized access
+      return;
+
+    }
     const data = await response.json();
 
     if (data.success) {

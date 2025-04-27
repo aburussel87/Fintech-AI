@@ -17,15 +17,10 @@ window.onload = async () => {
 
         // Check if the response status is ok (status 200)
         if (!response.ok) {
-            // If not 200, handle different status codes
-            if (response.status === 401) {
                 alert("Unauthorized access. Please log in again.");
                 localStorage.removeItem("access_token");
                 window.location.href = "index.html"; // Redirect to login page on unauthorized access
                 return;
-            }
-            alert("Failed to load profile. Please try again later.");
-            return;
         }
 
         const data = await response.json(); // 👈 Extract the JSON body here
