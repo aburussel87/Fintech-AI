@@ -7,32 +7,52 @@
 
 html, body {
     height: 100%;
-    /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
-    background: linear-gradient(to right, #dbeeff, #fddde6); /* Blue to pink gradient */
+    font-family: 'Share Tech Mono', monospace;
+    background: linear-gradient(135deg, #090141, #1a3741, #080350);
+    overflow: hidden;
 }
 
-/* Chatbot container full screen */
+/* Logo container */
+.logo-container {
+    position: absolute;
+    top: 250px;
+    left: 750px;
+    z-index: 100;
+    opacity: 15%;
+}
+
+.logo {
+    width: 200px; /* Adjust size as needed */
+    height: auto;
+}
+
+/* Chat container */
 .chat-container {
     display: flex;
     flex-direction: column;
     height: 100vh;
     width: 100vw;
-    background: linear-gradient(to right, #e3f2fd, #fce4ec);
-    border-radius: 20px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    margin: auto;
-    padding: 10px;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding: 20px;
+    z-index: 1;
 }
 
-/* Chat messages area */
 .chat-box {
     flex: 1;
+    width: 100%;
+    max-width: 700px;
     overflow-y: auto;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px 20px 0 0;
     padding: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
     display: flex;
     flex-direction: column;
     gap: 12px;
-    background: linear-gradient(to right, #e3f2fd, #fce4ec);
 }
 
 /* Message styles */
@@ -42,63 +62,72 @@ html, body {
     max-width: 75%;
     font-size: 16px;
     word-wrap: break-word;
-    line-height: 1.4;
+    line-height: 1.5;
 }
 
 .user {
     align-self: flex-end;
-    background-color: #e2f0fb;
-    color: #003865;
+    background: rgba(33, 150, 243, 0.2);
+    color: #90caf9;
+    border: 1px solid rgba(144, 202, 249, 0.3);
     text-align: right;
-    border: 1px solid #b6daee;
 }
 
 .bot {
     align-self: flex-start;
-    background-color: #fde2ec;
-    color: #5b1a30;
+    background: rgba(244, 242, 243, 0.2);
+    color: #f48fb1;
+    border: 1px solid rgba(244, 143, 177, 0.3);
     text-align: left;
-    border: 1px solid #f7b5c9;
 }
 
-/* Input and button area */
+/* Input area */
 .input-area {
+    width: 100%;
+    max-width: 700px;
     display: flex;
-    padding: 12px;
-    border-top: 1px solid #ccc;
-    background-color: rgba(255, 255, 255, 0.8);
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.05);
     border-radius: 0 0 20px 20px;
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 input[type="text"] {
     flex: 1;
     padding: 12px;
     font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
     outline: none;
+}
+
+input[type="text"]::placeholder {
+    color: rgba(255, 255, 255, 0.5);
 }
 
 button {
     margin-left: 12px;
     padding: 12px 24px;
     font-size: 16px;
-    background: linear-gradient(to right, #007bff, #5a8dee);
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
     color: white;
     border: none;
-    border-radius: 8px;
+    border-radius: 10px;
     cursor: pointer;
     transition: background 0.3s ease;
 }
 
 button:hover {
-    background: linear-gradient(to right, #0056b3, #3b6edc);
+    filter: brightness(1.2);
 }
 
-/* Responsive */
-@media screen and (max-width: 768px) {
-    .chat-box {
-        padding: 15px;
+/* Responsive Design */
+@media (max-width: 768px) {
+    .chat-box, .input-area {
+        width: 95%;
     }
 
     .input-area {
@@ -106,29 +135,8 @@ button:hover {
         gap: 10px;
     }
 
-    input[type="text"], button {
+    button {
         width: 100%;
+        margin-left: 0;
     }
 }
-
-.chat-container::before {
-    content: "";
-    background: url('../logo.png') no-repeat center center;
-    background-size: 300px; /* adjust as needed */
-    opacity: 0.2; /* faded effect */
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    height: 100%;
-    width: 100%;
-    z-index: 0; /* behind everything */
-    pointer-events: none;
-}
-
-/* Make sure actual content is above the background */
-.chat-container {
-    position: relative;
-    z-index: 1;
-}
-
