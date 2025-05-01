@@ -138,15 +138,21 @@ def fraud():
     
 def check_fraud(reciever_id,current_user,current_transaction):
 
-    if is_user_in_fraud_list(reciever_id):
-        return json.dumps({
+    return json.dumps({
         "message": f"User {reciever_id} is in the fraud list",
-        "flag": "red"
-        }), 200
+        "flag": "green"
+    }), 200
+
+
+    # if is_user_in_fraud_list(reciever_id):
+    #     return json.dumps({
+    #     "message": f"User {reciever_id} is in the fraud list",
+    #     "flag": "red"
+    #     }), 200
 
     
-    else:
+    # else:
 
-        # return jsonify({"message": f"User {reciever_id} is not in the fraud list{current_user}","flag":"green"}), 200
-        data = check_fraud_Ai(reciever_id, current_transaction)
-        return data
+    #     # return jsonify({"message": f"User {reciever_id} is not in the fraud list{current_user}","flag":"green"}), 200
+    #     data = check_fraud_Ai(reciever_id, current_transaction)
+    #     return data
