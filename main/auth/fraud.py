@@ -51,6 +51,7 @@ def check_fraud_Ai(user_id, current_transaction):
                     break
                     # return True
         prompt = f"""
+        give me clean json code nothing else, not a single extra word, just the json code.
             check if the follwing transaction of user {user_id} is consistent with the previous transactions of the user.
             carefully check the locations this user recieves from, like the cities and countries, if that varies thats a red flag
             and also check the amount recieved by this user user
@@ -61,6 +62,7 @@ def check_fraud_Ai(user_id, current_transaction):
             respond with clean Json format in this format:
             "flag": "red" or "green" or "yellow"
             "message" : "a short message about the transaction about if there is prababale fraud or not"
+             give me clean json code nothing else, not a single extra word, just the json code.
         """
         chat_response = get_response(prompt, user_id)
         # print(f"Prompt: {prompt}")

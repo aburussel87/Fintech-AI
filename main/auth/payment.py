@@ -53,6 +53,7 @@ def submit_payment():
     amount = data.get("amount")
     paymentmethod = data.get("paymentMethod")
     Sender_Location = data.get("Sender_location")
+    force = data.get("force")
 
     users = load_users()  # Load the users list/dictionary
 
@@ -89,12 +90,35 @@ def submit_payment():
         "note": note,
     }
 
+    
+    if(force == "true"):
+        # Load existing invoices, append the new invoice, and save
+        print("force is true")
+        invoices = load_invoices()
+        invoices.append(invoice)
+        save_invoices(invoices)
+        success = True
+        return jsonify({"success": success, "invoice": invoice, "message":"payment successful"}), 201
+
+
+
+
     fraud_check_json = check_fraud(receiver_id, sender_id, invoice)
     fraud_check = json.loads(fraud_check_json)
 
+    # Check the fraud check result
+    # this returns a json object with the flag and message
+    # fraud_check['flag'] can be 'green', 'yellow', or 'red'
+    #green means no fraud, yellow means potential fraud, red means fraud detected
+    # if fraud_check['flag'] == 'red', we don't save the invoice and return an error message
+    # if fraud_check['flag'] == 'yellow', we save the invoice but mark it as potential fraud 
+    # and return a warning message
+    # if fraud_check['flag'] == 'green', we save the invoice as normal
 
+    # very important 
+    # yellow and green are both considered success for now but you have to display user a message if it is yellow, 
     success = False
-    if(fraud_check['flag']=='green' or fraud_check['flag']=='yellow'):
+    if(fraud_check['flag']=='green' or force == "true"):
         # Load existing invoices, append the new invoice, and save
         invoices = load_invoices()
         invoices.append(invoice)
