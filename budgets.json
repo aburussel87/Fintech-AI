@@ -1,0 +1,84 @@
+{
+  "user3": {
+    "budgetName": "Monthly Budget",
+    "currency": "USD",
+    "income": [
+      {
+        "source": "Salary",
+        "amount": "20000"
+      }
+    ],
+    "expenses": [
+      {
+        "category": "Housing",
+        "items": [
+          {
+            "item": "Rent",
+            "name": "House Rent",
+            "amount": "12000"
+          },
+          {
+            "item": "Utilities",
+            "name": "Bills & Services",
+            "amount": "8000"
+          }
+        ]
+      },
+      {
+        "category": "Transportation",
+        "items": [
+          {
+            "item": "Car Payment",
+            "name": "Car Payment",
+            "amount": "4000"
+          },
+          {
+            "item": "Gas",
+            "name": "Gas",
+            "amount": "2000"
+          },
+          {
+            "item": "Insurance",
+            "name": "Insurance",
+            "amount": "1000"
+          }
+        ]
+      },
+      {
+        "category": "Food",
+        "items": [
+          {
+            "item": "Groceries",
+            "name": "Groceries",
+            "amount": "3000"
+          }
+        ]
+      },
+      {
+        "category": "Entertainment",
+        "items": [
+          {
+            "item": "Netflix",
+            "name": "Netflix",
+            "amount": "500"
+          },
+          {
+            "item": "Dining Out",
+            "name": "Dining Out",
+            "amount": "1000"
+          }
+        ]
+      },
+      {
+        "category": "Savings",
+        "items": [
+          {
+            "item": "Emergency Fund",
+            "name": "Emergency Fund",
+            "amount": "2000"
+          }
+        ]
+      }
+    ]
+  }
+}
