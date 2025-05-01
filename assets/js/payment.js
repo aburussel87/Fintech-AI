@@ -51,6 +51,19 @@ async function verifyReceiver() {
   }
 }
 
+async function FraudDetection() {
+  receiver_Id = document.getElementById('receiver-id').value.trim();
+  receiver_Mobile = document.getElementById('receiver-mobile').value.trim();
+  sender_id = localStorage.getItem("user_id");
+  payment_method = document.getElementById('payment-method').value;
+  amount = document.getElementById('amount').value.trim();
+  payer_info = document.getElementById('payer-info').value.trim();
+  note = document.getElementById('note').value.trim();
+
+}
+
+
+
 
 async function submitPayment() {
   const receiverId = document.getElementById('receiver-id').value.trim();
@@ -69,8 +82,11 @@ async function submitPayment() {
     note: note,
     amount: document.getElementById('amount').value.trim(),
     paymentMethod: document.getElementById('payment-method').value,
-    payerInfo: document.getElementById('payer-info').value.trim()
+    payerInfo: document.getElementById('payer-info').value.trim(),
+    Sender_location: Loc
   };
+
+  console.log(data);
 
   const res = await fetch("http://localhost:5000/payment/submit", {
     method: "POST",
@@ -140,6 +156,7 @@ async function generateInvoicePDF(invoice) {
   doc.text(`Phone: ${invoice.sender_info.phone}`, leftX, startY + 24);
   doc.text(`Email: ${invoice.sender_info.email}`, leftX, startY + 32);
 
+
   // Receiver
   doc.setFont("times", "bold");
   doc.text("Receiver Information", rightX, startY);
@@ -157,3 +174,38 @@ async function generateInvoicePDF(invoice) {
 
   doc.save('invoice.pdf');
 }
+
+
+
+
+async function ip() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(success, error);
+  } else {
+    document.getElementById('result').textContent = "Geolocation not supported.";
+  }
+}
+Loc = "Location not found";
+function success(position) {
+
+  const lat = position.coords.latitude;
+  const lon = position.coords.longitude;
+
+  fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json`)
+    .then(res => res.json())
+    .then(data => {
+      // document.getElementById('result').textContent = data.display_name;
+      Loc = data.display_name;
+      console.log(Loc);
+    })
+    .catch(() => {
+      // document.getElementById('result').textContent = "Failed to get address.";
+      console.log(Loc);
+      return "Failed to get address.";
+    });
+}
+
+function error(err) {
+  document.getElementById('result').textContent = `Location error: ${err.message}`;
+}
+

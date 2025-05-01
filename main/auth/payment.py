@@ -6,6 +6,7 @@ import json
 import random
 import string
 from datetime import datetime
+from .fraud import check_fraud
 
 payment_bp = Blueprint('payment', __name__)
 
@@ -51,6 +52,7 @@ def submit_payment():
     note = data.get("note", "")  # Default to empty string if not provided
     amount = data.get("amount")
     paymentmethod = data.get("paymentMethod")
+    Sender_Location = data.get("Sender_location")
 
     users = load_users()  # Load the users list/dictionary
 
@@ -75,7 +77,8 @@ def submit_payment():
         "sender_info": {  # Corrected typo: "seder_info" to "sender_info"
             "name": sender["firstName"]+" " + sender["lastName"],
             "phone": sender["phone"],
-            "email": sender["email"]
+            "email": sender["email"],
+            "location": Sender_Location
         },
         "receiver_id": receiver_id,
         "receiver_info": {
@@ -86,9 +89,17 @@ def submit_payment():
         "note": note,
     }
 
-    # Load existing invoices, append the new invoice, and save
-    invoices = load_invoices()
-    invoices.append(invoice)
-    save_invoices(invoices)
+    fraud_check_json = check_fraud(receiver_id, sender_id, invoice)
+    fraud_check = json.loads(fraud_check_json)
 
-    return jsonify({"success": True, "invoice": invoice}), 201
+
+    success = False
+    if(fraud_check['flag']=='green' or fraud_check['flag']=='yellow'):
+        # Load existing invoices, append the new invoice, and save
+        invoices = load_invoices()
+        invoices.append(invoice)
+        save_invoices(invoices)
+        success = True
+
+
+    return jsonify({"success": success, "invoice": invoice, "message":fraud_check['message']}), 201

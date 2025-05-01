@@ -1,0 +1,21 @@
+[
+    {
+      "user_id": "user123",
+      "name": "John Doe",
+      "phone": "+8801234567890",
+      "reason": "Multiple chargebacks"
+    },
+    {
+      "user_id": "user456",
+      "name": "Jane Smith",
+      "phone": "+8801987654321",
+      "reason": "Suspicious transaction patterns"
+    },
+    {
+      "user_id": "fraud789",
+      "name": "Ali Hossain",
+      "phone": "+8801678901234",
+      "reason": "Fake identity documents"
+    }
+  ]
+  

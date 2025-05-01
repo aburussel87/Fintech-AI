@@ -10,9 +10,7 @@
   <link rel="stylesheet" href="assets/css/payment.css">
 </head>
 
-<body>
-
-
+<body onload="ip()">
 
   <!-- Glassy Form -->
   <form class="glass-card w-100" style="max-width: 500px;" onsubmit="return false">
@@ -54,8 +52,8 @@
     </div>
 
     <div class="mb-3">
-      <label for="note" class="form-label">Optional Note</label>
-      <textarea id="note" class="form-control" rows="3" placeholder="Write something..." disabled></textarea>
+      <label for="note" class="form-label" >Details</label>
+      <textarea id="note" class="form-control" rows="3" placeholder="Write something..." disabled required></textarea>
     </div>
 
     <button type="submit" id="submit" class="btn btn-success w-100" onclick="submitPayment()">Submit Payment</button>

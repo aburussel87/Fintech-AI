@@ -8,6 +8,7 @@ from auth.payment import payment_bp
 from auth.auth import auth_bp
 from auth.profile import profile_bp
 from auth.chat import chat_bp
+from auth.fraud import fraud_bp
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
@@ -23,6 +24,7 @@ app.register_blueprint(payment_bp)
 app.register_blueprint(auth_bp)
 app.register_blueprint(profile_bp)
 app.register_blueprint(chat_bp)
+app.register_blueprint(fraud_bp)
 
 if __name__ == "__main__":
     app.run(debug=True, port=5000)
