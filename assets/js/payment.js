@@ -103,7 +103,7 @@ async function submitPayment(force_i="false") {
   if (result.success=='green'||force_i=="true") {
     alert("Payment recorded!");
     // result.invoice will contain details
-    generateInvoicePDF(result.invoice);
+    await generateInvoicePDF(result.invoice);
     console.log(result.invoice);
     
     } 
@@ -146,7 +146,7 @@ async function submitPayment(force_i="false") {
 
 async function force_submit() {
   console.log("Force submit called");
-  submitPayment("true");
+  await submitPayment("true");
   console.log("forced submitPayment");
 }
 

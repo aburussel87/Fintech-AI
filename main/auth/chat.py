@@ -5,7 +5,8 @@ import ollama
 from flask_jwt_extended import jwt_required, get_jwt_identity
 
 chat_bp = Blueprint('chat', __name__)
-model = 'llama3:8b'
+# model = 'mistral:instruct'
+model = 'llama3.2:3b'
 
 
 
