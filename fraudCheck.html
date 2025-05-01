@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Fraud Check</title>
+</head>
+
+<body>
+    <h2>Fraud Check Form</h2>
+    <label for="token">JWT Token:</label><br>
+    <input type="text" id="token" placeholder="Enter your JWT token"><br><br>
+
+    <label for="receiver_id">Receiver ID:</label><br>
+    <input type="text" id="receiver_id" placeholder="Enter receiver ID"><br><br>
+
+    <button onclick="checkFraud()">Check Fraud</button>
+    <button onclick="ip()">IP</button>
+    <h3>Result:</h3>
+    <pre id="result"></pre>
+
+    <script>
+        async function checkFraud() {
+            // const token = document.getElementById("token").;
+            const receiver_id = document.getElementById("receiver_id").value;
+
+            const response = await fetch("http://localhost:5000/fraud", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer " + localStorage.getItem("access_token")
+                },
+                body: JSON.stringify({ receiver_id: receiver_id })
+            });
+
+            const result = await response.json();
+            document.getElementById("result").textContent = JSON.stringify(result, null, 2);
+        }
+
+        async function ip() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(success, error);
+            } else {
+                document.getElementById('result').textContent = "Geolocation not supported.";
+            }
+        }
+
+        function success(position) {
+
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
+
+            fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json`)
+                .then(res => res.json())
+                .then(data => {
+                    document.getElementById('result').textContent = data.display_name;
+                })
+                .catch(() => {
+                    document.getElementById('result').textContent = "Failed to get address.";
+                });
+        }
+
+        function error(err) {
+            document.getElementById('result').textContent = `Location error: ${err.message}`;
+        }
+
+    </script>
+</body>
+
+</html>

@@ -65,7 +65,7 @@ async function FraudDetection() {
 
 
 
-async function submitPayment() {
+async function submitPayment(force_i="false") {
   const receiverId = document.getElementById('receiver-id').value.trim();
   const receiverMobile = document.getElementById('receiver-mobile').value.trim();
   const note = document.getElementById('note').value.trim();
@@ -83,7 +83,8 @@ async function submitPayment() {
     amount: document.getElementById('amount').value.trim(),
     paymentMethod: document.getElementById('payment-method').value,
     payerInfo: document.getElementById('payer-info').value.trim(),
-    Sender_location: Loc
+    Sender_location: Loc,
+    force: force_i
   };
 
   console.log(data);
@@ -98,12 +99,55 @@ async function submitPayment() {
   });
 
   const result = await res.json();
-  if (result.success) {
+
+  if (result.success=='green'||force_i=="true") {
     alert("Payment recorded!");
-    generateInvoicePDF(result.invoice); // result.invoice will contain details
-  } else {
-    alert(result.message);
-  }
+    // result.invoice will contain details
+    generateInvoicePDF(result.invoice);
+    console.log(result.invoice);
+    
+    } 
+    else{
+      console.log(result.message);
+      const modal = document.createElement('div');
+      modal.style.position = 'fixed';
+      modal.style.top = '50%';
+      modal.style.left = '50%';
+      modal.style.transform = 'translate(-50%, -50%)';
+      modal.style.backgroundColor = '#fff';
+      modal.style.padding = '20px';
+      modal.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.2)';
+      modal.style.zIndex = '1000';
+      modal.style.color = '#333';
+
+      const message = document.createElement('p');
+      message.textContent = "This transaction has been flagged for review. Do you want to proceed?\n\n" + result.message;
+      modal.appendChild(message);
+
+      const yesButton = document.createElement('button');
+      yesButton.textContent = 'Yes';
+      yesButton.style.marginRight = '10px';
+      yesButton.onclick = () => {
+        document.body.removeChild(modal);
+        force_submit();
+      };
+      modal.appendChild(yesButton);
+
+      const noButton = document.createElement('button');
+      noButton.textContent = 'No';
+      noButton.onclick = () => {
+        document.body.removeChild(modal);
+      };
+      modal.appendChild(noButton);
+
+      document.body.appendChild(modal);
+    } 
+}
+
+async function force_submit() {
+  console.log("Force submit called");
+  submitPayment("true");
+  console.log("forced submitPayment");
 }
 
 async function generateInvoicePDF(invoice) {
