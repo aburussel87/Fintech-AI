@@ -47,11 +47,12 @@ function renderTransactions(data) {
     const rechargeSection = document.getElementById('recharge-section');
     const payBillSection = document.getElementById('paybill-section');
     const sendMoneySection = document.getElementById('sendmoney-section');
-
+    const recieved_moneySection = document.getElementById('recievedmoney-section');
     // Clear previous content
     rechargeSection.innerHTML = "";
     payBillSection.innerHTML = "";
     sendMoneySection.innerHTML = "";
+    recieved_moneySection.innerHTML="";
 
     data.forEach(transaction => {
         const transactionBox = createTransactionBox(transaction);
@@ -62,6 +63,8 @@ function renderTransactions(data) {
             payBillSection.appendChild(transactionBox);
         } else if (transaction.type === 'send_money') {
             sendMoneySection.appendChild(transactionBox);
+        } else if(transaction.type === 'recieved_money'){
+            recieved_moneySection.appendChild(transactionBox);
         }
     });
 }
@@ -76,7 +79,7 @@ function createTransactionBox(transaction) {
 
     const amount = document.createElement('span');
     amount.classList.add('transaction-header');
-    amount.textContent = (transaction.amount > 0 ? '+' : '-') + ' $' + Math.abs(transaction.amount).toFixed(2);
+    amount.textContent = (transaction.amount > 0 ? '+' : '-') + ' ৳' + Math.abs(transaction.amount).toFixed(2);
 
     const date = document.createElement('span');
     date.classList.add('transaction-date');

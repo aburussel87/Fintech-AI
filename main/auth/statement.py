@@ -48,6 +48,15 @@ def statement():
                 "time": i["time"],
                 "details": f"Sent money to {i['receiver_info'].get('name', 'Unknown')} -- invoice id {i['invoice_id']}"
             })
+        user_invoices = [i for i in invoices if i["receiver_id"] == current_user]
+        for i in user_invoices:
+            transactions.append({
+                "type": "recieved_money",
+                "amount": float(i["amount"]),
+                "method": i["payment_method"],
+                "time": i["time"],
+                "details": f"Recieved money from {i['sender_info'].get('name', 'Unknown')} -- invoice id {i['invoice_id']}"
+            })
 
         # Optional: Sort by time (newest first)
         transactions.sort(key=lambda x: x["time"], reverse=True)
