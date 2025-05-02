@@ -15,6 +15,20 @@
     <div class="container py-5">
         <h2 class="text-center mb-4">Personal Budget Planner</h2>
 
+        <div class="mb-3">
+            <div class="row align-items-center g-3">
+                <label for="previous-budgets" class="form-label col-md-2">Previous Budgets:</label>
+                <div class="col-md-6">
+                    <select id="previous-budgets" class="form-select">
+                        <option value="" disabled selected>Select a budget</option>
+                    </select>
+                </div>
+                <div class="col-md-4 d-grid">
+                    <button id="display-budget" class="btn btn-primary">Display</button>
+                </div>
+            </div>
+        </div>
+
         <form id="budget-form" class="card">
             <div class="mb-3">
                 <label for="budget-name" class="form-label">Budget Name</label>

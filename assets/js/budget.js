@@ -91,6 +91,8 @@ async function saveBudget() {
     }
 }
 
+
+
 // Generate AI budget button
 document.getElementById('generate-budget').addEventListener('click', generateBudget);
 
@@ -182,10 +184,13 @@ function collectFormData() {
 
 // Display generated budget
 function displayGeneratedBudget(generatedBudget) {
-    
-    expenseList = document.getElementById('expense-list');
+    const expenseList = document.getElementById('expense-list');
     expenseList.innerHTML = ''; // Clear existing expenses
     generatedBudget.expenses.forEach(category => {
+        // Normalize item to items
+        if (category.item && !category.items) {
+            category.items = Array.isArray(category.item) ? category.item : [category.item];
+        }
         if (!category.items) {
             category.items = [{
                 name: category.name || category.item || "Unnamed",
@@ -193,7 +198,6 @@ function displayGeneratedBudget(generatedBudget) {
             }];
             category.category = category.item || "Uncategorized";
         }
-        
 
         const categoryDiv = document.createElement('div');
         categoryDiv.classList.add('expense-category', 'border', 'p-3', 'mb-3');
@@ -208,6 +212,7 @@ function displayGeneratedBudget(generatedBudget) {
         expenseList.appendChild(categoryDiv);
 
         const itemsDiv = categoryDiv.querySelector('.expense-items');
+        
         category.items.forEach(item => {
             const itemDiv = document.createElement('div');
             itemDiv.classList.add('row', 'g-2', 'expense-item', 'mb-2');
@@ -223,8 +228,200 @@ function displayGeneratedBudget(generatedBudget) {
                 </div>
             `;
             itemsDiv.appendChild(itemDiv);
+            itemDiv.querySelector('.remove-item').addEventListener('click', () => itemDiv.remove());
         });
 
         categoryDiv.querySelector('.remove-category').addEventListener('click', () => categoryDiv.remove());
+        categoryDiv.querySelector('.add-expense-item').addEventListener('click', () => {
+            const newItemDiv = document.createElement('div');
+            newItemDiv.classList.add('row', 'g-2', 'expense-item', 'mb-2');
+            newItemDiv.innerHTML = `
+                <div class="col-md-6">
+                    <input type="text" class="form-control" placeholder="Item Name" required>
+                </div>
+                <div class="col-md-4">
+                    <input type="number" class="form-control" placeholder="Amount" required>
+                </div>
+                <div class="col-md-2 d-grid">
+                    <button type="button" class="btn btn-danger remove-item">Remove</button>
+                </div>
+            `;
+            itemsDiv.appendChild(newItemDiv);
+            newItemDiv.querySelector('.remove-item').addEventListener('click', () => newItemDiv.remove());
+        });
     });
 }
+
+// function displayGeneratedBudget(generatedBudget) {
+    
+//     expenseList = document.getElementById('expense-list');
+//     expenseList.innerHTML = ''; // Clear existing expenses
+//     generatedBudget.expenses.forEach(category => {
+//         if (!category.items) {
+//             category.items = [{
+//                 name: category.name || category.item || "Unnamed",
+//                 amount: category.amount || 0
+//             }];
+//             category.category = category.item || "Uncategorized";
+//         }
+        
+
+//         const categoryDiv = document.createElement('div');
+//         categoryDiv.classList.add('expense-category', 'border', 'p-3', 'mb-3');
+//         categoryDiv.innerHTML = `
+//             <div class="mb-2">
+//                 <input type="text" class="form-control" placeholder="Expense Category Name" value="${category.category}" required>
+//             </div>
+//             <div class="expense-items"></div>
+//             <button type="button" class="btn btn-sm btn-outline-success add-expense-item">+ Add Item</button>
+//             <button type="button" class="btn btn-sm btn-outline-danger remove-category">Remove Category</button>
+//         `;
+//         expenseList.appendChild(categoryDiv);
+
+//         const itemsDiv = categoryDiv.querySelector('.expense-items');
+        
+//         category.items.forEach(item => {
+//             const itemDiv = document.createElement('div');
+//             itemDiv.classList.add('row', 'g-2', 'expense-item', 'mb-2');
+//             itemDiv.innerHTML = `
+//                 <div class="col-md-6">
+//                     <input type="text" class="form-control" placeholder="Item Name" value="${item.name}" required>
+//                 </div>
+//                 <div class="col-md-4">
+//                     <input type="number" class="form-control" placeholder="Amount" value="${item.amount}" required>
+//                 </div>
+//                 <div class="col-md-2 d-grid">
+//                     <button type="button" class="btn btn-danger remove-item">Remove</button>
+//                 </div>
+//             `;
+//             itemsDiv.appendChild(itemDiv);
+            
+            
+//             itemsDiv.querySelector('.remove-item').addEventListener('click', () => itemDiv.remove());
+//         });
+
+//         categoryDiv.querySelector('.remove-category').addEventListener('click', () => categoryDiv.remove());
+//         categoryDiv.querySelector('.add-expense-item').addEventListener('click', () => {
+//             const newItemDiv = document.createElement('div');
+//             newItemDiv.classList.add('row', 'g-2', 'expense-item', 'mb-2');
+//             newItemDiv.innerHTML = `
+//                 <div class="col-md-6">
+//                     <input type="text" class="form-control" placeholder="Item Name" required>
+//                 </div>
+//                 <div class="col-md-4">
+//                     <input type="number" class="form-control" placeholder="Amount" required>
+//                 </div>
+//                 <div class="col-md-2 d-grid">
+//                     <button type="button" class="btn btn-danger remove-item">Remove</button>
+//                 </div>
+//             `;
+//             itemsDiv.appendChild(newItemDiv);
+//             newItemDiv.querySelector('.remove-item').addEventListener('click', () => newItemDiv.remove());
+//         });
+//     });
+// }
+
+
+
+const budgetSelect = document.getElementById('previous-budgets');
+let previousBudgetsData = [];
+
+async function loadPreviousBudgets() {
+    const token = localStorage.getItem('access_token');
+    if (!token) {
+        alert('Please log in first.');
+        window.location.href = '/login'; // Adjust redirect URL as needed
+        return;
+    }
+
+    try {
+        const res = await fetch('http://localhost:5000/get_budget', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+            if (res.status === 401) {
+                alert('Session expired. Please log in again.');
+                window.location.href = '/login';
+            } else {
+                throw new Error(data.error || 'Failed to load budgets');
+            }
+        }
+
+        if (data.success && Array.isArray(data.budgets)) {
+            previousBudgetsData = data.budgets;
+            const budgetSelect = document.getElementById('previous-budgets');
+            budgetSelect.innerHTML = '<option value="" disabled selected>Select a budget</option>';
+            data.budgets.forEach(b => {
+                const option = document.createElement('option');
+                option.value = b.budgetId;
+                option.textContent = `${b.budgetName} (${b.currency})`;
+                budgetSelect.appendChild(option);
+            });
+        } else {
+            alert('No budgets found or invalid response.');
+        }
+    } catch (err) {
+        console.error('Error loading budgets:', err);
+        alert('Could not fetch previous budgets: ' + err.message);
+    }
+}
+
+// Call on page load
+document.addEventListener('DOMContentLoaded', loadPreviousBudgets);
+
+
+
+// Populate the entire budget form
+function populateBudgetForm(budget) {
+    // Populate budget name and currency
+    document.getElementById('budget-name').value = budget.budgetName || '';
+    document.getElementById('currency').value = budget.currency || '';
+
+    // Populate income sources
+    const incomeList = document.getElementById('income-list');
+    incomeList.innerHTML = ''; // Clear existing income
+    budget.income.forEach(income => {
+        const div = document.createElement('div');
+        div.classList.add('row', 'g-2', 'income-item', 'mb-2');
+        div.innerHTML = `
+            <div class="col-md-6">
+                <input type="text" class="form-control" placeholder="Income Source" value="${income.source}" required>
+            </div>
+            <div class="col-md-4">
+                <input type="number" class="form-control" placeholder="Amount" value="${income.amount}" required>
+            </div>
+            <div class="col-md-2 d-grid">
+                <button type="button" class="btn btn-danger remove-item">Remove</button>
+            </div>
+        `;
+        incomeList.appendChild(div);
+        div.querySelector('.remove-item').addEventListener('click', () => div.remove());
+    });
+
+    // Populate expenses using existing displayGeneratedBudget
+    displayGeneratedBudget(budget);
+}
+
+// Display selected budget
+document.getElementById('display-budget').addEventListener('click', () => {
+    const selectedId = budgetSelect.value;
+    if (!selectedId) {
+        alert('Please select a budget to display.');
+        return;
+    }
+    const budget = previousBudgetsData.find(b => b.budgetId === selectedId);
+    if (!budget) {
+        alert('Selected budget not found.');
+        return;
+    }
+    populateBudgetForm(budget);
+});
+
+

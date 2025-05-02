@@ -13,6 +13,22 @@ budget_bp = Blueprint('budget', __name__)
 def generateBudgetId():
     return ''.join(random.choices(string.ascii_uppercase + string.digits, k=6))
 
+def delete_budget(budgetName,user_id):
+    try:
+        file_path = 'main\\auth\\budgets.json'
+        if os.path.exists(file_path):
+            with open(file_path, 'r') as file:
+                budgets = json.load(file)
+            # Filter out the budget to be deleted
+            budgets = [budget for budget in budgets if not (budget['budgetName'] == budgetName and budget['user_id'] == user_id)]
+            # Save back to file
+            with open(file_path, 'w') as file:
+                json.dump(budgets, file, indent=2)
+            print(f"✅ Budget {budgetName} deleted successfully.")
+        else:
+            print("No budgets found to delete.")
+    except Exception as e:
+        print(f"❌ Error deleting budget: {e}")
 
 # Route for saving a new budget
 @budget_bp.route('/save_budget', methods=['POST'])
@@ -25,7 +41,7 @@ def save_budget_route():
     for field in required_fields:
         if field not in data:
             return jsonify({"error": f"{field} is required"}), 400
-
+    delete_budget(data['budgetName'], get_jwt_identity())
     # Extract the user ID from the request (or assume it's passed in the data)
     # user_id = data.get('user_id')
     user_id = get_jwt_identity()  # Get user ID from JWT token
@@ -79,65 +95,54 @@ def add_budget(user_id, new_budget):
         print(f"❌ Error saving budget: {e}")
         return False
 
-# Route for getting a user's budget (already exists)
 @budget_bp.route('/get_budget', methods=['POST'])
+@jwt_required()
 def get_budget_route():
-    data = request.get_json()
-    user_id = data.get('user_id')
-    
+    user_id = get_jwt_identity()  # Get user ID from JWT token
     if not user_id:
-        return jsonify({"error": "User ID is required"}), 400
-    
-    budget = get_budget(user_id)
-    
-    if budget is None:
-        return jsonify({"error": "Budget not found"}), 404
-    
-    return jsonify({"budget": budget}), 200
+        return jsonify({"success": False, "error": "User ID is required"}), 401
 
-# Function to get a user's budget (already exists)
+    budgets = get_budget(user_id)
+    return jsonify({"success": True, "budgets": budgets}), 200
+
+# Function to get a user's budgets
 def get_budget(user_id):
     try:
-        with open('main\\auth\\budgets.json', 'r') as file:
+        file_path = os.path.join('main', 'auth', 'budgets.json')
+        if not os.path.exists(file_path):
+            return []
+
+        with open(file_path, 'r') as file:
             budgets = json.load(file)
             user_budgets = [budget for budget in budgets if budget['user_id'] == user_id]
-            if user_budgets:
-                print(f"{len(user_budgets)} budget(s) found for user {user_id}.\n")
-                return user_budgets
-            else:
-                print(f"No budgets found for user {user_id}.")
-                return []
-    except FileNotFoundError:
-        print("Budget file not found or is empty.")
-        return []
+            return user_budgets
+
     except json.JSONDecodeError:
-        print("Error decoding JSON from the budget file.")
         return []
     except Exception as e:
-        print(f"An unexpected error occurred: {e}")
+        print(f"Error retrieving budgets: {e}")
         return []
-
 # Example usage for adding a new budget
-new_budget = {
-    "budgetName": "November Budget",
-    "currency": "BDT",
-    "income": [{"source": "Salary", "amount": 25000}],
-    "expenses": [
-        {
-            "category": "Housing",
-            "items": [
-                {"item": "Rent", "name": "Housing", "amount": 6000},
-                {"item": "Utilities", "name": "Electricity", "amount": 1500}
-            ]
-        },
-        {
-            "category": "Savings",
-            "items": [
-                {"item": "Emergency Fund", "name": "Savings", "amount": 3000}
-            ]
-        }
-    ]
-}
+# new_budget = {
+#     "budgetName": "November Budget",
+#     "currency": "BDT",
+#     "income": [{"source": "Salary", "amount": 25000}],
+#     "expenses": [
+#         {
+#             "category": "Housing",
+#             "items": [
+#                 {"item": "Rent", "name": "Housing", "amount": 6000},
+#                 {"item": "Utilities", "name": "Electricity", "amount": 1500}
+#             ]
+#         },
+#         {
+#             "category": "Savings",
+#             "items": [
+#                 {"item": "Emergency Fund", "name": "Savings", "amount": 3000}
+#             ]
+#         }
+#     ]
+# }
 
 # user_id = "user123"
 # add_budget(user_id, new_budget)
