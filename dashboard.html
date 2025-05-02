@@ -279,6 +279,14 @@
             <span class="nav-link-text ms-1">Chat BOT</span>
           </a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="budget.html">
+            <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="ni ni-money-coins text-dark text-gradient text-lg opacity-10" aria-hidden="true"></i>
+            </div>
+            <span class="nav-link-text ms-1">Budget</span>
+          </a>
+        </li>
       </ul>
     </div>
     <div class="sidenav-footer mx-3 ">
@@ -293,8 +301,7 @@
           <div class="docs-info">
             <h6 class="text-white up mb-0">Need help?</h6>
             <p class="text-xs font-weight-bold">Please check our docs</p>
-            <a href="https://www.creative-tim.com/learning-lab/bootstrap/license/soft-ui-dashboard" target="_blank"
-              class="btn btn-white btn-sm w-100 mb-0">Documentation</a>
+            <a href="documentation.html" class="btn btn-white btn-sm w-100 mb-0">Documentation</a>
           </div>
         </div>
       </div>
@@ -1064,9 +1071,166 @@
   <script src="../assets_2/js/plugins/perfect-scrollbar.min.js"></script>
   <script src="../assets_2/js/plugins/smooth-scrollbar.min.js"></script>
   <script src="../assets_2/js/plugins/chartjs.min.js"></script>
-  <script src="assets/js/chart.js">
+  <script>
+    // Load user data from JSON file
+    async function loadUserData() {
+      try {
+        const response = await fetch('assets/js/user_data.json');
+        const data = await response.json();
+        return data.user;
+      } catch (error) {
+        console.error('Error loading user data:', error);
+        return null;
+      }
+    }
 
-    // </script>
+    // Update dashboard with user data
+    async function updateDashboard() {
+      const userData = await loadUserData();
+      if (!userData) return;
+
+      // Update user info
+      document.querySelector('.avatar').src = userData.avatar;
+      document.querySelector('.d-sm-inline.d-none').textContent = userData.name;
+
+      // Update balance card
+      document.getElementById('MyBalance').textContent = userData.balance;
+
+      // Update credit score card
+      document.getElementById('creditScore').textContent = userData.creditScore;
+
+      // Update purchases and likes
+      document.querySelector('.col-lg-6.col-md-6.col-12:nth-child(1) h5').textContent = userData.purchases;
+      document.querySelector('.col-lg-6.col-md-6.col-12:nth-child(2) h5').textContent = userData.likes;
+
+      // Update status bars
+      document.querySelector('.progress-bar.w-80').style.width = `${userData.status.balance}%`;
+      document.querySelector('.progress-bar.w-10').style.width = `${userData.status.neutralReviews}%`;
+      document.querySelector('.progress-bar.w-5').style.width = `${userData.status.negativeReviews}%`;
+
+      // Update recent activity table
+      const tableBody = document.getElementById('recentActivityTable');
+      tableBody.innerHTML = ''; // Clear existing rows
+
+      userData.recentActivity.forEach(activity => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>
+            <div class="d-flex px-2 py-1">
+              <div>
+                <img src="../assets_2/img/small-logos/logo-xd.svg" class="avatar avatar-sm me-3" alt="xd">
+              </div>
+              <div class="d-flex flex-column justify-content-center">
+                <h6 class="mb-0 text-sm">${activity.activity}</h6>
+              </div>
+            </div>
+          </td>
+          <td>
+            <div class="avatar-group mt-2">
+              ${activity.category ? `<span class="text-xs">${activity.category}</span>` : ''}
+            </div>
+          </td>
+          <td class="align-middle text-center text-sm">
+            <span class="text-xs font-weight-bold">${activity.amount ? `$${activity.amount}` : 'Not set'}</span>
+          </td>
+          <td class="align-middle">
+            <div class="progress-wrapper w-75 mx-auto">
+              <div class="progress-info">
+                <div class="progress-percentage">
+                  <span class="text-xs font-weight-bold">${activity.note}</span>
+                </div>
+              </div>
+            </div>
+          </td>
+        `;
+        tableBody.appendChild(row);
+      });
+
+      // Update sales overview chart
+      const ctx2 = document.getElementById("chart-line").getContext("2d");
+      const gradientStroke1 = ctx2.createLinearGradient(0, 230, 0, 50);
+      gradientStroke1.addColorStop(1, 'rgba(203,12,159,0.2)');
+      gradientStroke1.addColorStop(0.2, 'rgba(72,72,176,0.0)');
+      gradientStroke1.addColorStop(0, 'rgba(203,12,159,0)');
+
+      new Chart(ctx2, {
+        type: "line",
+        data: {
+          labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+          datasets: [{
+            label: "Sales",
+            tension: 0.4,
+            borderWidth: 0,
+            pointRadius: 0,
+            borderColor: "#cb0c9f",
+            borderWidth: 3,
+            backgroundColor: gradientStroke1,
+            fill: true,
+            data: userData.salesOverview.data,
+            maxBarThickness: 6
+          }],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              display: false,
+            }
+          },
+          interaction: {
+            intersect: false,
+            mode: 'index',
+          },
+          scales: {
+            y: {
+              grid: {
+                drawBorder: false,
+                display: true,
+                drawOnChartArea: true,
+                drawTicks: false,
+                borderDash: [5, 5]
+              },
+              ticks: {
+                display: true,
+                padding: 10,
+                color: '#b2b9bf',
+                font: {
+                  size: 11,
+                  family: "Open Sans",
+                  style: 'normal',
+                  lineHeight: 2
+                },
+              }
+            },
+            x: {
+              grid: {
+                drawBorder: false,
+                display: false,
+                drawOnChartArea: false,
+                drawTicks: false,
+                borderDash: [5, 5]
+              },
+              ticks: {
+                display: true,
+                color: '#b2b9bf',
+                padding: 20,
+                font: {
+                  size: 11,
+                  family: "Open Sans",
+                  style: 'normal',
+                  lineHeight: 2
+                },
+              }
+            },
+          },
+        },
+      });
+    }
+
+    // Initialize dashboard when page loads
+    document.addEventListener('DOMContentLoaded', updateDashboard);
+  </script>
   <script>
     var win = navigator.platform.indexOf('Win') > -1;
     if (win && document.querySelector('#sidenav-scrollbar')) {

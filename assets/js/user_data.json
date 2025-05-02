@@ -1,0 +1,58 @@
+{
+    "user": {
+      "name": "Mahmud Nihal",
+      "avatar": "../assets_2/img/team-1.jpg",
+      "balance": 1600,
+      "creditScore": 357,
+      "purchases": 2300,
+      "likes": 940,
+      "status": {
+        "balance": 80,
+        "neutralReviews": 17,
+        "negativeReviews": 3
+      },
+      "recentActivity": [
+        {
+          "activity": "Soft UI XD Version",
+          "category": "",
+          "amount": 14000,
+          "note": "Random stuff"
+        },
+        {
+          "activity": "Add Progress Track",
+          "category": "Development",
+          "amount": 3000,
+          "note": "10%"
+        },
+        {
+          "activity": "Fix Platform Errors",
+          "category": "Maintenance",
+          "amount": 0,
+          "note": "100%"
+        },
+        {
+          "activity": "Launch our Mobile App",
+          "category": "Development",
+          "amount": 20500,
+          "note": "100%"
+        },
+        {
+          "activity": "Add the New Pricing Page",
+          "category": "Design",
+          "amount": 500,
+          "note": "25%"
+        },
+        {
+          "activity": "Redesign New Online Shop",
+          "category": "Design",
+          "amount": 2000,
+          "note": "40%"
+        }
+      ],
+      "salesOverview": {
+        "percentage": 4,
+        "year": 2021,
+        "data": [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200]
+      }
+    }
+  } 
