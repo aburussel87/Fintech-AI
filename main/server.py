@@ -13,6 +13,8 @@ from auth.chat import chat_bp
 from auth.fraud import fraud_bp
 from auth.recharge import recharge_bp
 from auth.statement import statement_bp
+from auth.budget import budget_bp
+
 import os
 app = Flask(__name__, static_folder='assets')
 CORS(app)  # Enable CORS for all routes
@@ -33,6 +35,7 @@ app.register_blueprint(chat_bp)
 app.register_blueprint(fraud_bp)
 app.register_blueprint(recharge_bp)
 app.register_blueprint(statement_bp)
+app.register_blueprint(budget_bp)
 
 
 

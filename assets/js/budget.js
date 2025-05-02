@@ -61,20 +61,30 @@ document.getElementById('save-budget').addEventListener('click', saveBudget);
 
 async function saveBudget() {
     const budgetData = collectFormData();
-    console.log("Budget Data:", budgetData);
+    if (!budgetData.expenses || budgetData.expenses.length === 0) {
+        alert('Please add at least one expense category before saving the budget.');
+        return;
+    }
+    console.log("Budget Data:", budgetData); // Check the collected data
+
     try {
         const res = await fetch('http://localhost:5000/save_budget', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(budgetData)
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem('access_token') // Adding the token
+            },
+            body: JSON.stringify(budgetData)  // Send budget data as JSON
         });
+
         const data = await res.json();
 
         if (!res.ok || !data.success) {
-            throw new Error('Failed to save budget.');
+            throw new Error(data.message || 'Failed to save budget');
         }
 
         alert('Budget saved successfully!');
+        console.log('Saved Budget:', data.budget);  // Log the saved budget details (optional)
     } catch (error) {
         alert('Error: Could not save budget.');
         console.error('Save Budget Error:', error);
@@ -87,9 +97,16 @@ document.getElementById('generate-budget').addEventListener('click', generateBud
 async function generateBudget() {
     console.log("Generating budget...");
     const budgetData = collectFormData();
+    if (!budgetData) {
+        alert('Please fill in all required fields before generating the budget.');
+        return;
+    }
     console.log("Budget Data:", budgetData);
     // budgetData = JSON.stringify(budgetData, null, 2); // Convert to JSON string
     try {
+        // const token = localStorage.getItem('token');
+
+
         const res = await fetch('http://localhost:5000/chat', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', 
@@ -102,6 +119,7 @@ async function generateBudget() {
               
               
         });
+
         const data = await res.json();
         console.log('Response:', data.response);
         // alert('Response:', data.response);
@@ -111,7 +129,7 @@ async function generateBudget() {
         // alert('AI budget generated successfully!');
         // console.log('Generated Budget:', data.generated_budget);
         // displayGeneratedBudget(data.generated_budget); // Uncomment if needed
-        const generatedBudget = JSON.parse(data.response);
+        const generatedBudget = await JSON.parse(data.response);
         console.log('Generated Budget:', generatedBudget);
         displayGeneratedBudget(generatedBudget);
     } catch (error) {
@@ -129,6 +147,27 @@ function collectFormData() {
         source: item.querySelector('input[type="text"]').value,
         amount: parseFloat(item.querySelector('input[type="number"]').value)
     }));
+    if(!budgetName) {
+        alert('Please enter a budget name.');
+        return false;
+    }
+    if(!currency) {
+        alert('Please select a currency.');
+        return false;
+    }
+    // Validate income data
+    if (income.some(item => isNaN(item.amount))) {
+        alert('Please enter valid amounts for all income sources.');
+        return false;
+    }
+    if (income.length === 0) {
+        alert('Please add at least one income source.');
+        return false;
+    }
+    if (income.some(item => item.amount <= 0)) {
+        alert('Income amounts must be greater than zero.');
+        return false;
+    }
 
     const expenses = Array.from(document.querySelectorAll('.expense-category')).map(category => ({
         category: category.querySelector('input[type="text"]').value,
@@ -143,9 +182,19 @@ function collectFormData() {
 
 // Display generated budget
 function displayGeneratedBudget(generatedBudget) {
+    
     expenseList = document.getElementById('expense-list');
     expenseList.innerHTML = ''; // Clear existing expenses
     generatedBudget.expenses.forEach(category => {
+        if (!category.items) {
+            category.items = [{
+                name: category.name || category.item || "Unnamed",
+                amount: category.amount || 0
+            }];
+            category.category = category.item || "Uncategorized";
+        }
+        
+
         const categoryDiv = document.createElement('div');
         categoryDiv.classList.add('expense-category', 'border', 'p-3', 'mb-3');
         categoryDiv.innerHTML = `

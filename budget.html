@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-    <html lang="en" data-bs-theme="dark">
+<html lang="en" data-bs-theme="dark">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,15 +9,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/budget.css">
 </head>
+
 <body>
-    
+
     <div class="container py-5">
         <h2 class="text-center mb-4">Personal Budget Planner</h2>
 
         <form id="budget-form" class="card">
             <div class="mb-3">
                 <label for="budget-name" class="form-label">Budget Name</label>
-                <input type="text" class="form-control" id="budget-name" placeholder="e.g. Monthly Budget May 2025" required>
+                <input type="text" class="form-control" id="budget-name" placeholder="e.g. Monthly Budget May 2025"
+                    required>
             </div>
 
             <div class="mb-3">
@@ -25,11 +28,32 @@
             </div>
 
             <h4>Income Sources</h4>
-            <div id="income-list" class="income-list"></div>
+            <div id="income-list" class="income-list">
+                <div class="row g-2 income-item mb-2">
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" placeholder="Income Source" required="">
+                    </div>
+                    <div class="col-md-4">
+                        <input type="number" class="form-control" placeholder="Amount" required="">
+                    </div>
+                    <div class="col-md-2 d-grid">
+                        <button type="button" class="btn btn-danger remove-item">Remove</button>
+                    </div>
+                </div>
+            </div>
             <button type="button" class="btn btn-success mb-3" id="add-income">+ Add Income</button>
 
             <h4>Expense Categories</h4>
-            <div id="expense-list" class="expense-list"></div>
+            <div id="expense-list" class="expense-list">
+                <div class="mb-2">
+                    <input type="text" class="form-control" placeholder="Expense Category Name" required>
+                </div>
+                <div class="expense-items"></div>
+                <button type="button" class="btn btn-sm btn-outline-success add-expense-item">+ Add Item</button>
+                <button type="button" class="btn btn-sm btn-outline-danger remove-category">Remove Category</button>
+
+
+            </div>
             <button type="button" class="btn btn-success mb-3" id="add-expense-category">+ Add Expense Category</button>
 
             <div class="d-flex gap-3">
@@ -43,4 +67,5 @@
 
     <script src="assets/js/budget.js"></script>
 </body>
+
 </html>
