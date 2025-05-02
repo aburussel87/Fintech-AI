@@ -46,5 +46,11 @@
         "amount": "1000",
         "method": "Card",
         "time": "2025-05-02 11:42:16"
+    },
+    {
+        "user_id": "253JWHKCKFKJ",
+        "amount": "6000",
+        "method": "Card",
+        "time": "2025-05-02 12:15:11"
     }
 ]
