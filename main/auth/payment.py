@@ -7,6 +7,7 @@ import random
 import string
 from datetime import datetime
 from .fraud import check_fraud
+from utils import load_users, save_users
 
 payment_bp = Blueprint('payment', __name__)
 
@@ -56,7 +57,6 @@ def submit_payment():
     force = data.get("force")
 
     users = load_users()  # Load the users list/dictionary
-
     # Find the receiver based on ID and mobile number
     receiver = next((u for u in users if u["id"] == receiver_id and u["phone"] == receiver_mobile), None)
     if receiver is None:
@@ -69,6 +69,8 @@ def submit_payment():
     sender = next((u for u in users if u["id"] == sender_id), None)
     if sender is None:
         return jsonify({"success": False, "message": "Sender not found"}), 404
+    if (sender["balance"]- float(amount)-float(amount)*.0018) < 0:
+        return jsonify({"success": False, "message": "Insufficient Balance"}), 404
     invoice = {
         "invoice_id": invoice_id,
         "amount": amount,
@@ -125,5 +127,11 @@ def submit_payment():
         save_invoices(invoices)
         success = True
 
+        # Update balances
+    if success:
+        transaction_fee = float(amount) * 0.0018
+        sender["balance"] -= float(amount) + transaction_fee
+        receiver["balance"] += float(amount)
+        save_users(users)  # Save updated user balances
 
     return jsonify({"success": success, "invoice": invoice, "message":fraud_check['message']}), 201

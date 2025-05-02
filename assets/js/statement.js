@@ -44,29 +44,58 @@ async function loadTransactions() {
 }
 
 function renderTransactions(data) {
-    const rechargeSection = document.getElementById('recharge-section');
-    const payBillSection = document.getElementById('paybill-section');
-    const sendMoneySection = document.getElementById('sendmoney-section');
-    const recieved_moneySection = document.getElementById('recievedmoney-section');
+    const sections = {
+        recharge: document.getElementById('recharge-section'),
+        pay_bill: document.getElementById('paybill-section'),
+        send_money: document.getElementById('sendmoney-section'),
+        recieved_money: document.getElementById('recievedmoney-section')
+    };
+
     // Clear previous content
-    rechargeSection.innerHTML = "";
-    payBillSection.innerHTML = "";
-    sendMoneySection.innerHTML = "";
-    recieved_moneySection.innerHTML="";
+    for (const key in sections) {
+        sections[key].innerHTML = '';
+    }
+
+    // Group transactions by type and date
+    const groupedByDate = {};
 
     data.forEach(transaction => {
-        const transactionBox = createTransactionBox(transaction);
+        const dateOnly = new Date(transaction.time).toLocaleDateString('en-GB', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
 
-        if (transaction.type === 'recharge') {
-            rechargeSection.appendChild(transactionBox);
-        } else if (transaction.type === 'pay_bill') {
-            payBillSection.appendChild(transactionBox);
-        } else if (transaction.type === 'send_money') {
-            sendMoneySection.appendChild(transactionBox);
-        } else if(transaction.type === 'recieved_money'){
-            recieved_moneySection.appendChild(transactionBox);
+        const type = transaction.type;
+
+        if (!groupedByDate[type]) {
+            groupedByDate[type] = {};
         }
+
+        if (!groupedByDate[type][dateOnly]) {
+            groupedByDate[type][dateOnly] = [];
+        }
+
+        groupedByDate[type][dateOnly].push(transaction);
     });
+
+    // Render grouped transactions
+    for (const type in groupedByDate) {
+        const section = sections[type];
+        const dateGroups = groupedByDate[type];
+
+        for (const date in dateGroups) {
+            const dateHeader = document.createElement('h4');
+            dateHeader.textContent = date;
+            dateHeader.classList.add('transaction-date-header');
+            section.appendChild(dateHeader);
+
+            dateGroups[date].forEach(transaction => {
+                const transactionBox = createTransactionBox(transaction);
+                section.appendChild(transactionBox);
+            });
+        }
+    }
 }
 
 function createTransactionBox(transaction) {
@@ -81,9 +110,15 @@ function createTransactionBox(transaction) {
     amount.classList.add('transaction-header');
     amount.textContent = (transaction.amount > 0 ? '+' : '-') + ' ৳' + Math.abs(transaction.amount).toFixed(2);
 
+    const time = new Date(transaction.time).toLocaleTimeString('en-GB', {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit'
+    });
+
     const date = document.createElement('span');
     date.classList.add('transaction-date');
-    date.textContent = transaction.time;
+    date.textContent = time;
 
     header.appendChild(amount);
     header.appendChild(date);

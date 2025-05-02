@@ -87,7 +87,6 @@ async function submitPayment(force_i="false") {
     force: force_i
   };
 
-  console.log(data);
 
   const res = await fetch("http://localhost:5000/payment/submit", {
     method: "POST",
@@ -99,7 +98,11 @@ async function submitPayment(force_i="false") {
   });
 
   const result = await res.json();
-
+  if(result.success==false){
+    alert("Payment failed: " + result.message);
+    window.location.href = "transaction.html"; // Redirect to login page if not logged in
+    return;
+  }
   if (result.success=='green'||force_i=="true") {
     alert("Payment recorded!");
     // result.invoice will contain details
