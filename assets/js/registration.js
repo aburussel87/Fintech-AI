@@ -187,9 +187,11 @@ async function signup(event) {
   const joiningDate = today.toLocaleDateString('en-GB', options);
 
   const id = generateUniqueId(today.getFullYear());
+  const balance = 0;
   const newUser = {
     firstName,
     lastName,
+    balance,
     age,
     dob,
     maritalStatus,

@@ -1,0 +1,91 @@
+body {
+    background-color: #030122;
+    color: #012035;
+  }
+  
+  .profile-img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .balance-box {
+    background-color: #ced6e1;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: center;
+    user-select: none;
+    transition: background-color 0.3s ease;
+    color: #000000;
+    border: 1px solid #30363d;
+  }
+  
+  .balance-box:hover {
+    background-color: #979899;
+  }
+  
+  .transaction-card {
+    background-color: #002849;
+    border-radius: 12px;
+    padding: 20px 10px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(88, 166, 255, 0.05);
+    transition: all 0.3s ease;
+    height: 130px;
+    border: 1px solid #30363d;
+  }
+  
+  .transaction-card:hover {
+    background-color: #1c2128;
+    transform: translateY(-4px);
+    box-shadow: 0 0 10px rgba(88, 166, 255, 0.3);
+  }
+  
+  .transaction-icon {
+    font-size: 28px;
+    color: #58a6ff;
+    margin-bottom: 10px;
+  }
+  
+  .transaction-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #c9d1d9;
+  }
+  
+  .dashboard {
+    background-color: #989da6;
+    border-radius: 16px;
+    padding: 25px;
+    margin-top: 20px;
+    box-shadow: 0 0 12px rgba(88, 166, 255, 0.05);
+    border: 1px solid #30363d;
+  }
+  
+  .balance-text {
+    display: inline-block;
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+    font-size: 20px;
+    color: #000000;
+  }
+  
+  .balance-text.hide {
+    opacity: 0;
+  }
+  
+  .balance-amount {
+    font-size: 24px;
+    font-weight: bold;
+    color: #e6edf3;
+  }
+  
+  .balance-currency {
+    font-size: 14px;
+    margin-left: 4px;
+    vertical-align: top;
+    color: #8b949e;
+  }
+  

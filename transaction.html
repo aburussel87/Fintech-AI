@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>FinguardAI Transaction Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/transaction.css">
+    <link rel="icon" type="image/png" href="assets/logo.png">
+  </head>
+  
+<body>
+  <div class="container mt-4">
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center bg-white p-3 rounded shadow-sm">
+      <div class="d-flex align-items-center">
+        <img src="assets/logo.png" alt="Profile" class="profile-img me-3" id="profile"/>
+        <div>
+          <h6 id="name" class="mb-0">User Name</h6>
+          <small id="id">User ID</small><br />
+          <small id = "number">Mobile No.</small>
+        </div>
+      </div>
+      <div class="balance-box" onclick="toggleBalance()">
+        <span id="balance-text" class="balance-text">Tap to see Balance</span>
+      </div>
+      
+    </div>
+
+    <!-- Dashboard -->
+    <div class="dashboard mt-4">
+      <h5 class="mb-4">Transaction Options</h5>
+      <div class="row g-3">
+        <div class="col-6 col-md-3">
+          <div class="transaction-card" id="recharge-card">
+            <i class="fas fa-mobile-alt transaction-icon"></i>
+            <div class="transaction-label">Recharge</div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="transaction-card" id="send-money-card">
+            <i class="fas fa-paper-plane transaction-icon"></i>
+            <div class="transaction-label">Send Money</div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="transaction-card" id="pay-bill-card">
+            <i class="fas fa-file-invoice transaction-icon"></i>
+            <div class="transaction-label">Pay Bill</div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="transaction-card" id="bank-transfer-card">
+            <i class="fas fa-university transaction-icon"></i>
+            <div class="transaction-label">Bank Transfer</div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="transaction-card" id="my-wallet-card">
+            <i class="fas fa-wallet transaction-icon"></i>
+            <div class="transaction-label">My Wallet</div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="transaction-card" id="statement-card">
+            <i class="fas fa-history transaction-icon"></i>
+            <div class="transaction-label">Statement</div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="transaction-card" id="add-card">
+            <i class="fas fa-credit-card transaction-icon"></i>
+            <div class="transaction-label">Add Card</div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="transaction-card" id="request-money-card">
+            <i class="fas fa-hand-holding-usd transaction-icon"></i>
+            <div class="transaction-label">Request Money</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/js/transaction.js">
+    
+  </script>
+</body>
+</html>
