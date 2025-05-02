@@ -17,7 +17,15 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8 profile-container text-center">
-                <img src="assets/logo.jpeg" alt="Profile Picture" class="profile-image mb-3" />
+                <!-- Profile Picture & Upload -->
+                <div class="position-relative d-inline-block">
+                    <img id="profileImage" alt="Profile Picture" class="profile-image mb-3" />
+                    <label for="uploadInput" class="upload-btn" title="Change Picture">
+                        <i class="bi bi-camera-fill"></i>
+                    </label>
+                    <input type="file" id="uploadInput" accept="image/*" style="display: none;" />
+                </div>
+
                 <h3 class="mb-4 text-white" id="profile_name">---</h3>
 
                 <!-- Personal Info -->

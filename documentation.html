@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Finguard AI Documentation</title>
+  <link rel="stylesheet" href="assets/css/documentation.css">
+  <link rel="icon" type="image/png" href="assets/logo.png">
+</head>
+<body>
+  <div class="watermark"></div>
+
+  <aside class="sidebar">
+    <h2>Finguard AI</h2>
+    <nav>
+      <a href="#overview">Overview</a>
+      
+      <a href="#setup">Setup</a>
+      <a href="#api">API Endpoints</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contributors">Contributors</a>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <section id="overview">
+      <h1>📘 Overview</h1>
+      <p>Finguard AI is a fintech assistant that provides users with secure, AI-powered financial recommendations and transaction handling.</p>
+    </section>
+
+    <section id="setup">
+      <h1>⚙️ Setup</h1>
+      <pre><code>
+# Clone the repository
+git clone https://github.com/your-repo/finguard-ai.git
+
+# Install dependencies
+cd backend
+pip install -r requirements.txt
+
+# Run server
+python main.py
+      </code></pre>
+    </section>
+
+    <section id="api">
+      <h1>🔌 API Endpoints</h1>
+      <ul>
+        <li><strong>POST /register</strong> - Register a new user</li>
+        <li><strong>POST /login</strong> - Authenticate user and receive JWT</li>
+        <li><strong>GET /statement</strong> - Retrieve all user transactions</li>
+        <li><strong>POST /recharge</strong> - Add balance using mobile/bank</li>
+        <li><strong>POST /verifyReceiver</strong> - Verify recipient before sending money</li>
+        <li><strong>POST /sendMoney</strong> - Send money to another user</li>
+      </ul>
+    </section>
+
+    <section id="faq">
+      <h1>❓ FAQ</h1>
+      <p><strong>Q:</strong> Is my data stored securely?<br>
+         <strong>A:</strong> Yes. We use JWT, JSON file-based storage, and optionally blockchain for integrity.</p>
+
+      <p><strong>Q:</strong> Can I update my profile?<br>
+         <strong>A:</strong> Yes, use the `/profile/update` endpoint or UI form.</p>
+    </section>
+
+    <section id="contributors">
+      <h1>👥 Contributors</h1>
+      <div class="contributors-grid">
+        <div class="contributor-card">
+          <img src="assets/images/russel.jpg" alt="Md Abu Russel">
+          <h3>Md Abu Russel</h3>
+          <p>2205157@cse.buet.ac.bd</p>
+        </div>
+        <div class="contributor-card">
+          <img src="assets/images/ghagra.jpg" alt="Ghagra Salem Debnath">
+          <h3>Ghagra Salem Debnath</h3>
+          <p>2205181@cse.buet.ac.bd</p>
+        </div>
+        <div class="contributor-card">
+          <img src="assets/images/provat.png" alt="Provat Roy">
+          <h3>Provat Roy</h3>
+          <p>2205156@cse.buet.ac.bd</p>
+        </div>
+        <div class="contributor-card">
+          <img src="assets/images/nihal.jpg" alt="Mujtahid Mahmud Nihal">
+          <h3>Mujtahid Mahmud Nihal</h3>
+          <p>2205158@cse.buet.ac.bd</p>
+        </div>
+      </div>
+    </section>
+    
+  </main>
+</body>
+</html>

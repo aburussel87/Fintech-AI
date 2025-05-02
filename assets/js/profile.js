@@ -38,6 +38,10 @@ window.onload = async () => {
             document.getElementById("user-address").textContent = `${user.district}, ${user.division}, ${user.country}`;
             document.getElementById("user-phone").textContent = user.phone || "N/A";
             document.getElementById("user-email").textContent = user.email;
+
+            const img = document.getElementById("profileImage");
+            console.log(data.image);
+            img.src = data.image ? `http://localhost:5000${data.image}` : "assets/logo.png";
         } else {
             alert("Failed to fetch profile. Redirecting to login page.");
             localStorage.removeItem("access_token");
@@ -49,3 +53,42 @@ window.onload = async () => {
         alert('Failed to load user data. Please check your connection or try again later.');
     }
 };
+
+
+document.getElementById("uploadInput").addEventListener("change", function () {
+    const file = this.files[0];
+    if (!file) return;
+  
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      document.getElementById("profileImage").src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  
+    // Create a FormData object to send the file
+    const formData = new FormData();
+    formData.append("file", file); // Append the file to FormData object
+
+    // Send the image to the server
+    fetch('http://localhost:5000/profile/uploadImage', {
+        method: 'POST',
+        body: formData,  // FormData automatically sets content-type
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem("access_token")}` // Include JWT token for authentication
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert("Image uploaded successfully!");
+        } else {
+            alert("Error uploading image.");
+        }
+    })
+    .catch(error => {
+        console.error("Error:", error);
+        alert("Failed to upload image.");
+    });
+});
+
+  
