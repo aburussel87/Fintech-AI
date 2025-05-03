@@ -91,8 +91,7 @@ def submit_payment():
         },
         "note": note,
     }
-
-    print(invoice)
+    
     if force:
         # Load existing invoices, append the new invoice, and save
         print("force is true")
@@ -137,6 +136,6 @@ def submit_payment():
         add_block(invoice)
         success = True
     elif(fraud_check['flag']=='red'):
-        return jsonify({"success": False, "invoice": invoice, "message":fraud_check['message']}), 403
+        return jsonify({"success": "red", "invoice": invoice, "message":fraud_check['message']}), 403
 
     return jsonify({"success": success, "invoice": invoice, "message":fraud_check['message']}), 201
