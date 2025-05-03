@@ -11,7 +11,7 @@
 </head>
 
 <body onload="ip()">
-
+  <div class="watermark"></div>
   <!-- Glassy Form -->
   <form class="glass-card w-100" style="max-width: 500px;" onsubmit="return false">
     <div class="text-center mb-4">
@@ -35,9 +35,9 @@
       <label for="payment-method" class="form-label">Payment Method</label>
       <select id="payment-method" class="form-select" disabled>
         <option value="">--Select--</option>
-        <option value="card">Credit/Debit Card</option>
-        <option value="bank">Bank Transfer</option>
-        <option value="wallet">Mobile Wallet</option>
+        <option value="card" disabled>Credit/Debit Card</option>
+        <option value="bank" disabled>Bank Transfer</option>
+        <option value="wallet">Account Balance</option>
       </select>
     </div>
 
@@ -47,8 +47,8 @@
     </div>
 
     <div class="mb-3">
-      <label for="payer-info" class="form-label">Payer Info</label>
-      <input type="text" id="payer-info" class="form-control" placeholder="Enter payer details" disabled>
+      <label for="payer-info" class="form-label">Reference</label>
+      <input type="text" id="payer-info" class="form-control" placeholder="Enter Reference" disabled>
     </div>
 
     <div class="mb-3">

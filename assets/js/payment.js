@@ -65,7 +65,7 @@ async function FraudDetection() {
 
 
 
-async function submitPayment(force_i="false") {
+async function submitPayment(force_i=false) {
   const receiverId = document.getElementById('receiver-id').value.trim();
   const receiverMobile = document.getElementById('receiver-mobile').value.trim();
   const note = document.getElementById('note').value.trim();
@@ -75,7 +75,19 @@ async function submitPayment(force_i="false") {
     alert("Please log in first.");
     return;
   }
-
+  if(document.getElementById('amount').value.trim() == ""){
+    alert("Please enter an amount.");
+    return;
+  }else if(document.getElementById('payer-info').value.trim() == ""){
+    alert("Please enter payer information.");
+    return;
+  }else if(document.getElementById('payment-method').value == ""){
+    alert("Please select a payment method.");
+    return;
+  }else if(document.getelementById('note').value.trim() == ""){
+    alert("Please enter a note.");
+    return;
+  }
   const data = {
     id: receiverId,
     mobile: receiverMobile,
@@ -103,9 +115,13 @@ async function submitPayment(force_i="false") {
     window.location.href = "transaction.html"; // Redirect to login page if not logged in
     return;
   }
+<<<<<<< HEAD
   console.log(result);
   // await new Promise(resolve => setTimeout(resolve, 30000));
   if (result.success=='green'||force_i=="true") {
+=======
+  if (result.success || force_i==true) {
+>>>>>>> c2937586b59c318d652acfac3b6e1a3e0b153186
     alert("Payment recorded!");
     // result.invoice will contain details
     await generateInvoicePDF(result.invoice);
@@ -151,7 +167,7 @@ async function submitPayment(force_i="false") {
 
 async function force_submit() {
   console.log("Force submit called");
-  await submitPayment("true");
+  await submitPayment(true);
   console.log("forced submitPayment");
 }
 

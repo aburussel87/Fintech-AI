@@ -57,8 +57,56 @@ def check_fraud(transaction):
     # Preprocess the transaction data
     processed_data = preprocess_transaction(transaction)
 
+<<<<<<< HEAD
     # Predict fraud using the trained model
     prediction = model.predict(processed_data)[0]
+=======
+def check_fraud_Ai(user_id, current_transaction):
+    previsous_Transactions = []
+    res = """ "flag": "red", "message": "Operation unsuccessful." """
+    try :
+        count = 0
+        with open('main\\auth\\invoice.json', 'r') as file:
+            invoices = json.load(file)
+            for invoice in invoices:
+                if(invoice['receiver_id'] == user_id):
+                    print(f"{count+1} : User transaction {invoice['invoice_id']} is in the list.")
+                    previsous_Transactions.append(invoice)
+                    count += 1
+                if count == 20:
+                    break
+                    # return True
+        prompt = f"""
+            give me clean json code nothing else, not a single extra word, just the json code.
+            check if the follwing transaction of user {user_id} is consistent with the previous transactions of the user.
+            carefully check the locations this user recieves from, like the cities and countries, if that varies thats a red flag
+            and also check the amount recieved by this user. The user may be found as sender_id or reciever_id in the previous transactions.
+            the previous transactions are:
+            {previsous_Transactions}
+            the current transaction is:
+            {current_transaction}
+            respond with clean Json format in this format:
+            "flag": "red" or "green"
+            "message" : "a short message in lone line about the transaction about if there is prababale fraud or not"
+             give me one clean json code nothing else, not a single extra word, just the json code,
+        """
+        chat_response = get_response(prompt, user_id)
+        # print(f"Prompt: {prompt}")
+        print(f"Chat response: {chat_response}")
+        print(f"Chat response type: {type(chat_response)}")
+        res = extract_flag_and_message(chat_response)
+        return res.strip()
+    except (FileNotFoundError):
+        print("invoice list file not found or is empty.")
+        return res.strip()
+    except json.JSONDecodeError:
+        print("Error decoding JSON from the invoice list file.")
+        return res.strip()
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
+        return res.strip()
+        # return {user['user_id']: user for user in fraud_list}
+>>>>>>> c2937586b59c318d652acfac3b6e1a3e0b153186
 
     # Return prediction result
     if prediction == 1:  # Fraudulent

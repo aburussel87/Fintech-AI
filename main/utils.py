@@ -1,8 +1,11 @@
 import json
 import os
+from datetime import datetime
 
 DATA_FILE = os.path.join(os.path.dirname(__file__), "users.json")
 RECHARGE_FILE = os.path.join(os.path.dirname(__file__), "recharge.json")
+BLOCKCHAIN_FILE = os.path.join(os.path.dirname(__file__), "blockchain.json")
+
 def load_users():
     if not os.path.exists(DATA_FILE):
         return []
@@ -23,3 +26,25 @@ def load_recharges():
 def save_recharges(recharges):
     with open(RECHARGE_FILE, "w") as f:
         json.dump(recharges, f, indent=4)
+
+
+
+ #Blockchain functions
+
+def load_blockchain():
+    if not os.path.exists(BLOCKCHAIN_FILE):
+        genesis_block = {
+            "index": 0,
+            "timestamp": str(datetime.now()),
+            "transaction": "Genesis Block",
+            "previous_hash": "0",
+            "hash": "0"
+        }
+        with open(BLOCKCHAIN_FILE, 'w') as f:
+            json.dump([genesis_block], f, indent=2)
+    with open(BLOCKCHAIN_FILE, 'r') as f:
+        return json.load(f)
+
+def save_blockchain(chain):
+    with open(BLOCKCHAIN_FILE, 'w') as f:
+        json.dump(chain, f, indent=2)
