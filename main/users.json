@@ -2,7 +2,7 @@
     {
         "firstName": "Abu",
         "lastName": "Russel",
-        "balance": 10000.0,
+        "balance": 9127.432199999997,
         "age": "23",
         "dob": "2025-04-09",
         "maritalStatus": "Single",
@@ -19,7 +19,7 @@
     {
         "firstName": "Abu",
         "lastName": "Russel",
-        "balance": 6500.0,
+        "balance": 7371.0,
         "age": "23",
         "dob": "2025-05-16",
         "maritalStatus": "Single",

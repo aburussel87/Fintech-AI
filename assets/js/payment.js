@@ -103,6 +103,8 @@ async function submitPayment(force_i="false") {
     window.location.href = "transaction.html"; // Redirect to login page if not logged in
     return;
   }
+  console.log(result);
+  // await new Promise(resolve => setTimeout(resolve, 30000));
   if (result.success=='green'||force_i=="true") {
     alert("Payment recorded!");
     // result.invoice will contain details
@@ -110,7 +112,7 @@ async function submitPayment(force_i="false") {
     console.log(result.invoice);
     
     } 
-    else{
+    else if (result.success=='red') {
       console.log(result.message);
       const modal = document.createElement('div');
       modal.style.position = 'fixed';
@@ -256,3 +258,9 @@ function error(err) {
   document.getElementById('result').textContent = `Location error: ${err.message}`;
 }
 
+
+document.getElementById("submit").addEventListener("click", async (event) => {
+  event.preventDefault();  // Prevent the page from refreshing
+  await submitPayment();
+  console.log("Payment submitted");
+});
