@@ -110,9 +110,9 @@ def submit_payment():
 
 
 
-    fraud_check_json = check_fraud(receiver_id, sender_id, invoice)
+    fraud_check_json = check_fraud(invoice)
     fraud_check = json.loads(fraud_check_json)
-
+    print (fraud_check)
     # Check the fraud check result
     # this returns a json object with the flag and message
     # fraud_check['flag'] can be 'green', 'yellow', or 'red'

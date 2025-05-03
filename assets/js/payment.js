@@ -110,19 +110,20 @@ async function submitPayment(force_i=false) {
   });
 
   const result = await res.json();
-  // if(result.success==false){
-  //   alert("Payment failed: " + result.message);
-  //   window.location.href = "transaction.html"; // Redirect to login page if not logged in
-  //   return;
-  // }
+  if(result.success==false){
+    alert("Payment failed: " + result.message);
+    window.location.href = "transaction.html"; // Redirect to login page if not logged in
+    return;
+  }
   if (result.success || force_i==true) {
+>>>>>>> c2937586b59c318d652acfac3b6e1a3e0b153186
     alert("Payment recorded!");
     // result.invoice will contain details
     await generateInvoicePDF(result.invoice);
     console.log(result.invoice);
     
     } 
-    else{
+    else if (result.success=='red') {
       console.log(result.message);
       const modal = document.createElement('div');
       modal.style.position = 'fixed';
@@ -268,3 +269,9 @@ function error(err) {
   document.getElementById('result').textContent = `Location error: ${err.message}`;
 }
 
+
+document.getElementById("submit").addEventListener("click", async (event) => {
+  event.preventDefault();  // Prevent the page from refreshing
+  await submitPayment();
+  console.log("Payment submitted");
+});

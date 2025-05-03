@@ -2,7 +2,11 @@
     {
         "firstName": "Abu",
         "lastName": "Russel",
+<<<<<<< HEAD
+        "balance": 9127.432199999997,
+=======
         "balance": 24002.0,
+>>>>>>> c2937586b59c318d652acfac3b6e1a3e0b153186
         "age": "23",
         "dob": "2025-04-09",
         "maritalStatus": "Single",
@@ -19,7 +23,11 @@
     {
         "firstName": "Abu",
         "lastName": "Russel",
+<<<<<<< HEAD
+        "balance": 7371.0,
+=======
         "balance": 2493.7999999999993,
+>>>>>>> c2937586b59c318d652acfac3b6e1a3e0b153186
         "age": "23",
         "dob": "2025-05-16",
         "maritalStatus": "Single",
