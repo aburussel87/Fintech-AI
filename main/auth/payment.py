@@ -61,8 +61,6 @@ def submit_payment():
     users = load_users()  # Load the users list/dictionary
     # Find the receiver based on ID and mobile number
     receiver = next((u for u in users if u["id"] == receiver_id and u["phone"] == receiver_mobile), None)
-    if receiver is None:
-        return jsonify({"success": False, "message": "Receiver not found"}), 404
 
     invoice_id = generate_invoice_id()  # Generate a unique invoice ID
     time_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")  # Get the current time
@@ -94,7 +92,7 @@ def submit_payment():
         "note": note,
     }
 
-    
+    print(invoice)
     if force:
         # Load existing invoices, append the new invoice, and save
         print("force is true")

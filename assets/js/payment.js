@@ -84,7 +84,7 @@ async function submitPayment(force_i=false) {
   }else if(document.getElementById('payment-method').value == ""){
     alert("Please select a payment method.");
     return;
-  }else if(document.getelementById('note').value.trim() == ""){
+  }else if(document.getElementById('note').value.trim() == ""){
     alert("Please enter a note.");
     return;
   }
@@ -110,11 +110,11 @@ async function submitPayment(force_i=false) {
   });
 
   const result = await res.json();
-  if(result.success==false){
-    alert("Payment failed: " + result.message);
-    window.location.href = "transaction.html"; // Redirect to login page if not logged in
-    return;
-  }
+  // if(result.success==false){
+  //   alert("Payment failed: " + result.message);
+  //   window.location.href = "transaction.html"; // Redirect to login page if not logged in
+  //   return;
+  // }
   if (result.success || force_i==true) {
     alert("Payment recorded!");
     // result.invoice will contain details
