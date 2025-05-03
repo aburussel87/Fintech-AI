@@ -56,7 +56,7 @@ def check_fraud_Ai(user_id, current_transaction):
             give me clean json code nothing else, not a single extra word, just the json code.
             check if the follwing transaction of user {user_id} is consistent with the previous transactions of the user.
             carefully check the locations this user recieves from, like the cities and countries, if that varies thats a red flag
-            and also check the amount recieved by this user user
+            and also check the amount recieved by this user. The user may be found as sender_id or reciever_id in the previous transactions.
             the previous transactions are:
             {previsous_Transactions}
             the current transaction is:

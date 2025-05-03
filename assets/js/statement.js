@@ -52,9 +52,9 @@ function renderTransactions(data) {
     };
 
     // Clear previous content
-    for (const key in sections) {
-        sections[key].innerHTML = '';
-    }
+    // for (const key in sections) {
+    //     sections[key].innerHTML = '';
+    // }
 
     // Group transactions by type and date
     const groupedByDate = {};

@@ -7,6 +7,8 @@ from utils import load_users
 from utils import save_users
 from utils import load_recharges
 from utils import save_recharges
+from auth.blockchain import add_block
+
 
 recharge_bp = Blueprint('recharge', __name__)
 
@@ -45,5 +47,14 @@ def recharge():
     }
     recharges.append(recharge_entry)
     save_recharges(recharges)
+        # Save to blockchain
+    add_block({
+        "type": "recharge",
+        "user_id": user_id,
+        "amount": amount,
+        "method": method,
+        "time": recharge_entry["time"]
+    })
+
 
     return jsonify({"success": True, "message": "Recharge successful", "recharge": recharge_entry}), 201

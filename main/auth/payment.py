@@ -8,6 +8,8 @@ import string
 from datetime import datetime
 from .fraud import check_fraud
 from utils import load_users, save_users
+from auth.blockchain import add_block
+
 
 payment_bp = Blueprint('payment', __name__)
 
@@ -93,12 +95,17 @@ def submit_payment():
     }
 
     
-    if(force == "true"):
+    if force:
         # Load existing invoices, append the new invoice, and save
         print("force is true")
         invoices = load_invoices()
         invoices.append(invoice)
         save_invoices(invoices)
+        transaction_fee = float(amount) * 0.0018
+        sender["balance"] -= float(amount) + transaction_fee
+        receiver["balance"] += float(amount)
+        save_users(users)  # Save updated user balances
+        add_block(invoice)
         success = True
         return jsonify({"success": success, "invoice": invoice, "message":"payment successful"}), 201
 
@@ -120,18 +127,18 @@ def submit_payment():
     # very important 
     # yellow and green are both considered success for now but you have to display user a message if it is yellow, 
     success = False
-    if(fraud_check['flag']=='green' or force == "true"):
+    if(fraud_check['flag']=='green' or force):
         # Load existing invoices, append the new invoice, and save
         invoices = load_invoices()
         invoices.append(invoice)
         save_invoices(invoices)
-        success = True
-
-        # Update balances
-    if success:
         transaction_fee = float(amount) * 0.0018
         sender["balance"] -= float(amount) + transaction_fee
         receiver["balance"] += float(amount)
         save_users(users)  # Save updated user balances
+        add_block(invoice)
+        success = True
+    elif(fraud_check['flag']=='red'):
+        return jsonify({"success": False, "invoice": invoice, "message":fraud_check['message']}), 403
 
     return jsonify({"success": success, "invoice": invoice, "message":fraud_check['message']}), 201

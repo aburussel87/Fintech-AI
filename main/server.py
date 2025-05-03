@@ -4,6 +4,7 @@ from flask_jwt_extended import JWTManager
 from flask import send_from_directory
 
 
+from auth.blockchain import blockchain_bp
 from auth.login import login_bp
 from auth.register import register_bp
 from auth.payment import payment_bp
@@ -36,6 +37,7 @@ app.register_blueprint(fraud_bp)
 app.register_blueprint(recharge_bp)
 app.register_blueprint(statement_bp)
 app.register_blueprint(budget_bp)
+app.register_blueprint(blockchain_bp)
 
 
 
