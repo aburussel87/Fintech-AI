@@ -9,6 +9,7 @@ from datetime import datetime
 from .fraud import check_fraud
 from utils import load_users, save_users
 from auth.blockchain import add_block
+from .budgetAi import verify_transaction
 
 
 payment_bp = Blueprint('payment', __name__)
@@ -112,6 +113,10 @@ def submit_payment():
     fraud_check_json = check_fraud(invoice)
     fraud_check = json.loads(fraud_check_json)
     print (fraud_check)
+
+    budget_check_json = verify_transaction(invoice)
+    budget_check = json.loads(budget_check_json)
+    print (budget_check)
     # Check the fraud check result
     # this returns a json object with the flag and message
     # fraud_check['flag'] can be 'green', 'yellow', or 'red'
@@ -124,7 +129,7 @@ def submit_payment():
     # very important 
     # yellow and green are both considered success for now but you have to display user a message if it is yellow, 
     success = False
-    if(fraud_check['flag']=='green' or force):
+    if((fraud_check['flag']=='green' and budget_check['flag']=='green')or force):
         # Load existing invoices, append the new invoice, and save
         invoices = load_invoices()
         invoices.append(invoice)
@@ -137,5 +142,7 @@ def submit_payment():
         success = True
     elif(fraud_check['flag']=='red'):
         return jsonify({"success": "red", "invoice": invoice, "message":fraud_check['message']}), 403
+    if(budget_check['flag']=='red' and fraud_check['flag']=='green'):
+        return jsonify({"success": "red", "invoice": invoice, "message":budget_check['message']}), 403
 
     return jsonify({"success": success, "invoice": invoice, "message":fraud_check['message']}), 201

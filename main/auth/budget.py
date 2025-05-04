@@ -147,3 +147,4 @@ def get_budget(user_id):
 # user_id = "user123"
 # add_budget(user_id, new_budget)
 # print(get_budget(user_id))
+

@@ -9,7 +9,7 @@ from auth.login import login_bp
 from auth.register import register_bp
 from auth.payment import payment_bp
 from auth.auth import auth_bp
-from auth.profile import profile_bp
+from auth.user_profile import profile_bp
 from auth.chat import chat_bp
 from auth.fraud import fraud_bp
 from auth.recharge import recharge_bp
