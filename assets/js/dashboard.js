@@ -1,271 +1,308 @@
 document.addEventListener('DOMContentLoaded', async () => {
-    // Fetch user data
-    let userData;
+    let transactions = [];
+    let user;
     try {
-      const res = await fetch('assets/js/user_data.json');
-      const data = await res.json();
-      userData = data.user;
-      console.log('Fetched userData:', userData);
-      // Set dashboard profile picture
-      var profilePic = document.getElementById('dashboardProfilePic');
-      if (profilePic && userData.avatar) {
-        // Fix relative path if needed
-        let avatarPath = userData.avatar;
-        if (avatarPath.startsWith('../')) {
-          avatarPath = avatarPath.replace('../', 'assets_2/');
+        const token = localStorage.getItem("access_token");
+
+        if (!token) {
+            alert("You are not logged in. Redirecting to login page.");
+            window.location.href = "index.html";
+            return;
         }
-        profilePic.src = avatarPath;
-      }
-    } catch (e) {
-      document.getElementById('userBalance').textContent = 'Error loading data';
-      document.getElementById('transactionList').innerHTML = '<div style="color:#f48fb1;padding:18px;text-align:center;">Error loading transactions.</div>';
-      return;
+
+        const response = await fetch('http://localhost:5000/statement/dashboard', {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+
+        if (!response.ok) {
+            alert("Unauthorized access. Please log in again.");
+            localStorage.removeItem("access_token");
+            window.location.href = "index.html";
+            return;
+        }
+
+        const data = await response.json();
+
+        if (data.success === true) {
+            user = data.user;
+            transactions = user.transactions;
+            document.getElementById('userName').innerText = user.name;
+            document.getElementById('userEmail').innerText = user.email;
+            document.getElementById('userPhone').innerText = user.phone;
+            document.getElementById('userid').innerText = user.id;
+            const img = document.getElementById("dashboardProfilePic");
+            img.src = data.image ? `http://localhost:5000${data.image}` : "assets/logo.png";
+            const summary = getTransactionSummaryByType(transactions, 7);
+        } else {
+            alert("Failed to fetch statement. Redirecting to login page.");
+            localStorage.removeItem("access_token");
+            window.location.href = "index.html";
+        }
+
+    } catch (error) {
+        console.error('Error fetching statement:', error);
+        alert('Failed to load transaction data. Please try again later.');
     }
-  
-    // Category mapping
+
+
+    function getTransactionSummaryByType(transactions, days = 7) {
+        const summary = {
+            "Recharge": { count: 0, totalAmount: 0 },
+            "Sent Money": { count: 0, totalAmount: 0 },
+            "Received Money": { count: 0, totalAmount: 0 },
+            "Pay Bill": { count: 0, totalAmount: 0 },
+        };
+
+        // Get the cutoff date
+        const cutoffDate = new Date();
+        cutoffDate.setDate(cutoffDate.getDate() - days);
+
+        transactions.forEach(tx => {
+            const txDate = new Date(`${tx.date} ${tx.time}`);
+
+            if (txDate >= cutoffDate) {
+                const category = tx.category;
+                const amount = parseFloat(tx.amount);
+                if (summary[category]) {
+                    summary[category].count += 1;
+                    summary[category].totalAmount += amount;
+                }
+            }
+        });
+        document.getElementById("box1Count").innerText = summary["Recharge"].count;
+        document.getElementById("box1Total").innerText = `৳ ${summary["Recharge"].totalAmount.toFixed(2)}`;
+        document.getElementById("box2Count").innerText = summary["Sent Money"].count;
+        document.getElementById("box2Total").innerText = `৳ ${summary["Sent Money"].totalAmount.toFixed(2)}`;
+        document.getElementById("box3Count").innerText = summary["Received Money"].count;
+        document.getElementById("box3Total").innerText = `৳ ${summary["Received Money"].totalAmount.toFixed(2)}`;
+        document.getElementById("box4Count").innerText = summary["Pay Bill"].count;
+        document.getElementById("box4Total").innerText = `৳ ${summary["Pay Bill"].totalAmount.toFixed(2)}`;
+        return summary;
+    }
+
+
+
+
     const CATEGORY_MAP = {
-      must: ["Groceries", "Rent", "Utilities", "Transportation"],
-      need: ["Healthcare", "Education", "Insurance"],
-      want: ["Entertainment", "Dining", "Shopping", "Subscriptions"]
+        sentMoney: ["Sent Money"],
+        receivedMoney: ["Received Money"],
+        recharge: ["Recharge"]
     };
-  
-    // Helper: categorize
+
     function getCategoryType(category) {
-      if (CATEGORY_MAP.must.includes(category)) return 'Must';
-      if (CATEGORY_MAP.need.includes(category)) return 'Need';
-      if (CATEGORY_MAP.want.includes(category)) return 'Want';
-      return 'Other';
+        if (CATEGORY_MAP.sentMoney.includes(category)) return 'SentMoney';
+        if (CATEGORY_MAP.receivedMoney.includes(category)) return 'ReceivedMoney';
+        if (CATEGORY_MAP.recharge.includes(category)) return 'Recharge';
+        return 'Other';
     }
-  
-    // Helper: get date X days ago
+
     function getDateXDaysAgo(days) {
-      const d = new Date();
-      d.setDate(d.getDate() - days + 1); // inclusive
-      d.setHours(0,0,0,0);
-      return d;
-    }
-  
-    // Helper: ordinal suffix for date
-    function getOrdinal(n) {
-      if (n > 3 && n < 21) return n + 'th';
-      switch (n % 10) {
-        case 1: return n + 'st';
-        case 2: return n + 'nd';
-        case 3: return n + 'rd';
-        default: return n + 'th';
-      }
-    }
-  
-    // Helper: format date as '1st May'
-    function formatDateLabel(dateStr) {
-      const d = new Date(dateStr);
-      const day = d.getDate();
-      const month = d.toLocaleString('default', { month: 'short' });
-      return `${getOrdinal(day)} ${month}`;
-    }
-  
-    // Set balance
-    document.getElementById('userBalance').textContent = `$${userData.balance.toLocaleString()}`;
-  
-    // Render transactions (show both date and time)
-    function renderTransactions(transactions) {
-      const list = document.getElementById('transactionList');
-      list.innerHTML = '';
-      if (!transactions.length) {
-        list.innerHTML = '<div style="color:#90caf9;padding:18px;text-align:center;">No transactions in this period.</div>';
-        return;
-      }
-      transactions.forEach(tx => {
-        const div = document.createElement('div');
-        div.className = 'transaction-item';
-        div.tabIndex = 0;
-        div.innerHTML = `
-          <span class="transaction-date">${tx.date} ${tx.time}</span>
-          <span class="transaction-category">${tx.category}</span>
-          <span class="transaction-amount">$${tx.amount.toFixed(2)}</span>
-        `;
-        div.addEventListener('click', () => showModal(tx));
-        div.addEventListener('keypress', e => { if (e.key === 'Enter') showModal(tx); });
-        list.appendChild(div);
-      });
-    }
-  
-    // Modal logic
-    const modal = document.getElementById('transactionModal');
-    const closeModalBtn = document.getElementById('closeModal');
-    function showModal(tx) {
-      document.getElementById('modalDetails').innerHTML = `
-        <h4 style="margin-bottom:16px;">Transaction Details</h4>
-        <div><b>Date:</b> ${tx.date} ${tx.time}</div>
-        <div><b>Category:</b> ${tx.category}</div>
-        <div><b>Amount:</b> $${tx.amount.toFixed(2)}</div>
-        <div><b>Invoice ID:</b> ${tx.invoice_id}</div>
-        <div><b>Receiver ID:</b> ${tx.receiver_id}</div>
-      `;
-      modal.style.display = 'flex';
-    }
-    closeModalBtn.onclick = () => { modal.style.display = 'none'; };
-    window.onclick = e => { if (e.target === modal) modal.style.display = 'none'; };
-  
-    // Timeline filter
-    const timelineSelect = document.getElementById('timelineSelect');
-    function filterTransactions(days) {
-      const fromDate = getDateXDaysAgo(days);
-      return userData.transactions.filter(tx => {
-        const txDate = new Date(tx.date);
-        txDate.setHours(0,0,0,0);
-        return txDate >= fromDate;
-      });
-    }
-  
-    // Pie chart data
-    function getPieData(transactions) {
-      const sums = { Must: 0, Need: 0, Want: 0 };
-      transactions.forEach(tx => {
-        const type = getCategoryType(tx.category);
-        if (sums[type] !== undefined) sums[type] += tx.amount;
-      });
-      return [sums.Must, sums.Need, sums.Want];
-    }
-  
-    // Line chart data (three lines: Must, Need, Want)
-    function getLineData(transactions, days) {
-      // Prepare date keys
-      const dateKeys = [];
-      const today = new Date();
-      for (let i = days - 1; i >= 0; i--) {
         const d = new Date();
-        d.setDate(today.getDate() - i);
-        const key = d.toISOString().slice(0,10);
-        dateKeys.push(key);
-      }
-      // Prepare sums for each type
-      const sums = {
-        Must: dateKeys.map(() => 0),
-        Need: dateKeys.map(() => 0),
-        Want: dateKeys.map(() => 0)
-      };
-      transactions.forEach(tx => {
-        const type = getCategoryType(tx.category);
-        const idx = dateKeys.indexOf(tx.date);
-        if (idx !== -1 && sums[type] !== undefined) {
-          sums[type][idx] += tx.amount;
-        }
-      });
-      return {
-        labels: dateKeys.map(formatDateLabel),
-        Must: sums.Must,
-        Need: sums.Need,
-        Want: sums.Want
-      };
+        d.setDate(d.getDate() - days + 1);
+        d.setHours(0, 0, 0, 0);
+        return d;
     }
-  
-    // Chart.js theme colors
+
+    function getOrdinal(n) {
+        if (n > 3 && n < 21) return n + 'th';
+        switch (n % 10) {
+            case 1: return n + 'st';
+            case 2: return n + 'nd';
+            case 3: return n + 'rd';
+            default: return n + 'th';
+        }
+    }
+
+    function formatDateLabel(dateStr) {
+        const d = new Date(dateStr);
+        const day = d.getDate();
+        const month = d.toLocaleString('default', { month: 'short' });
+        return `${getOrdinal(day)} ${month}`;
+    }
+
+
+
+    const timelineSelect = document.getElementById('timelineSelect');
+
+    function filterTransactions(days) {
+        const fromDate = getDateXDaysAgo(days).toISOString().slice(0, 10);
+        return transactions.filter(tx => {
+            return tx.date >= fromDate;
+        });
+    }
+
+    function getPieData(transactions) {
+        const sums = { SentMoney: 0, ReceivedMoney: 0, Recharge: 0 };
+
+        transactions.forEach(tx => {
+            const type = getCategoryType(tx.category);
+            if (sums.hasOwnProperty(type)) {
+                sums[type] += parseFloat(tx.amount,2);
+            }
+        });
+
+        return [sums.SentMoney, sums.ReceivedMoney, sums.Recharge];
+    }
+
+    function getLineData(transactions, days) {
+        const dateKeys = [];
+        const today = new Date();
+
+        for (let i = days - 1; i >= 0; i--) {
+            const d = new Date();
+            d.setDate(today.getDate() - i);
+            dateKeys.push(d.toISOString().slice(0, 10));
+        }
+
+        const sums = {
+            SentMoney: dateKeys.map(() => 0),
+            ReceivedMoney: dateKeys.map(() => 0),
+            Recharge: dateKeys.map(() => 0)
+        };
+
+        transactions.forEach(tx => {
+            const type = getCategoryType(tx.category);
+            const idx = dateKeys.indexOf(tx.date);
+            if (idx !== -1 && sums.hasOwnProperty(type)) {
+                sums[type][idx] += parseFloat(tx.amount,2);
+            }
+        });
+
+        return {
+            labels: dateKeys.map(formatDateLabel),
+            SentMoney: sums.SentMoney,
+            ReceivedMoney: sums.ReceivedMoney,
+            Recharge: sums.Recharge
+        };
+    }
+
     const pieColors = [
-      'rgba(33, 150, 243, 0.7)', // Must
-      'rgba(244, 180, 0, 0.7)',  // Need
-      'rgba(244, 143, 177, 0.7)' // Want
+        'rgba(33, 150, 243, 0.7)',  // Sent Money
+        'rgba(244, 180, 0, 0.7)',   // Received Money
+        'rgba(255, 118, 230, 0.83)'  // Recharge
     ];
-  
-    // Render charts
-    let pieChart, lineChart;
+
+    let TpieChart, TlineChart;
+
     function renderCharts(transactions, days) {
-      // Pie
-      const pieData = getPieData(transactions);
-      if (pieChart) pieChart.destroy();
-      pieChart = new Chart(document.getElementById('pieChart'), {
-        type: 'pie',
-        data: {
-          labels: ['Must', 'Need', 'Want'],
-          datasets: [{
-            data: pieData,
-            backgroundColor: pieColors,
-            borderColor: '#222',
-            borderWidth: 2
-          }]
-        },
-        options: {
-          plugins: {
-            legend: {
-              labels: { color: '#fff', font: { family: 'Share Tech Mono', size: 16 } }
-            }
-          }
-        }
-      });
-      // Line (three lines)
-      const lineData = getLineData(transactions, days);
-      if (lineChart) lineChart.destroy();
-      lineChart = new Chart(document.getElementById('lineChart'), {
-        type: 'line',
-        data: {
-          labels: lineData.labels,
-          datasets: [
-            {
-              label: 'Must',
-              data: lineData.Must,
-              fill: false,
-              borderColor: pieColors[0],
-              backgroundColor: pieColors[0],
-              tension: 0.4,
-              pointRadius: 3,
-              pointBackgroundColor: '#fff',
-              borderWidth: 3
+        const pieData = getPieData(transactions);
+        if (TpieChart) TpieChart.destroy(); // Destroy previous pie chart
+        TpieChart = new Chart(document.getElementById('TpieChart'), {
+            type: 'pie',
+            data: {
+                labels: ['Sent Money', 'Received Money', 'Recharge'],
+                datasets: [{
+                    data: pieData,
+                    backgroundColor: pieColors,
+                    borderColor: '#222',
+                    borderWidth: 2
+                }]
             },
-            {
-              label: 'Need',
-              data: lineData.Need,
-              fill: false,
-              borderColor: pieColors[1],
-              backgroundColor: pieColors[1],
-              tension: 0.4,
-              pointRadius: 3,
-              pointBackgroundColor: '#fff',
-              borderWidth: 3
+            options: {
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: '#fff',
+                            font: { family: 'Share Tech Mono', size: 16 }
+                        }
+                    }
+                }
+            }
+        });
+
+        const lineData = getLineData(transactions, days);
+        if (TlineChart) TlineChart.destroy(); // Destroy previous line chart
+        TlineChart = new Chart(document.getElementById('TlineChart'), {
+            type: 'line',
+            data: {
+                labels: lineData.labels,
+                datasets: [
+                    {
+                        label: 'Sent Money',
+                        data: lineData.SentMoney,
+                        fill: false,
+                        borderColor: pieColors[0],
+                        backgroundColor: pieColors[0],
+                        tension: 0.4,
+                        pointRadius: 3,
+                        pointBackgroundColor: '#fff',
+                        borderWidth: 3
+                    },
+                    {
+                        label: 'Received Money',
+                        data: lineData.ReceivedMoney,
+                        fill: false,
+                        borderColor: pieColors[1],
+                        backgroundColor: pieColors[1],
+                        tension: 0.4,
+                        pointRadius: 3,
+                        pointBackgroundColor: '#fff',
+                        borderWidth: 3
+                    },
+                    {
+                        label: 'Recharge',
+                        data: lineData.Recharge,
+                        fill: false,
+                        borderColor: pieColors[2],
+                        backgroundColor: pieColors[2],
+                        tension: 0.4,
+                        pointRadius: 3,
+                        pointBackgroundColor: '#fff',
+                        borderWidth: 3
+                    }
+                ]
             },
-            {
-              label: 'Want',
-              data: lineData.Want,
-              fill: false,
-              borderColor: pieColors[2],
-              backgroundColor: pieColors[2],
-              tension: 0.4,
-              pointRadius: 3,
-              pointBackgroundColor: '#fff',
-              borderWidth: 3
+            options: {
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: '#fff',
+                            font: { family: 'Share Tech Mono', size: 14 }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        ticks: {
+                            color: '#fff',
+                            font: { family: 'Share Tech Mono', size: 13 }
+                        },
+                        grid: { color: 'rgba(255,255,255,0.08)' }
+                    },
+                    y: {
+                        ticks: {
+                            color: '#fff',
+                            font: { family: 'Share Tech Mono', size: 13 }
+                        },
+                        grid: { color: 'rgba(255,255,255,0.08)' }
+                    }
+                }
             }
-          ]
-        },
-        options: {
-          plugins: {
-            legend: {
-              labels: { color: '#fff', font: { family: 'Share Tech Mono', size: 14 } }
-            }
-          },
-          scales: {
-            x: {
-              ticks: { color: '#fff', font: { family: 'Share Tech Mono', size: 13 } },
-              grid: { color: 'rgba(255,255,255,0.08)' }
-            },
-            y: {
-              ticks: { color: '#fff', font: { family: 'Share Tech Mono', size: 13 } },
-              grid: { color: 'rgba(255,255,255,0.08)' }
-            }
-          }
-        }
-      });
+        });
     }
-  
-    // Initial render
+
+    let begin = true;
     function updateDashboard() {
-      const days = parseInt(timelineSelect.value, 10);
-      const filtered = filterTransactions(days);
-      renderTransactions(filtered);
-      renderCharts(filtered, days);
+        if (begin) {
+            const filtered = filterTransactions(7); // Default to 30 days
+            // renderTransactions(filtered); // Render the filtered transactions
+            renderCharts(filtered, 7);  // Render the charts (pie and line)
+            getTransactionSummaryByType(filtered, 7); // Render the summary boxes
+            begin = false;
+            return;
+        }
+        const days = parseInt(timelineSelect.value, 10);
+        const filtered = filterTransactions(days);
+        //renderTransactions(filtered); // Render the filtered transactions
+        renderCharts(filtered, days);  // Render the charts (pie and line)
+        getTransactionSummaryByType(filtered, days); // Render the summary boxes
+
     }
-  
+
     timelineSelect.addEventListener('change', updateDashboard);
-  
-    // Initial load
-    updateDashboard();
-  });
-  
+
+    updateDashboard(); // Initial render
+});

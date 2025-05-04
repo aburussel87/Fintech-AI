@@ -40,7 +40,6 @@ window.onload = async () => {
             document.getElementById("user-email").textContent = user.email;
 
             const img = document.getElementById("profileImage");
-            console.log(data.image);
             img.src = data.image ? `http://localhost:5000${data.image}` : "assets/logo.png";
         } else {
             alert("Failed to fetch profile. Redirecting to login page.");

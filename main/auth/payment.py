@@ -9,7 +9,7 @@ from datetime import datetime
 from .fraud import check_fraud
 from utils import load_users, save_users
 from auth.blockchain import add_block
-from .budgetAi import verify_transaction
+from auth.budgetAi import verify_transaction
 
 
 payment_bp = Blueprint('payment', __name__)
