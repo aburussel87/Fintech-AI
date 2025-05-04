@@ -1,95 +1,281 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Finguard AI Documentation</title>
-  <link rel="stylesheet" href="assets/css/documentation.css">
-  <link rel="icon" type="image/png" href="assets/logo.png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Finguard AI | Documentation</title>
+  <link rel="stylesheet" href="assets/css/documentation.css" />
+  <link rel="icon" type="image/png" href="assets/logo.png" />
 </head>
 <body>
   <div class="watermark"></div>
 
-  <aside class="sidebar">
+  <!-- Responsive Sidebar -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
     <h2>Finguard AI</h2>
-    <nav>
-      <a href="#overview">Overview</a>
-      
-      <a href="#setup">Setup</a>
-      <a href="#api">API Endpoints</a>
-      <a href="#faq">FAQ</a>
-      <a href="#contributors">Contributors</a>
-    </nav>
-  </aside>
+    <button class="hamburger" id="hamburger">&#9776;</button>
+  </div>
+  <nav>
+    <a href="#overview">📘 Overview</a>
+    <a href="#project-structure">📁 Project Structure</a>
+    <a href="#setup">⚙️ Setup</a>
+    <a href="#requirements">📦 Requirements</a>
+    <a href="#api">🔌 API Endpoints</a>
+    <a href="#assets">📂 Assets</a>
+    <a href="#deployment">🚀 Deployment</a>
+    <a href="#notes">📝 Notes</a>
+    <a href="#faq">❓ FAQ</a>
+    <a href="#contributors">👥 Contributors</a>
+    <a href="#license">📄 License</a>
+    <a href="#contact">📬 Contact</a>
+    <a href="#future">🔮 Future Plans</a>
+  </nav>
+</aside>
+
 
   <main class="content">
+
+    <!-- Overview -->
     <section id="overview">
       <h1>📘 Overview</h1>
-      <p>Finguard AI is a fintech assistant that provides users with secure, AI-powered financial recommendations and transaction handling.</p>
-    </section>
+      <p><strong>Finguard AI</strong> is a secure, intelligent fintech assistant designed to help users manage their finances through AI-driven insights, fraud detection, blockchain-based integrity, and modern UI/UX. The system is modular, scalable, and ideal for personal use, education, or small businesses.</p>
 
-    <section id="setup">
-      <h1>⚙️ Setup</h1>
-      <pre><code>
-# Clone the repository
-git clone https://github.com/your-repo/finguard-ai.git
-
-# Install dependencies
-cd backend
-pip install -r requirements.txt
-
-# Run server
-python main.py
-      </code></pre>
-    </section>
-
-    <section id="api">
-      <h1>🔌 API Endpoints</h1>
+      <h2>Key Features</h2>
       <ul>
-        <li><strong>POST /register</strong> - Register a new user</li>
-        <li><strong>POST /login</strong> - Authenticate user and receive JWT</li>
-        <li><strong>GET /statement</strong> - Retrieve all user transactions</li>
-        <li><strong>POST /recharge</strong> - Add balance using mobile/bank</li>
-        <li><strong>POST /verifyReceiver</strong> - Verify recipient before sending money</li>
-        <li><strong>POST /sendMoney</strong> - Send money to another user</li>
+        <li><strong>AI-Powered Financial Insights:</strong> Interprets user intent using NLP to offer real-time suggestions.</li>
+        <li><strong>Custom Budgeting:</strong> Auto-generates budget plans based on spending history.</li>
+        <li><strong>Secure Chatbot:</strong> Conversational assistant that understands financial queries.</li>
+        <li><strong>Fraud Detection:</strong> ML model flags anomalies in transactions.</li>
+        <li><strong>JWT & RBAC:</strong> Secure token-based authentication with role segregation.</li>
+        <li><strong>Blockchain:</strong> Ensures audit trails and data immutability.</li>
+        <li><strong>Multi-step Registration:</strong> Includes verification and profile completion.</li>
+        <li><strong>PDF Invoices:</strong> Automatically generated after transactions.</li>
+        <li><strong>Fully Responsive UI:</strong> Mobile-friendly, animated transitions.</li>
+      </ul>
+
+      <h2>Technology Stack</h2>
+      <ul>
+        <li><strong>Frontend:</strong> HTML, CSS, JavaScript, EmailJS</li>
+        <li><strong>Backend:</strong> Flask or FastAPI with modular blueprint routing</li>
+        <li><strong>ML:</strong> Scikit-learn models for fraud detection</li>
+        <li><strong>AI:</strong> Ollama + LLaMA 3.2 for NLP and user queries</li>
+        <li><strong>Security:</strong> JWT, secure password hashing, token verification</li>
+        <li><strong>Storage:</strong> JSON for quick access, database ready</li>
+        <li><strong>Blockchain:</strong> Localized chain for transaction verification</li>
       </ul>
     </section>
 
-    <section id="faq">
-      <h1>❓ FAQ</h1>
-      <p><strong>Q:</strong> Is my data stored securely?<br>
-         <strong>A:</strong> Yes. We use JWT, JSON file-based storage, and optionally blockchain for integrity.</p>
+    <!-- Project Structure -->
+    <section id="project-structure">
+      <h1>📁 Project Structure</h1>
+      <pre><code>FinguardAI/
 
-      <p><strong>Q:</strong> Can I update my profile?<br>
-         <strong>A:</strong> Yes, use the `/profile/update` endpoint or UI form.</p>
+├── assets/
+│   └── css/
+│       └── css files
+│   └── js 
+|       └── js files
+├── main/
+│   └── images/
+├   └── auth/
+│     ├── auth.py
+│     ├── blockchain.py
+│     ├── budget.py
+│     ├── chat.py
+│     ├── fraud.py
+│     ├── login.py
+│     ├── payment.py
+│     ├── profile.py
+│     ├── recharge.py
+│     └── register.py
+├── fraud_detection_model.pkl
+├── server.py
+├── utils.py
+├── JSON files
+├── requirements.txt
+└── README.md</code></pre>
     </section>
 
+    <!-- Setup -->
+    <section id="setup">
+      <h1>⚙️ Setup</h1>
+      <pre><code># Clone the repo
+git clone https://github.com/your-repo/finguard-ai.git
+
+# Navigate into backend
+cd backend
+
+# Create virtual environment
+python -m venv venv
+source venv/bin/activate   # Windows: venv\Scripts\activate
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Run the app
+python server.py</code></pre>
+      <p>Ensure you have Python 3.8+ and pip installed.</p>
+      <p>For Windows users, use <code>venv\Scripts\activate</code> to activate the virtual environment.</p>
+      <p>To run the server, use <code>python server.py</code>. The app will be available at <code>http://
+    </section>
+
+    <!-- Requirements -->
+    <section id="requirements">
+      <h1>📦 Requirements</h1>
+      <p>Dependencies listed in <code>requirements.txt</code>:</p>
+      <ul>
+        <li>Flask</li>
+        <li>Flask-Cors</li>
+        <li>Flask-JWT-Extended</li>
+        <li>scikit-learn</li>
+        <li>joblib</li>
+        <li>pandas</li>
+        <li>faker</li>
+        <li>ollama</li>
+      </ul>
+    </section>
+
+    <!-- API -->
+    <section id="api">
+      <h1>🔌 API Endpoints</h1>
+      <h2>Blueprints</h2>
+      <ul>
+        <li><code>/auth</code> – JWT login/authentication</li>
+        <li><code>/register</code> – Create new users</li>
+        <li><code>/login</code> – Authenticate user</li>
+        <li><code>/profile</code> – Update or view profile</li>
+        <li><code>/payment</code> – Transaction verification</li>
+        <li><code>/recharge</code> – Add wallet balance</li>
+        <li><code>/chat</code> – AI chatbot interface</li>
+        <li><code>/fraud</code> – Anomaly detection API</li>
+        <li><code>/statement</code> – Transaction logs</li>
+        <li><code>/budget</code> – Budget recommendations</li>
+        <li><code>/blockchain</code> – Blockchain operations</li>
+      </ul>
+
+      <h2>Sample Request</h2>
+      <pre><code>POST /login
+{
+  "email": "john@example.com",
+  "password": "securepass"
+}
+
+GET /statement
+Headers: Authorization: Bearer &lt;JWT_TOKEN&gt;
+</code></pre>
+    </section>
+
+    <!-- Assets -->
+    <section id="assets">
+      <h1>📂 Assets</h1>
+      <ul>
+        <li><strong>Static Assets:</strong> <code>/assets</code></li>
+        <li><strong>Image Uploads:</strong> <code>/main/images/</code></li>
+        <li><strong>Allowed Types:</strong> <code>.jpg, .jpeg, .png, .gif</code></li>
+      </ul>
+    </section>
+
+    <!-- Deployment -->
+    <section id="deployment">
+      <h1>🚀 Deployment</h1>
+      <ul>
+        <li>Can be deployed on Heroku, Render, or Railway</li>
+        <li>For production, set secret key via environment variables</li>
+        <li>Ensure LLaMA model is hosted locally or via Ollama cloud</li>
+        <li>Use Nginx or Gunicorn for performance</li>
+      </ul>
+    </section>
+
+    <!-- Notes -->
+    <section id="notes">
+      <h1>📝 Notes</h1>
+      <ul>
+        <li>Update <code>app.config["SECRET_KEY"]</code> with a strong key</li>
+        <li>Install <code>ollama</code> and download the <code>llama3.2:3b</code> model</li>
+        <li>Ensure <code>fraud_detection_model.pkl</code> exists at project root</li>
+      </ul>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq">
+      <h1>❓ FAQ</h1>
+      <p><strong>Q:</strong> Can I use this project commercially?<br>
+         <strong>A:</strong> Please refer to the license section.</p>
+
+      <p><strong>Q:</strong> Is my data encrypted?<br>
+         <strong>A:</strong> Passwords are hashed and JWT tokens are securely handled.</p>
+
+      <p><strong>Q:</strong> How does fraud detection work?<br>
+         <strong>A:</strong> It uses scikit-learn to predict outliers in transactions based on user behavior.</p>
+    </section>
+
+    <!-- Contributors -->
     <section id="contributors">
       <h1>👥 Contributors</h1>
       <div class="contributors-grid">
         <div class="contributor-card">
-          <img src="assets/images/russel.jpg" alt="Md Abu Russel">
+          <img src="assets/images/russel.jpg" alt="Md Abu Russel" />
           <h3>Md Abu Russel</h3>
           <p>2205157@cse.buet.ac.bd</p>
         </div>
         <div class="contributor-card">
-          <img src="assets/images/ghagra.jpg" alt="Ghagra Salem Debnath">
+          <img src="assets/images/ghagra.jpg" alt="Ghagra Salem Debnath" />
           <h3>Ghagra Salem Debnath</h3>
           <p>2205181@cse.buet.ac.bd</p>
         </div>
         <div class="contributor-card">
-          <img src="assets/images/provat.png" alt="Provat Roy">
+          <img src="assets/images/provat.png" alt="Provat Roy" />
           <h3>Provat Roy</h3>
-          <p>2205160@cse.buet.ac.bd</p>
+          <p>2205167@cse.buet.ac.bd</p>
         </div>
         <div class="contributor-card">
-          <img src="assets/images/nihal.jpg" alt="Mujtahid Mahmud Nihal">
+          <img src="assets/images/nihal.jpg" alt="Nihal" />
           <h3>Mujtahid Mahmud Nihal</h3>
-          <p>2205158@cse.buet.ac.bd</p>
+          <p>2205167@cse.buet.ac.bd</p>
         </div>
       </div>
     </section>
-    
+
+    <!-- License -->
+    <section id="license">
+      <h1>📄 License</h1>
+      <p>This project is licensed under the <strong>MIT License</strong>. You are free to use, modify, and distribute it with proper attribution.</p>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+      <h1>📬 Contact</h1>
+      <p>For queries or contributions, reach out via email:</p>
+      <ul>
+        <li>Md Abu Russel: <a href="mailto:2205157@cse.buet.ac.bd">2205157@cse.buet.ac.bd</a></li>
+        <li>Ghagra Salem Debnath: <a href="mailto:2205181@cse.buet.ac.bd">2205157@cse.buet.ac.bd</a></li>
+        <li>Mahmud Nihal: <a href="mailto:2205158@cse.buet.ac.bd">2205157@cse.buet.ac.bd</a></li>
+        <li>Provat Roy: <a href="mailto:2205160@cse.buet.ac.bd">2205157@cse.buet.ac.bd</a></li>
+        <li>Project GitHub: <a href="https://github.com/your-repo/finguard-ai" target="_blank">GitHub Repo</a></li>
+      </ul>
+    </section>
+
+    <!-- Future Plans -->
+    <section id="future">
+      <h1>🔮 Future Plans</h1>
+      <ul>
+        <li>Database migration with PostgreSQL or MongoDB</li>
+        <li>Real-time notification system via WebSockets</li>
+        <li>Integration with payment gateways (e.g., Stripe, bKash)</li>
+        <li>Multi-language support for broader accessibility</li>
+        <li>Admin dashboard with analytics</li>
+      </ul>
+    </section>
+
   </main>
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const sidebar = document.getElementById('sidebar');
+  
+    hamburger.addEventListener('click', () => {
+      sidebar.classList.toggle('open');
+    });
+  </script>
 </body>
 </html>
