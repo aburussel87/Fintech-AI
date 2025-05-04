@@ -3,9 +3,11 @@ import string
 from flask import Blueprint, request, jsonify
 import json
 import os
-
+from .chat import get_response
 # from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required, get_jwt_identity
+
+from .extract_budget import extract_budget_json
 
 
 budget_bp = Blueprint('budget', __name__)
@@ -148,3 +150,67 @@ def get_budget(user_id):
 # add_budget(user_id, new_budget)
 # print(get_budget(user_id))
 
+
+@budget_bp.route('/generate_budget', methods=['POST'])
+@jwt_required()
+def generate_budget_route():
+    user_id = get_jwt_identity()  # Get user ID from JWT token
+    data = request.get_json()
+    if not user_id:
+        return jsonify({"error": "User ID is required"}), 401
+    prompt = "Return a clean JSON in the exact format I provided, with no extra explanation or text. Suggest a monthly budget based on the following income data: " + json.dumps(data.get("message"))+ ". Each category must include 'item', 'name', and 'amount'. Item names must be relevant and realistic. You must recalculate and adjust the budget to match the total income, even if the user provides preset values. Do not exceed the salary under any circumstances. use proper spacing and indentation. The JSON format should be as follows:\n\n{\n    \"budgetName\": \"Sample Budget\",\n    \"currency\": \"BDT\",\n    \"income\": [\n        {\n            \"source\": \"Salary\",\n            \"amount\": 20000\n        }\n    ],\n    \"expenses\": [\n        {\n            \"category\": \"Housing\",\n            \"items\": [\n                {\n                    \"item\": \"Rent\",\n                    \"name\": \"Housing\",\n                    \"amount\": 5000\n                },\n                {\n                    \"item\": \"Utilities\",\n                    \"name\": \"Electricity & Internet\",\n                    \"amount\": 1500\n                }\n            ]\n        },\n        {\n            \"category\": \"Food & Essentials\",\n            \"items\": [\n                {\n                    \"item\": \"Groceries\",\n                    \"name\": \"Food\",\n                    \"amount\": 3000\n                }\n            ]\n        }\n    ]\n}. keeep the housing cost low, consider mediactl expenses, and do not include any luxury items. The budget should be realistic and practical. \n"
+    print("\n\nPrompt for AI:", prompt)
+    chat_response = get_response(prompt, user_id)
+    print("\n\nChat response:", chat_response)
+
+    extracted_budget = extract_budget_json(chat_response)
+    print("\n\nExtracted budget:", json.loads(extracted_budget))
+    return jsonify({'response': json.loads(extracted_budget)}), 200
+    # Generate a sample budget
+
+    
+
+    # Save the generated budget
+    # success = add_budget(user_id, generated_budget)
+
+
+# prompt =""" generate j clean json file for budget in thsis format {
+#     "budgetName": "Sample Budget",
+#     "currency": "BDT",
+#     "income": [
+#         {
+#             "source": "Salary",
+#             "amount": 20000
+#         }
+#     ],
+#     "expenses": [
+#         {
+#             "category": "Housing",
+#             "items": [
+#                 {
+#                     "item": "Rent",
+#                     "name": "Housing",
+#                     "amount": 5000
+#                 },
+#                 {
+#                     "item": "Utilities",
+#                     "name": "Electricity & Internet",
+#                     "amount": 1500
+#                 }
+#             ]
+#         },
+#         {
+#             "category": "Food & Essentials",
+#             "items": [
+#                 {
+#                     "item": "Groceries",
+#                     "name": "Food",
+#                     "amount": 3000
+#                 }
+#             ]
+#         }
+#     ]
+# }
+# """
+    
+# print(extract_budget_json("generated budget :\n" + get_response(prompt, "user123")))
