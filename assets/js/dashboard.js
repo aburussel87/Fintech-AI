@@ -123,12 +123,21 @@ document.addEventListener('DOMContentLoaded', async () => {
         return `${getOrdinal(day)} ${month}`;
     }
 
+    function formatLocalDate(d) {
+        const year = d.getFullYear();
+        const month = String(d.getMonth() + 1).padStart(2, '0');
+        const day = String(d.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    }
+    
+
 
 
     const timelineSelect = document.getElementById('timelineSelect');
 
     function filterTransactions(days) {
-        const fromDate = getDateXDaysAgo(days).toISOString().slice(0, 10);
+        const fromDate = formatLocalDate(getDateXDaysAgo(days));
+
         return transactions.filter(tx => {
             return tx.date >= fromDate;
         });
@@ -154,7 +163,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         for (let i = days - 1; i >= 0; i--) {
             const d = new Date();
             d.setDate(today.getDate() - i);
-            dateKeys.push(d.toISOString().slice(0, 10));
+            dateKeys.push(formatLocalDate(d));
+
         }
 
         const sums = {
