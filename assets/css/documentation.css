@@ -43,7 +43,6 @@ body {
   backdrop-filter: blur(12px);
   background: rgba(255, 255, 255, 0.05);
   border-right: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 30px 20px;
   position: fixed;
   overflow-y: auto;
   box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
@@ -69,7 +68,6 @@ body {
   margin-bottom: 14px;
   font-size: 1rem;
   transition: all 0.3s ease;
-  padding: 10px 14px;
   border-radius: 8px;
 }
 

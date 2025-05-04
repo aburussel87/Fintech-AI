@@ -64,7 +64,7 @@ body {
   }
   
   .transection-section{
-    background-color: #470000;
+    background-color: #baef1a;
     border-radius: 8px;
     padding: 1rem;
     margin-bottom: 1rem;
@@ -72,25 +72,48 @@ body {
   
   .transaction-list,
   .budget-list {
-    border: 1px solid #333;
+    border: 1px solid #897e7e;
     border-radius: 8px;
     padding: 1rem;
-    background-color: #d8d6da;
+    color:rgb(116, 8, 8);
+    background-color: (255, 255, 255, 0.1);
     max-height: 300px;
     overflow-y: scroll;
   }
   
   .statistics-panel {
-    position: relative;
-    overflow: scroll;
-    background-color: #ceb0b0;
-    color: #e0e0e0;
+    background: linear-gradient(135deg, rgba(42, 122, 202, 0.4), rgba(255, 255, 255, 0.1));
+    border-radius: 16px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    color: #ffffff;
+    overflow-x: auto;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    padding: 1rem;
   }
   
-  .statistics-panel canvas {
+  /* Make canvas responsive with 3D glassmorphic style */
+  .statistics-charts canvas {
     width: 100% !important;
     height: auto !important;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+    padding: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
+  
+  .statistics-charts canvas:hover {
+    transform: scale(1.02);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+  }
+
+  
+  
+  
   
   select,
   .form-select {
@@ -125,22 +148,11 @@ body {
       width: 60px;
       height: 60px;
     }
-  
-    .statistics-header {
-      flex-direction: column;
-      align-items: flex-start;
-      overflow-y: auto;
-    }
-  
-    .timeline-dropdown {
-      width: 100%;
-    }
-  
     /* Sidebar is handled via Bootstrap Offcanvas */
   }
   
   /* Make each column scroll independently on large screens */
-@media (min-width: 768px) {
+@media (min-width: 400px) {
   .sidebar,
   main,
   .statistics-panel {
@@ -148,39 +160,23 @@ body {
     overflow-y: auto;
   }
 
-  /* Optional: hide scrollbar if needed */
-  .sidebar::-webkit-scrollbar,
-  main::-webkit-scrollbar,
-  .statistics-panel::-webkit-scrollbar {
-    width: 6px;
-  }
-
-  .sidebar::-webkit-scrollbar-thumb,
-  main::-webkit-scrollbar-thumb,
-  .statistics-panel::-webkit-scrollbar-thumb {
-    background-color: rgba(0,0,0,0.1);
-    border-radius: 3px;
-  }
+  
 }
 
 /* Scrollable main content on mobile */
 @media (max-width: 768px) {
   .main-content {
     max-height: 100vh;
-    overflow-y: auto;
     padding-bottom: 1rem;
-  }
-
-  .statistics-panel {
-    overflow-x: auto;
-    padding: 1rem;
-  }
-
-  .statistics-panel canvas {
-    min-width: 600px;
-    height: 300px !important;
-    display: block;
   }
 }
 
-
+@media (max-width: 400px) {
+  .statistics-charts canvas {
+    width: 100%;
+    height: auto;
+    order: 2;
+    min-height: 250px; /* Ensures the chart doesn't collapse */
+    display: block !important;
+  }
+}

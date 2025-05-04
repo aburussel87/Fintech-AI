@@ -47,7 +47,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         alert('Failed to load transaction data. Please try again later.');
     }
 
-
     function getTransactionSummaryByType(transactions, days = 7) {
         const summary = {
             "Recharge": { count: 0, totalAmount: 0 },
@@ -56,13 +55,11 @@ document.addEventListener('DOMContentLoaded', async () => {
             "Pay Bill": { count: 0, totalAmount: 0 },
         };
 
-        // Get the cutoff date
         const cutoffDate = new Date();
         cutoffDate.setDate(cutoffDate.getDate() - days);
 
         transactions.forEach(tx => {
             const txDate = new Date(`${tx.date} ${tx.time}`);
-
             if (txDate >= cutoffDate) {
                 const category = tx.category;
                 const amount = parseFloat(tx.amount);
@@ -72,6 +69,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 }
             }
         });
+
         document.getElementById("box1Count").innerText = summary["Recharge"].count;
         document.getElementById("box1Total").innerText = `৳ ${summary["Recharge"].totalAmount.toFixed(2)}`;
         document.getElementById("box2Count").innerText = summary["Sent Money"].count;
@@ -82,9 +80,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         document.getElementById("box4Total").innerText = `৳ ${summary["Pay Bill"].totalAmount.toFixed(2)}`;
         return summary;
     }
-
-
-
 
     const CATEGORY_MAP = {
         sentMoney: ["Sent Money"],
@@ -106,41 +101,18 @@ document.addEventListener('DOMContentLoaded', async () => {
         return d;
     }
 
-    function getOrdinal(n) {
-        if (n > 3 && n < 21) return n + 'th';
-        switch (n % 10) {
-            case 1: return n + 'st';
-            case 2: return n + 'nd';
-            case 3: return n + 'rd';
-            default: return n + 'th';
-        }
-    }
-
-    function formatDateLabel(dateStr) {
-        const d = new Date(dateStr);
-        const day = d.getDate();
-        const month = d.toLocaleString('default', { month: 'short' });
-        return `${getOrdinal(day)} ${month}`;
-    }
-
     function formatLocalDate(d) {
         const year = d.getFullYear();
         const month = String(d.getMonth() + 1).padStart(2, '0');
         const day = String(d.getDate()).padStart(2, '0');
         return `${year}-${month}-${day}`;
     }
-    
-
-
 
     const timelineSelect = document.getElementById('timelineSelect');
 
     function filterTransactions(days) {
         const fromDate = formatLocalDate(getDateXDaysAgo(days));
-
-        return transactions.filter(tx => {
-            return tx.date >= fromDate;
-        });
+        return transactions.filter(tx => tx.date >= fromDate);
     }
 
     function getPieData(transactions) {
@@ -149,7 +121,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         transactions.forEach(tx => {
             const type = getCategoryType(tx.category);
             if (sums.hasOwnProperty(type)) {
-                sums[type] += parseFloat(tx.amount,2);
+                sums[type] += parseFloat(tx.amount);
             }
         });
 
@@ -164,7 +136,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             const d = new Date();
             d.setDate(today.getDate() - i);
             dateKeys.push(formatLocalDate(d));
-
         }
 
         const sums = {
@@ -177,12 +148,12 @@ document.addEventListener('DOMContentLoaded', async () => {
             const type = getCategoryType(tx.category);
             const idx = dateKeys.indexOf(tx.date);
             if (idx !== -1 && sums.hasOwnProperty(type)) {
-                sums[type][idx] += parseFloat(tx.amount,2);
+                sums[type][idx] += parseFloat(tx.amount);
             }
         });
 
         return {
-            labels: dateKeys.map(formatDateLabel),
+            labels: dateKeys,
             SentMoney: sums.SentMoney,
             ReceivedMoney: sums.ReceivedMoney,
             Recharge: sums.Recharge
@@ -190,16 +161,16 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     const pieColors = [
-        'rgba(33, 150, 243, 0.7)',  // Sent Money
-        'rgba(244, 180, 0, 0.7)',   // Received Money
-        'rgba(255, 118, 230, 0.83)'  // Recharge
+        'rgba(33, 150, 243, 0.7)', // Sent Money
+        'rgba(244, 180, 0, 0.7)',  // Received Money
+        'rgba(255, 118, 230, 0.83)' // Recharge
     ];
 
     let TpieChart, TlineChart;
 
     function renderCharts(transactions, days) {
         const pieData = getPieData(transactions);
-        if (TpieChart) TpieChart.destroy(); // Destroy previous pie chart
+        if (TpieChart) TpieChart.destroy();
         TpieChart = new Chart(document.getElementById('TpieChart'), {
             type: 'pie',
             data: {
@@ -212,11 +183,15 @@ document.addEventListener('DOMContentLoaded', async () => {
                 }]
             },
             options: {
+                responsive: true,
                 plugins: {
                     legend: {
-                        labels: {
-                            color: '#fff',
-                            font: { family: 'Share Tech Mono', size: 16 }
+                        labels: { color: '#fff', font: { family: 'Share Tech Mono', size: 16 } }
+                    },
+                    doughnut: {
+                        animation: {
+                            animateRotate: true,
+                            animateScale: true
                         }
                     }
                 }
@@ -224,7 +199,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
 
         const lineData = getLineData(transactions, days);
-        if (TlineChart) TlineChart.destroy(); // Destroy previous line chart
+        if (TlineChart) TlineChart.destroy();
         TlineChart = new Chart(document.getElementById('TlineChart'), {
             type: 'line',
             data: {
@@ -237,7 +212,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                         borderColor: pieColors[0],
                         backgroundColor: pieColors[0],
                         tension: 0.4,
-                        pointRadius: 3,
+                        pointRadius: 6,
                         pointBackgroundColor: '#fff',
                         borderWidth: 3
                     },
@@ -248,7 +223,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                         borderColor: pieColors[1],
                         backgroundColor: pieColors[1],
                         tension: 0.4,
-                        pointRadius: 3,
+                        pointRadius: 6,
                         pointBackgroundColor: '#fff',
                         borderWidth: 3
                     },
@@ -259,36 +234,21 @@ document.addEventListener('DOMContentLoaded', async () => {
                         borderColor: pieColors[2],
                         backgroundColor: pieColors[2],
                         tension: 0.4,
-                        pointRadius: 3,
+                        pointRadius: 6,
                         pointBackgroundColor: '#fff',
                         borderWidth: 3
                     }
                 ]
             },
             options: {
-                plugins: {
-                    legend: {
-                        labels: {
-                            color: '#fff',
-                            font: { family: 'Share Tech Mono', size: 14 }
-                        }
-                    }
-                },
+                responsive: true,
                 scales: {
-                    x: {
-                        ticks: {
-                            color: '#fff',
-                            font: { family: 'Share Tech Mono', size: 13 }
-                        },
-                        grid: { color: 'rgba(255,255,255,0.08)' }
-                    },
-                    y: {
-                        ticks: {
-                            color: '#fff',
-                            font: { family: 'Share Tech Mono', size: 13 }
-                        },
-                        grid: { color: 'rgba(255,255,255,0.08)' }
-                    }
+                    x: { ticks: { color: '#fff' }, grid: { color: 'rgba(255,255,255,0.08)' } },
+                    y: { ticks: { color: '#fff' }, grid: { color: 'rgba(255,255,255,0.08)' } }
+                },
+                animation: {
+                    duration: 2000,
+                    easing: 'easeInOutQuad'
                 }
             }
         });
@@ -297,22 +257,18 @@ document.addEventListener('DOMContentLoaded', async () => {
     let begin = true;
     function updateDashboard() {
         if (begin) {
-            const filtered = filterTransactions(7); // Default to 30 days
-            // renderTransactions(filtered); // Render the filtered transactions
-            renderCharts(filtered, 7);  // Render the charts (pie and line)
-            getTransactionSummaryByType(filtered, 7); // Render the summary boxes
+            const filtered = filterTransactions(7);
+            renderCharts(filtered, 7);
+            getTransactionSummaryByType(filtered, 7);
             begin = false;
             return;
         }
         const days = parseInt(timelineSelect.value, 10);
         const filtered = filterTransactions(days);
-        //renderTransactions(filtered); // Render the filtered transactions
-        renderCharts(filtered, days);  // Render the charts (pie and line)
-        getTransactionSummaryByType(filtered, days); // Render the summary boxes
-
+        renderCharts(filtered, days);
+        getTransactionSummaryByType(filtered, days);
     }
 
     timelineSelect.addEventListener('change', updateDashboard);
-
-    updateDashboard(); // Initial render
+    updateDashboard();
 });

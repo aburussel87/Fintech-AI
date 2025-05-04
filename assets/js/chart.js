@@ -1,168 +1,91 @@
-var ctx = document.getElementById("chart-bars").getContext("2d");
 
-    // new Chart(ctx, {
-    //   type: "bar",
-    //   data: {
-    //     labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-    //     datasets: [{
-    //       label: "Sales",
-    //       tension: 0.4,
-    //       borderWidth: 0,
-    //       borderRadius: 4,
-    //       borderSkipped: false,
-    //       backgroundColor: "#fff",
-    //       data: [450, 200, 100, 220, 500, 100, 400, 230, 500],
-    //       maxBarThickness: 6
-    //     },],
-    //   },
-    //   options: {
-    //     responsive: true,
-    //     maintainAspectRatio: false,
-    //     plugins: {
-    //       legend: {
-    //         display: false,
-    //       }
-    //     },
-    //     interaction: {
-    //       intersect: false,
-    //       mode: 'index',
-    //     },
-    //     scales: {
-    //       y: {
-    //         grid: {
-    //           drawBorder: false,
-    //           display: false,
-    //           drawOnChartArea: false,
-    //           drawTicks: false,
-    //         },
-    //         ticks: {
-    //           suggestedMin: 0,
-    //           suggestedMax: 500,
-    //           beginAtZero: true,
-    //           padding: 15,
-    //           font: {
-    //             size: 14,
-    //             family: "Inter",
-    //             style: 'normal',
-    //             lineHeight: 2
-    //           },
-    //           color: "#fff"
-    //         },
-    //       },
-    //       x: {
-    //         grid: {
-    //           drawBorder: false,
-    //           display: false,
-    //           drawOnChartArea: false,
-    //           drawTicks: false
-    //         },
-    //         ticks: {
-    //           display: false
-    //         },
-    //       },
-    //     },
-    //   },
-    // });
-
-
-    var ctx2 = document.getElementById("chart-line").getContext("2d");
-
-    var gradientStroke1 = ctx2.createLinearGradient(0, 230, 0, 50);
-
-    gradientStroke1.addColorStop(1, 'rgba(203,12,159,0.2)');
-    gradientStroke1.addColorStop(0.2, 'rgba(72,72,176,0.0)');
-    gradientStroke1.addColorStop(0, 'rgba(203,12,159,0)'); //purple colors
-
-    var gradientStroke2 = ctx2.createLinearGradient(0, 230, 0, 50);
-
-    gradientStroke2.addColorStop(1, 'rgba(20,23,39,0.2)');
-    gradientStroke2.addColorStop(0.2, 'rgba(72,72,176,0.0)');
-    gradientStroke2.addColorStop(0, 'rgba(20,23,39,0)'); //purple colors
-
-    new Chart(ctx2, {
-      type: "line",
-      data: {
-        labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-        datasets: [{
-          label: "Mobile apps",
-          tension: 0.4,
-          borderWidth: 0,
-          pointRadius: 0,
-          borderColor: "#cb0c9f",
-          borderWidth: 3,
-          backgroundColor: gradientStroke1,
-          fill: true,
-          data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
-          maxBarThickness: 6
-
-        },
-        {
-          label: "Websites",
-          tension: 0.4,
-          borderWidth: 0,
-          pointRadius: 0,
-          borderColor: "#3A416F",
-          borderWidth: 3,
-          backgroundColor: gradientStroke2,
-          fill: true,
-          data: [30, 90, 40, 140, 290, 290, 340, 230, 400],
-          maxBarThickness: 6
-        },
-        ],
+  // BpieChart: Budget Breakdown (Animated)
+  const BpieCtx = document.getElementById('BpieChart').getContext('2d');
+  const BpieChart = new Chart(BpieCtx, {
+    type: 'pie',
+    data: {
+      labels: ['Housing', 'Food', 'Entertainment', 'Savings', 'Transportation'],
+      datasets: [{
+        label: 'Budget Breakdown',
+        data: [50, 20, 10, 15, 5], // Sample data (percentages)
+        backgroundColor: ['#ff6384', '#36a2eb', '#ffcd56', '#4caf50', '#ff9800'],
+        hoverOffset: 10
+      }]
+    },
+    options: {
+      responsive: true,
+      animation: {
+        animateScale: true,
+        animateRotate: true
       },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: {
-            display: false,
+      plugins: {
+        tooltip: {
+          backgroundColor: '#222',
+          titleColor: '#fff',
+          bodyColor: '#fff',
+        }
+      }
+    }
+  });
+
+  // BlineChart: Monthly Spending History (Animated)
+  const BlineCtx = document.getElementById('BlineChart').getContext('2d');
+
+// Create gradient stroke
+const gradientStroke = BlineCtx.createLinearGradient(0, 0, BlineCtx.canvas.width, 0);
+gradientStroke.addColorStop(0, '#ff6a00'); // Orange
+gradientStroke.addColorStop(0.5, '#ff00c8'); // Pink
+gradientStroke.addColorStop(1, '#6a00ff'); // Purple
+
+// Optional: Create gradient fill
+const gradientFill = BlineCtx.createLinearGradient(0, 0, 0, BlineCtx.canvas.height);
+gradientFill.addColorStop(0, 'rgba(255,106,0,0.3)');
+gradientFill.addColorStop(1, 'rgba(106,0,255,0.05)');
+
+const BlineChart = new Chart(BlineCtx, {
+  type: 'line',
+  data: {
+    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+    datasets: [{
+      label: 'Spending History',
+      data: [800, 1200, 900, 1100, 950, 1050, 1000],
+      fill: true, // Enable area under the line
+      backgroundColor: gradientFill,
+      borderColor: gradientStroke,
+      tension: 0.4,
+      pointBackgroundColor: '#ffffff',
+      pointBorderColor: gradientStroke,
+      pointRadius: 6,
+      pointHoverRadius: 8,
+    }]
+  },
+  options: {
+    responsive: true,
+    animation: {
+      duration: 1500,
+      easing: 'easeInOutQuart'
+    },
+    interaction: {
+      mode: 'index',
+      intersect: false
+    },
+    plugins: {
+      tooltip: {
+        enabled: true,
+        backgroundColor: '#222',
+        titleColor: '#fff',
+        bodyColor: '#fff',
+      }
+    },
+    scales: {
+      y: {
+        beginAtZero: true,
+        ticks: {
+          callback: function(value) {
+            return '$' + value;
           }
-        },
-        interaction: {
-          intersect: false,
-          mode: 'index',
-        },
-        scales: {
-          y: {
-            grid: {
-              drawBorder: false,
-              display: true,
-              drawOnChartArea: true,
-              drawTicks: false,
-              borderDash: [5, 5]
-            },
-            ticks: {
-              display: true,
-              padding: 10,
-              color: '#b2b9bf',
-              font: {
-                size: 11,
-                family: "Inter",
-                style: 'normal',
-                lineHeight: 2
-              },
-            }
-          },
-          x: {
-            grid: {
-              drawBorder: false,
-              display: false,
-              drawOnChartArea: false,
-              drawTicks: false,
-              borderDash: [5, 5]
-            },
-            ticks: {
-              display: true,
-              color: '#b2b9bf',
-              padding: 20,
-              font: {
-                size: 11,
-                family: "Inter",
-                style: 'normal',
-                lineHeight: 2
-              },
-            }
-          },
-        },
-      },
-    });
+        }
+      }
+    }
+  }
+});
