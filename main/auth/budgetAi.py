@@ -51,7 +51,7 @@ def verify_transaction(transaction, budgets_path=file_path):
     
     overspent = check_overspending(current_spent, transaction_amount)
     flag = "red" if overspent else "green"
-    message = f"Please review this expense. Category: {best_category}, Current: {current_spent}, After: {current_spent + transaction_amount}"
+    message = f"Please review this expense. You are about to overspend"
     
     return json.dumps({"flag": flag, "message": message})
 

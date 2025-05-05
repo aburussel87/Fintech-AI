@@ -1,0 +1,238 @@
+/* Base container and section styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background: #f4f7fb;
+    color: #333;
+  }
+  
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+  /* Base container and section styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background: #f4f7fb;
+    color: #333;
+}
+
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.section {
+    padding: 3rem 0;
+}
+
+.section-title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #222;
+    text-align: center;
+}
+
+.section-description {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    color: #555;
+}
+
+/* Feature grid layout */
+.feature-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+/* Collapsible feature styles */
+.collapsible {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: box-shadow 0.3s ease;
+}
+
+.collapsible:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.collapse-header {
+    width: 100%;
+    background: #f0f4ff;
+    padding: 1rem 1.25rem;
+    text-align: left;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #333;
+    transition: background 0.3s;
+}
+
+.collapse-header:hover {
+    background-color: #e1e9ff;
+}
+
+.toggle-icon {
+    transition: transform 0.3s ease;
+}
+
+.collapsible.active .toggle-icon {
+    transform: rotate(180deg);
+}
+
+.collapse-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.3s ease;
+    padding: 0 1.25rem;
+    font-size: 0.95rem;
+    color: #444;
+}
+
+.collapsible.active .collapse-content {
+    max-height: 500px;
+    padding: 1rem 1.25rem;
+}
+
+/* Transparent Box Styling for Setup Section */
+#setup {
+    background-color: rgba(255, 255, 255, 0.1); /* semi-transparent white */
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff; /* white text for contrast */
+    font-family: monospace;
+    margin: 20px;
+    max-width: 800px;
+}
+
+#setup pre {
+    background-color: rgba(0, 0, 0, 0.4); /* dark background for code */
+    padding: 15px;
+    border-radius: 8px;
+    overflow-x: auto;
+}
+
+/* Responsive design */
+@media (min-width: 600px) {
+    .feature-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (min-width: 900px) {
+    .feature-grid {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
+  .section {
+    padding: 3rem 0;
+  }
+  
+  .section-title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #222;
+    text-align: center;
+  }
+  
+  .section-description {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    color: #555;
+  }
+  
+  /* Feature grid layout */
+  .feature-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  /* Collapsible feature styles */
+  .collapsible {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .collapsible:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .collapse-header {
+    width: 100%;
+    background: #f0f4ff;
+    padding: 1rem 1.25rem;
+    text-align: left;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #333;
+    transition: background 0.3s;
+  }
+  
+  .collapse-header:hover {
+    background-color: #e1e9ff;
+  }
+  
+  .toggle-icon {
+    transition: transform 0.3s ease;
+  }
+  
+  .collapsible.active .toggle-icon {
+    transform: rotate(180deg);
+  }
+  
+  .collapse-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.3s ease;
+    padding: 0 1.25rem;
+    font-size: 0.95rem;
+    color: #444;
+  }
+  
+  .collapsible.active .collapse-content {
+    max-height: 500px;
+    padding: 1rem 1.25rem;
+  }
+  
+  /* Responsive design */
+  @media (min-width: 600px) {
+    .feature-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  
+  @media (min-width: 900px) {
+    .feature-grid {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+  }
+  

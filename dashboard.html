@@ -12,9 +12,12 @@
   <style>
     /* General Body */
     body {
-      background: linear-gradient(135deg, #090141, #1a3741, #080350); /* Match chat.css background */
-      color: #ffffff; /* Ensure text is visible on the dark background */
-      font-family: 'Share Tech Mono', monospace; /* Match font from chat.css */
+      background: linear-gradient(135deg, #090141, #1a3741, #080350);
+      /* Match chat.css background */
+      color: #ffffff;
+      /* Ensure text is visible on the dark background */
+      font-family: 'Share Tech Mono', monospace;
+      /* Match font from chat.css */
       height: 100vh;
       overflow: hidden;
     }
@@ -64,7 +67,8 @@
     .profile-card h3,
     .profile-card p,
     .balance-card h3 {
-      color: #90caf9; /* Match user message color in chat.css */
+      color: #90caf9;
+      /* Match user message color in chat.css */
       width: 100%;
       margin: 0;
     }
@@ -73,7 +77,8 @@
     .transaction-section,
     .budget-section,
     .statistics-panel {
-      background: rgba(255, 255, 255, 0.05); /* Match chat-box background */
+      background: rgba(255, 255, 255, 0.05);
+      /* Match chat-box background */
       backdrop-filter: blur(15px);
       border-radius: 10px;
       padding: 15px;
@@ -89,7 +94,8 @@
 
     /* Profile Section */
     #profile {
-      background: rgba(255, 255, 255, 0.05); /* Match chat-box background */
+      background: rgba(255, 255, 255, 0.05);
+      /* Match chat-box background */
       backdrop-filter: blur(20px);
       border-radius: 16px;
       border: 1px solid rgba(255, 255, 255, 0.15);
@@ -106,30 +112,38 @@
 
     /* Timeline Dropdown */
     .timeline-dropdown select {
-    background-color: rgba(255, 255, 255, 0.05); /* Match chat-box background */
-    color: #ffffff;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 5px;
-    font-family: 'Share Tech Mono', monospace; /* Match font from chat.css */
-    appearance: none; /* Remove default browser styles */
-    -webkit-appearance: none; /* For Safari */
-    -moz-appearance: none; /* For Firefox */
-  }
+      background-color: rgba(255, 255, 255, 0.05);
+      /* Match chat-box background */
+      color: #ffffff;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-family: 'Share Tech Mono', monospace;
+      /* Match font from chat.css */
+      appearance: none;
+      /* Remove default browser styles */
+      -webkit-appearance: none;
+      /* For Safari */
+      -moz-appearance: none;
+      /* For Firefox */
+    }
 
-  .timeline-dropdown select:hover {
-    background-color: rgba(255, 255, 255, 0.1); /* Subtle hover effect */
-  }
+    .timeline-dropdown select:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      /* Subtle hover effect */
+    }
 
-  /* Dropdown menu (expanded options) */
-  .timeline-dropdown select option {
-    background-color: rgba(255, 255, 255, 0.05); /* Match chat-box background */
-    color: #0f0101;
-  }
+    /* Dropdown menu (expanded options) */
+    .timeline-dropdown select option {
+      background-color: rgba(255, 255, 255, 0.05);
+      /* Match chat-box background */
+      color: #0f0101;
+    }
 
     /* Statistics Chart */
     #transaction {
-      background: rgba(255, 255, 255, 0.05); /* Match chat-box background */
+      background: rgba(255, 255, 255, 0.05);
+      /* Match chat-box background */
       backdrop-filter: blur(15px);
       border-radius: 10px;
       padding: 15px;
@@ -138,10 +152,14 @@
     }
 
     #accountBalance {
-      font-family: 'Courier New', Courier, monospace; /* Change to desired font */
-      font-size: 1.5rem; /* Adjust font size */
-      font-weight: bold; /* Make it bold */
-      color: #90caf9; /* Match user message color in chat.css */
+      font-family: 'Courier New', Courier, monospace;
+      /* Change to desired font */
+      font-size: 1.5rem;
+      /* Adjust font size */
+      font-weight: bold;
+      /* Make it bold */
+      color: #90caf9;
+      /* Match user message color in chat.css */
     }
   </style>
 </head>
@@ -172,10 +190,11 @@
             <span class="fs-5 fw-bold">FinGuard AI</span>
           </div>
           <ul class="nav flex-column sidebar-nav">
-            <li class="nav-item"><a class="nav-link" href="budget.html"><i class="fa-solid fa-wallet me-2"></i> Budget
-                Planner</a></li>
             <li class="nav-item"><a class="nav-link" href="profile.html"><i class="fa-solid fa-user me-2"></i>
                 Profile</a></li>
+            <li class="nav-item"><a class="nav-link" href="budget.html"><i class="fa-solid fa-wallet me-2"></i> Budget
+                Planner</a></li>
+
             <li class="nav-item"><a class="nav-link" href="transaction.html"><i class="fa-solid fa-list me-2"></i>
                 Transaction</a></li>
             <li class="nav-item"><a class="nav-link" href="chat.html"><i class="fa-solid fa-robot me-2"></i> Chatbot</a>
@@ -193,10 +212,11 @@
           <span class="sidebar-logo-text fs-5 fw-bold text-white">FinGuard AI</span>
         </div>
         <ul class="nav flex-column sidebar-nav">
-          <li class="nav-item"><a class="nav-link" href="budget.html"><i class="fa-solid fa-wallet me-2"></i> Budget
-              Planner</a></li>
           <li class="nav-item"><a class="nav-link" href="profile.html"><i class="fa-solid fa-user me-2"></i> Profile</a>
           </li>
+          <li class="nav-item"><a class="nav-link" href="budget.html"><i class="fa-solid fa-wallet me-2"></i> Budget
+              Planner</a></li>
+
           <li class="nav-item"><a class="nav-link" href="transaction.html"><i class="fa-solid fa-list me-2"></i>
               Transaction</a></li>
           <li class="nav-item"><a class="nav-link" href="chat.html"><i class="fa-solid fa-robot me-2"></i> Chatbot</a>
@@ -306,4 +326,4 @@
 </body>
 
 </html>
-``` 
+```
