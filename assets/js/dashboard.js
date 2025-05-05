@@ -85,13 +85,15 @@ document.addEventListener('DOMContentLoaded', async () => {
     const CATEGORY_MAP = {
         sentMoney: ["Sent Money"],
         receivedMoney: ["Received Money"],
-        recharge: ["Recharge"]
+        recharge: ["Recharge"],
+        paybill: ["Pay Bill"]
     };
 
     function getCategoryType(category) {
         if (CATEGORY_MAP.sentMoney.includes(category)) return 'SentMoney';
         if (CATEGORY_MAP.receivedMoney.includes(category)) return 'ReceivedMoney';
         if (CATEGORY_MAP.recharge.includes(category)) return 'Recharge';
+        if (CATEGORY_MAP.paybill.includes(category)) return 'Billpayment';
         return 'Other';
     }
 
@@ -117,7 +119,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     function getPieData(transactions) {
-        const sums = { SentMoney: 0, ReceivedMoney: 0, Recharge: 0 };
+        const sums = { SentMoney: 0, ReceivedMoney: 0, Recharge: 0 , Billpayment: 0 };
 
         transactions.forEach(tx => {
             const type = getCategoryType(tx.category);
@@ -126,7 +128,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
         });
 
-        return [sums.SentMoney, sums.ReceivedMoney, sums.Recharge];
+        return [sums.SentMoney, sums.ReceivedMoney, sums.Recharge, sums.Billpayment];
     }
 
     function getLineData(transactions, days) {
@@ -142,7 +144,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         const sums = {
             SentMoney: dateKeys.map(() => 0),
             ReceivedMoney: dateKeys.map(() => 0),
-            Recharge: dateKeys.map(() => 0)
+            Recharge: dateKeys.map(() => 0),
+            Billpayment: dateKeys.map(() => 0)
         };
 
         transactions.forEach(tx => {
@@ -157,14 +160,16 @@ document.addEventListener('DOMContentLoaded', async () => {
             labels: dateKeys,
             SentMoney: sums.SentMoney,
             ReceivedMoney: sums.ReceivedMoney,
-            Recharge: sums.Recharge
+            Recharge: sums.Recharge,
+            Billpayment: sums.Billpayment
         };
     }
 
     const pieColors = [
         'rgba(33, 150, 243, 0.7)', // Sent Money
         'rgba(244, 180, 0, 0.7)',  // Received Money
-        'rgba(255, 118, 230, 0.83)' // Recharge
+        'rgba(255, 118, 230, 0.83)', // Recharge
+        'rgba(5, 104, 94, 0.7)' // pay bill
     ];
 
     let TpieChart, TlineChart;
@@ -175,7 +180,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         TpieChart = new Chart(document.getElementById('TpieChart'), {
             type: 'pie',
             data: {
-                labels: ['Sent Money', 'Received Money', 'Recharge'],
+                labels: ['Sent Money', 'Received Money', 'Recharge', 'Pay Bill'],
                 datasets: [{
                     data: pieData,
                     backgroundColor: pieColors,
@@ -234,6 +239,17 @@ document.addEventListener('DOMContentLoaded', async () => {
                         fill: false,
                         borderColor: pieColors[2],
                         backgroundColor: pieColors[2],
+                        tension: 0.4,
+                        pointRadius: 6,
+                        pointBackgroundColor: '#fff',
+                        borderWidth: 3
+                    },
+                    {
+                        label: 'Bill Payment',
+                        data: lineData.Billpayment,
+                        fill: false,
+                        borderColor: pieColors[3],
+                        backgroundColor: pieColors[3],
                         tension: 0.4,
                         pointRadius: 6,
                         pointBackgroundColor: '#fff',

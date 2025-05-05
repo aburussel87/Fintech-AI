@@ -340,7 +340,7 @@ async function loadPreviousBudgets() {
     const token = localStorage.getItem('access_token');
     if (!token) {
         alert('Please log in first.');
-        window.location.href = '/login'; // Adjust redirect URL as needed
+        window.location.href = 'index.html'; // Adjust redirect URL as needed
         return;
     }
 

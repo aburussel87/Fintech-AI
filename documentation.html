@@ -35,52 +35,66 @@
 
 
   <main class="content">
-    <section id="overview">
-      <h1>📘 Overview</h1>
-      <p>FinGuard AI is a cutting-edge financial management tool powered by artificial intelligence, designed to help users manage their budgets, track expenses, and gain insights into their financial health. The platform offers a user-friendly interface that combines advanced data analytics and AI-driven suggestions to optimize personal financial planning and decision-making.</p>
+    <section id="overview" class="section">
+      <div class="container">
+        <h2 class="section-title">📘 Project Overview</h2>
+        <p class="section-description">
+          FinGuard AI is an intelligent financial management tool designed to simplify budgeting and financial planning. With a blend of intuitive design and powerful backend analytics, it enables users to gain control over their financial lives. Below is a breakdown of the core features and how they benefit the user.
+        </p>
     
-      <h2>Key Features</h2>
-      
-      <div class="feature-item">
-        <h3>💰 Budget Planner</h3>
-        <p>Track and manage your budget seamlessly. Automatically categorize expenses and receive suggestions to optimize your spending.</p>
-      </div>
+        <div class="feature-grid">
+          <div class="feature-item collapsible">
+            <button class="collapse-header" title="Plan and optimize your monthly budget">💰 Budget Planner <span class="toggle-icon">▼</span></button>
+             <div class="collapse-content">
+              <p>Track and manage your budget seamlessly. Automatically categorize expenses and receive suggestions to optimize your spending.
+                Easily set monthly spending limits and compare actual vs. planned expenses.
+                FinGuard AI adapts to your habits over time, making budget adjustments smarter and more personalized.</p>
+            </div> 
+           
+            
+          </div>
     
-      <div class="feature-item">
-        <h3>🤖 AI Chatbot</h3>
-        <p>Get personalized financial advice and budgeting tips from an AI-driven chatbot, available anytime to guide you through your financial decisions.</p>
-      </div>
+          <div class="feature-item collapsible">
+            <button class="collapse-header" title="Use AI to get financial advice based on your habits">🧠 AI Insights <span class="toggle-icon">▼</span></button>
+            <div class="collapse-content">
+              <p>Get intelligent recommendations based on spending patterns. Our AI helps you identify unnecessary expenses and advises on better saving strategies.
+                It learns from your financial behavior to deliver tailored alerts, such as potential overdrafts or excessive spending.
+                Insights are delivered in plain language, making them easy to understand and act upon.</p>
+            </div>
+          </div>
     
-      <div class="feature-item">
-        <h3>📊 Transaction Tracking</h3>
-        <p>Monitor your transactions in real-time, with a detailed history of your income and expenses. Stay informed on your spending patterns.</p>
-      </div>
+          <div class="feature-item collapsible">
+            <button class="collapse-header" title="Visualize where your money goes">📊 Expense Tracking <span class="toggle-icon">▼</span></button>
+            <div class="collapse-content">
+              <p>Detailed transaction tracking with category analysis. Visual charts and timelines to help users understand their financial behavior.
+                Search, filter, and review your spending history by category, merchant, or date.
+                Daily, weekly, and monthly summaries help you stay informed without overwhelming you.
+                
+                </p>
+            </div>
+          </div>
     
-      <div class="feature-item">
-        <h3>👤 Profile Management</h3>
-        <p>Manage your financial profile, including personal details, goals, and historical data, with the flexibility to adjust as your financial situation evolves.</p>
-      </div>
+          <div class="feature-item collapsible">
+            <button class="collapse-header" title="Set and monitor progress toward financial goals">🎯 Goal Setting <span class="toggle-icon">▼</span></button>
+            <div class="collapse-content">
+              <p>Set financial goals such as saving for a vacation or paying off a loan. Monitor progress and get nudges to stay on track.
+                Each goal includes a dynamic timeline and recommended monthly contributions.
+                Get motivational tips and progress badges to encourage consistency and celebrate milestones.</p>
+            </div>
+          </div>
     
-      <div class="feature-item">
-        <h3>📈 Statistics and Analytics</h3>
-        <p>Visualize your financial trends with detailed charts and graphs, helping you make better financial decisions and track your progress over time.</p>
-      </div>
-    
-      <div class="feature-item">
-        <h3>🔐 Fraud Detection</h3>
-        <p>Detect suspicious activity and prevent fraud with advanced AI-powered algorithms that analyze transactions in real-time and flag potential threats.</p>
-      </div>
-    
-      <div class="feature-item">
-        <h3>🔑 Secure Authentication with JWT</h3>
-        <p>Ensure secure user authentication using JWT tokens. Each user receives a secure token for login, making the entire platform safe and protecting sensitive data.</p>
-      </div>
-    
-      <div class="feature-item">
-        <h3>🧠 AI Models for Financial Insights</h3>
-        <p>Leverage machine learning and AI models to provide tailored financial recommendations, predict spending patterns, and optimize budget planning based on individual behaviors.</p>
+          <div class="feature-item collapsible">
+            <button class="collapse-header" title="Access on mobile or desktop">📱 Cross-Platform Access <span class="toggle-icon">▼</span></button>
+            <div class="collapse-content">
+              <p>Access FinGuard AI via web, iOS, and Android apps. Your data is synced in real-time across all your devices.
+                Enjoy a consistent, responsive experience with offline mode support for key features.
+                Data security and privacy are prioritized with encrypted syncing and biometric login options.</p>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
+    
     
 
     <!-- Setup -->
@@ -110,7 +124,7 @@ python server.py</code></pre>
     <section id="requirements">
       <h1>📦 Requirements</h1>
       <p>Dependencies listed in <code>requirements.txt</code>:</p>
-      <ul>
+      <pre><ul>
         <li><strong>annotated-types==0.7.0</strong> – Support for Python type annotations with metadata</li>
         <li><strong>anyio==4.9.0</strong> – Async library supporting async/await and structured concurrency</li>
         <li><strong>blinker==1.9.0</strong> – Fast, simple object-to-object and signal/event dispatching</li>
@@ -170,6 +184,8 @@ python server.py</code></pre>
         <li><strong>uvicorn==0.34.2</strong> – ASGI server for FastAPI and other async frameworks</li>
         <li><strong>Werkzeug==3.1.3</strong> – WSGI utility library used by Flask</li>
       </ul>
+
+    </pre>
       
     </section>
 
@@ -177,7 +193,7 @@ python server.py</code></pre>
     <section id="api">
       <h1>🔌 API Endpoints</h1>
       <h2>Blueprints</h2>
-      <ul>
+      <pre><ul>
         <li><code>/auth</code> – JWT login/authentication</li>
         <li><code>/register</code> – Create new users</li>
         <li><code>/login</code> – Authenticate user</li>
@@ -189,7 +205,7 @@ python server.py</code></pre>
         <li><code>/statement</code> – Transaction logs</li>
         <li><code>/budget</code> – Budget recommendations</li>
         <li><code>/blockchain</code> – Blockchain operations</li>
-      </ul>
+      </ul></pre>
 
       <h2>Sample Request</h2>
       <pre><code>POST /login
@@ -206,11 +222,12 @@ Headers: Authorization: Bearer &lt;JWT_TOKEN&gt;
     <!-- Assets -->
     <section id="assets">
       <h1>📂 Assets</h1>
+      <pre>
       <ul>
         <li><strong>Static Assets:</strong> <code>/assets</code></li>
         <li><strong>Image Uploads:</strong> <code>/main/images/</code></li>
         <li><strong>Allowed Types:</strong> <code>.jpg, .jpeg, .png, .gif</code></li>
-      </ul>
+      </ul></pre>
     </section>
 
     <!-- Deployment -->
@@ -269,7 +286,7 @@ Headers: Authorization: Bearer &lt;JWT_TOKEN&gt;
         <div class="contributor-card">
           <img src="assets/images/nihal.jpg" alt="Nihal" />
           <h3>Mujtahid Mahmud Nihal</h3>
-          <p>2205167@cse.buet.ac.bd</p>
+          <p>2205158@cse.buet.ac.bd</p>
         </div>
       </div>
     </section>
@@ -286,9 +303,9 @@ Headers: Authorization: Bearer &lt;JWT_TOKEN&gt;
       <p>For queries or contributions, reach out via email:</p>
       <ul>
         <li>Md Abu Russel: <a href="mailto:2205157@cse.buet.ac.bd">2205157@cse.buet.ac.bd</a></li>
-        <li>Ghagra Salem Debnath: <a href="mailto:2205181@cse.buet.ac.bd">2205157@cse.buet.ac.bd</a></li>
-        <li>Mahmud Nihal: <a href="mailto:2205158@cse.buet.ac.bd">2205157@cse.buet.ac.bd</a></li>
-        <li>Provat Roy: <a href="mailto:2205160@cse.buet.ac.bd">2205157@cse.buet.ac.bd</a></li>
+        <li>Ghagra Salem Debnath: <a href="mailto:2205181@cse.buet.ac.bd">2205181@cse.buet.ac.bd</a></li>
+        <li>Mahmud Nihal: <a href="mailto:2205158@cse.buet.ac.bd">2205158@cse.buet.ac.bd</a></li>
+        <li>Provat Roy: <a href="mailto:2205160@cse.buet.ac.bd">2205160@cse.buet.ac.bd</a></li>
         <li>Project GitHub: <a href="https://github.com/your-repo/finguard-ai" target="_blank">GitHub Repo</a></li>
       </ul>
     </section>
@@ -314,5 +331,15 @@ Headers: Authorization: Bearer &lt;JWT_TOKEN&gt;
       sidebar.classList.toggle('open');
     });
   </script>
+
+<script>
+  document.querySelectorAll('.collapse-header').forEach(button => {
+    button.addEventListener('click', () => {
+      const item = button.parentElement;
+      item.classList.toggle('active');
+    });
+  });
+</script>
+
 </body>
 </html>

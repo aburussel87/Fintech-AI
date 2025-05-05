@@ -63,7 +63,7 @@ def check_fraud(transaction):
 
     # Return prediction result
     if prediction == 1:  # Fraudulent
-        return json.dumps({"message": "Probable fraud.", "flag": "red"})
+        return json.dumps({"message": "This transaction needs review.", "flag": "red"})
     else:  # Normal
         return json.dumps({"message": "This transaction is normal.", "flag": "green"})
 
