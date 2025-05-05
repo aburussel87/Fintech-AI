@@ -14,7 +14,7 @@
 <aside class="sidebar" id="sidebar">
   <div class="sidebar-header">
     <h2>Finguard AI</h2>
-    <button class="hamburger" id="hamburger">&#9776;</button>
+    <button class="hamburger" id="hamburger">☰</button>
   </div>
   <nav>
     <a href="#overview">📘 Overview</a>
@@ -37,8 +37,51 @@
   <main class="content">
     <section id="overview">
       <h1>📘 Overview</h1>
-      <p>Finguard AI is a fintech assistant that provides users with secure, AI-powered financial recommendations and transaction handling.</p>
+      <p>FinGuard AI is a cutting-edge financial management tool powered by artificial intelligence, designed to help users manage their budgets, track expenses, and gain insights into their financial health. The platform offers a user-friendly interface that combines advanced data analytics and AI-driven suggestions to optimize personal financial planning and decision-making.</p>
+    
+      <h2>Key Features</h2>
+      
+      <div class="feature-item">
+        <h3>💰 Budget Planner</h3>
+        <p>Track and manage your budget seamlessly. Automatically categorize expenses and receive suggestions to optimize your spending.</p>
+      </div>
+    
+      <div class="feature-item">
+        <h3>🤖 AI Chatbot</h3>
+        <p>Get personalized financial advice and budgeting tips from an AI-driven chatbot, available anytime to guide you through your financial decisions.</p>
+      </div>
+    
+      <div class="feature-item">
+        <h3>📊 Transaction Tracking</h3>
+        <p>Monitor your transactions in real-time, with a detailed history of your income and expenses. Stay informed on your spending patterns.</p>
+      </div>
+    
+      <div class="feature-item">
+        <h3>👤 Profile Management</h3>
+        <p>Manage your financial profile, including personal details, goals, and historical data, with the flexibility to adjust as your financial situation evolves.</p>
+      </div>
+    
+      <div class="feature-item">
+        <h3>📈 Statistics and Analytics</h3>
+        <p>Visualize your financial trends with detailed charts and graphs, helping you make better financial decisions and track your progress over time.</p>
+      </div>
+    
+      <div class="feature-item">
+        <h3>🔐 Fraud Detection</h3>
+        <p>Detect suspicious activity and prevent fraud with advanced AI-powered algorithms that analyze transactions in real-time and flag potential threats.</p>
+      </div>
+    
+      <div class="feature-item">
+        <h3>🔑 Secure Authentication with JWT</h3>
+        <p>Ensure secure user authentication using JWT tokens. Each user receives a secure token for login, making the entire platform safe and protecting sensitive data.</p>
+      </div>
+    
+      <div class="feature-item">
+        <h3>🧠 AI Models for Financial Insights</h3>
+        <p>Leverage machine learning and AI models to provide tailored financial recommendations, predict spending patterns, and optimize budget planning based on individual behaviors.</p>
+      </div>
     </section>
+    
 
     <!-- Setup -->
     <section id="setup">
@@ -67,7 +110,7 @@ python server.py</code></pre>
     <section id="requirements">
       <h1>📦 Requirements</h1>
       <p>Dependencies listed in <code>requirements.txt</code>:</p>
-      <ul>
+      <ul >
         <li>Flask</li>
         <li>Flask-Cors</li>
         <li>Flask-JWT-Extended</li>
@@ -213,8 +256,8 @@ Headers: Authorization: Bearer &lt;JWT_TOKEN&gt;
 
   </main>
   <script>
-    const hamburger = document.getElementById('hamburger');
-    const sidebar = document.getElementById('sidebar');
+    const hamburger = document.getElementById("hamburger");
+    const sidebar = document.getElementById("sidebar");
   
     hamburger.addEventListener('click', () => {
       sidebar.classList.toggle('open');

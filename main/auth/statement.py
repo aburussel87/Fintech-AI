@@ -64,3 +64,68 @@ def statement():
         return jsonify({"success": True, "transactions": transactions})
     else:
         return jsonify({"success": False, "message": "User not found"}), 404
+
+
+
+
+@statement_bp.route("/statement/dashboard", methods=["GET"])
+@jwt_required()
+def dashboard():
+    current_user = get_jwt_identity()
+    users = load_users()
+    user = next((u for u in users if u["id"] == current_user), None)
+
+    if user:
+        transactions = []
+
+        # Load and filter recharges
+        recharges = load_recharges()
+        user_recharges = [r for r in recharges if r["user_id"] == current_user]
+        for r in user_recharges:
+            date_part, time_part = r["time"].split()
+            transactions.append({
+                "date": date_part,
+                "time": time_part,
+                "category": "Recharge",
+                "amount": r["amount"],
+                "method": r["method"],
+            })
+
+        # Load and filter invoices (send money)
+        invoices = load_invoices()
+        user_invoices = [i for i in invoices if i["sender_id"] == current_user]
+        for i in user_invoices:
+            date_part, time_part = i["time"].split()
+            transactions.append({
+                "date": date_part,
+                "time": time_part,
+                "category": "Sent Money",
+                "amount": i["amount"],
+                "invoice_id": i["invoice_id"],
+                "receiver_id": i["receiver_id"]
+            })
+        user_invoices = [r for r in invoices if r["receiver_id"] == current_user]
+        for r in user_invoices:
+            date_part, time_part = r["time"].split()
+            transactions.append({
+                "date": date_part,
+                "time": time_part,
+                "category": "Received Money",
+                "amount": r["amount"],
+                "invoice_id": r["invoice_id"],
+                "sender_id": r["sender_id"]
+            })
+
+        # Optional: Sort by time (newest first)
+        transactions.sort(key=lambda x: x["time"], reverse=True)
+        user = {
+            "name": user["firstName"] + " " + user["lastName"],
+            "phone": user["phone"],
+            "email": user["email"],
+            "id": user["id"],
+            "transactions": transactions
+        }
+        image_url = f"/images/{current_user}.jpg"
+        return jsonify({"success": True, "user": user, "image": image_url})
+    else:
+        return jsonify({"success": False, "message": "User not found"}), 404

@@ -124,6 +124,7 @@ async function generateBudget() {
 
         const data = await res.json();
         console.log('Response:', data.response);
+        document.getElementById("saved-budget").innerText=data.response;
         // alert('Response:', data.response);
         if (!res.ok || !data.response) {
             throw new Error('Failed to generate AI budget.');
