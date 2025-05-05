@@ -33,6 +33,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             document.getElementById('userEmail').innerText = user.email;
             document.getElementById('userPhone').innerText = user.phone;
             document.getElementById('userid').innerText = user.id;
+            document.getElementById('accountBalance').innerText = `৳ ${parseFloat(user.balance).toFixed(2)}`;
             const img = document.getElementById("dashboardProfilePic");
             img.src = data.image ? `http://localhost:5000${data.image}` : "assets/logo.png";
             const summary = getTransactionSummaryByType(transactions, 7);
@@ -249,6 +250,11 @@ document.addEventListener('DOMContentLoaded', async () => {
                 animation: {
                     duration: 2000,
                     easing: 'easeInOutQuad'
+                },
+                plugins: {
+                    legend: {
+                        labels: { color: '#fff', font: { family: 'Share Tech Mono', size: 16 } }
+                    }
                 }
             }
         });
