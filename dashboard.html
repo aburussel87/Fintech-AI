@@ -12,9 +12,9 @@
   <style>
     /* General Body */
     body {
-      background: linear-gradient(135deg, #2a2a2a, #121212);
-      color: #e0e0e0;
-      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(135deg, #090141, #1a3741, #080350); /* Match chat.css background */
+      color: #ffffff; /* Ensure text is visible on the dark background */
+      font-family: 'Share Tech Mono', monospace; /* Match font from chat.css */
       height: 100vh;
       overflow: hidden;
     }
@@ -32,7 +32,7 @@
 
     /* Sidebar */
     .sidebar {
-      background: rgba(0, 0, 0, 0.8);
+      background: linear-gradient(135deg, #090141, #1a3741, #080350);
       backdrop-filter: blur(15px);
       height: 100vh;
       box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
@@ -61,10 +61,10 @@
       object-fit: cover;
     }
 
-
     .profile-card h3,
-    .profile-card p,.balance-card h3{
-      color: #ffca70;
+    .profile-card p,
+    .balance-card h3 {
+      color: #90caf9; /* Match user message color in chat.css */
       width: 100%;
       margin: 0;
     }
@@ -73,32 +73,29 @@
     .transaction-section,
     .budget-section,
     .statistics-panel {
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.05); /* Match chat-box background */
       backdrop-filter: blur(15px);
       border-radius: 10px;
       padding: 15px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.15);
     }
 
     /* Card Titles */
     h3 {
-      color: #fff;
+      color: #ffffff;
       font-weight: 600;
     }
 
-    /* Transaction & Budget Section */
-
-
-
+    /* Profile Section */
     #profile {
-      background: rgba(255, 255, 255, 0.15);
+      background: rgba(255, 255, 255, 0.05); /* Match chat-box background */
       backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
       border-radius: 16px;
-      border: 1px solid rgba(255, 255, 255, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.15);
       padding: 1.5rem;
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
-      color: #fff;
+      color: #ffffff;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
@@ -107,25 +104,44 @@
       box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);
     }
 
-
     /* Timeline Dropdown */
     .timeline-dropdown select {
-      background-color: rgba(154, 36, 36, 0.3);
-      color: #fff;
-      border: none;
-      padding: 5px 10px;
-      border-radius: 5px;
-    }
+    background-color: rgba(255, 255, 255, 0.05); /* Match chat-box background */
+    color: #ffffff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-family: 'Share Tech Mono', monospace; /* Match font from chat.css */
+    appearance: none; /* Remove default browser styles */
+    -webkit-appearance: none; /* For Safari */
+    -moz-appearance: none; /* For Firefox */
+  }
 
-    .balance
+  .timeline-dropdown select:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Subtle hover effect */
+  }
+
+  /* Dropdown menu (expanded options) */
+  .timeline-dropdown select option {
+    background-color: rgba(255, 255, 255, 0.05); /* Match chat-box background */
+    color: #0f0101;
+  }
+
     /* Statistics Chart */
-
     #transaction {
-      background: rgba(212, 90, 90, 0.1);
+      background: rgba(255, 255, 255, 0.05); /* Match chat-box background */
       backdrop-filter: blur(15px);
       border-radius: 10px;
       padding: 15px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    #accountBalance {
+      font-family: 'Courier New', Courier, monospace; /* Change to desired font */
+      font-size: 1.5rem; /* Adjust font size */
+      font-weight: bold; /* Make it bold */
+      color: #90caf9; /* Match user message color in chat.css */
     }
   </style>
 </head>
@@ -290,3 +306,4 @@
 </body>
 
 </html>
+``` 
