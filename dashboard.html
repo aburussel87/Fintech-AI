@@ -36,6 +36,7 @@
     /* Sidebar */
     .sidebar {
       background: linear-gradient(135deg, #090141, #1a3741, #080350);
+      -webkit-backdrop-filter: blur(15px);
       backdrop-filter: blur(15px);
       height: 100vh;
       box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
@@ -167,7 +168,7 @@
 <body>
   <!-- Top Navbar with hamburger toggle for small screens -->
   <nav class="navbar navbar-light bg-light d-md-none px-3">
-    <button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarOffcanvas"
+    <button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarOffcanvas" title="Toggle Sidebar"
       aria-controls="sidebarOffcanvas">
       <i class="fas fa-bars fs-3"></i>
     </button>

@@ -135,6 +135,11 @@ async function generateBudget() {
         // const generatedBudget = await JSON.parse(data.response);
         const generatedBudget = parseBudgetJson(data.response);
         if (!generatedBudget) {
+            // alert('Failed to parse generated budget.');
+            // return;
+            generateBudget = parseMalformedBudgetString(data.response);
+        }
+        if (!generatedBudget) {
             alert('Failed to parse generated budget.');
             return;
         }
@@ -149,6 +154,57 @@ async function generateBudget() {
         console.error('Generate Budget Error:', error);
     }
 }
+
+function parseMalformedBudgetString(raw) {
+    // Remove quotes and newlines for easier regex processing
+    const text = raw.replace(/["']/g, "").replace(/\n/g, " ").replace(/\s+/g, " ");
+
+    const getValue = (key) => {
+        const regex = new RegExp(`${key}\\s*:\\s*([^,{}\\[\\]]+)`, "gi");
+        return [...text.matchAll(regex)].map(match => match[1].trim());
+    };
+
+    const budgetName = getValue("budgetName")[0] || "";
+    const currency = getValue("currency")[0] || "";
+
+    // Income
+    const sources = getValue("source");
+    const sourceAmounts = getValue("income[^}]*?amount"); // get only income-related amounts
+    const income = sources.map((source, i) => ({
+        source,
+        amount: Number(sourceAmounts[i] || 0)
+    }));
+
+    // Expenses
+    const categoryBlocks = text.split(/category\s*:/gi).slice(1); // skip preamble
+    const expenses = [];
+
+    categoryBlocks.forEach(block => {
+        const categoryMatch = block.match(/^([^,{}\[\]]+)/);
+        const category = categoryMatch ? categoryMatch[1].trim() : "Unknown";
+
+        const items = [];
+        const itemPattern = /item\s*:\s*([^,]+)\s*,\s*name\s*:\s*([^,]+)\s*,\s*amount\s*:\s*([^,\]}]+)/gi;
+        let match;
+        while ((match = itemPattern.exec(block)) !== null) {
+            items.push({
+                item: match[1].trim(),
+                name: match[2].trim(),
+                amount: Number(match[3])
+            });
+        }
+
+        expenses.push({ category, items });
+    });
+
+    return {
+        budgetName,
+        currency,
+        income,
+        expenses
+    };
+}
+
 
 // Collect form data
 function collectFormData() {
@@ -435,6 +491,29 @@ document.getElementById('display-budget').addEventListener('click', () => {
 });
 
 
+function sanitizeBudgetJSON(rawJson) {
+    try {
+        // Attempt to parse first; if successful, return as is
+        const parsed = JSON.parse(rawJson);
+        return parsed;
+    } catch (e) {
+        // Try to manually fix the common nested object issue
+        try {
+            const fixed = rawJson.replace(/},\s*{[\s\n]*"category":/g, '}]}},\n{"category":'); // fix misplaced objects
+            const wrapper = `{"root":[${fixed}]}`; // wrap in array for safe parsing
+            const temp = JSON.parse(wrapper);
+
+            // Flatten back into standard structure if needed
+            if (temp.root.length === 1) return temp.root[0];
+            return temp.root;
+        } catch (innerError) {
+            console.error("Failed to sanitize JSON:", innerError.message);
+            return null;
+        }
+    }
+}
+
+
 
 
 
@@ -442,7 +521,7 @@ function parseBudgetJson(input) {
     let budget;
     if (typeof input === 'string') {
         try {
-            budget = JSON.parse(input);
+            budget = sanitizeBudgetJSON(input);
         } catch (error) {
             console.error('Failed to parse JSON:', error.message);
             return null;

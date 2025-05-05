@@ -426,5 +426,63 @@
     ],
     "budgetId": "33IZCE",
     "user_id": "253JWHKCKFKJ"
+  },
+  {
+    "budgetName": "June",
+    "currency": "bdt",
+    "income": [
+      {
+        "source": "Salary",
+        "amount": 25000
+      }
+    ],
+    "expenses": [
+      {
+        "category": "Housing",
+        "items": [
+          {
+            "name": "Housing",
+            "amount": 2000
+          },
+          {
+            "name": "Electricity & Internet",
+            "amount": 500
+          }
+        ]
+      },
+      {
+        "category": "Food & Essentials",
+        "items": [
+          {
+            "name": "Food",
+            "amount": 2000
+          }
+        ]
+      },
+      {
+        "category": "Transportation",
+        "items": [
+          {
+            "name": "Transportation",
+            "amount": 500
+          },
+          {
+            "name": "Healthcare",
+            "amount": 1000
+          }
+        ]
+      },
+      {
+        "category": "Entertainment",
+        "items": [
+          {
+            "name": "Entertainment",
+            "amount": 200
+          }
+        ]
+      }
+    ],
+    "budgetId": "7U27QB",
+    "user_id": "253JWHKCKFKJ"
   }
 ]
