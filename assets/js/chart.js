@@ -23,6 +23,16 @@
           backgroundColor: '#222',
           titleColor: '#fff',
           bodyColor: '#fff',
+        },
+        legend: {
+          labels: {
+            color: '#fff' // <-- Change legend text color
+          }
+        },
+        scale: {
+          ticks: {
+            color: '#fff' // <-- Change scale ticks color
+          }
         }
       }
     }
@@ -62,30 +72,21 @@ const BlineChart = new Chart(BlineCtx, {
   options: {
     responsive: true,
     animation: {
-      duration: 1500,
-      easing: 'easeInOutQuart'
-    },
-    interaction: {
-      mode: 'index',
-      intersect: false
+      animateScale: true,
+      animateRotate: true
     },
     plugins: {
       tooltip: {
-        enabled: true,
         backgroundColor: '#222',
         titleColor: '#fff',
-        bodyColor: '#fff',
-      }
-    },
-    scales: {
-      y: {
-        beginAtZero: true,
-        ticks: {
-          callback: function(value) {
-            return '$' + value;
-          }
+        bodyColor: '#fff'
+      },
+      legend: {
+        labels: {
+          color: '#fff' // <-- Change legend text color
         }
       }
     }
   }
+  
 });

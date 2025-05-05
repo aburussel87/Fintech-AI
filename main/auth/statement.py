@@ -120,6 +120,7 @@ def dashboard():
         transactions.sort(key=lambda x: x["time"], reverse=True)
         user = {
             "name": user["firstName"] + " " + user["lastName"],
+            "balance": user["balance"],
             "phone": user["phone"],
             "email": user["email"],
             "id": user["id"],
