@@ -68,7 +68,7 @@ html, body {
 .user {
     align-self: flex-end;
     background: rgba(33, 150, 243, 0.2);
-    color: #90caf9;
+    color: #ecf1f5;
     border: 1px solid rgba(144, 202, 249, 0.3);
     text-align: right;
 }
@@ -76,8 +76,8 @@ html, body {
 .bot {
     align-self: flex-start;
     background: rgba(244, 242, 243, 0.2);
-    color: #f48fb1;
-    border: 1px solid rgba(244, 143, 177, 0.3);
+    color: #fefbfc;
+    border: 1px solid rgba(244, 242, 243, 0.2);
     text-align: left;
 }
 
