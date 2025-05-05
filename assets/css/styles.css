@@ -5,6 +5,7 @@
 
 body {
     font-family: 'century', sans-serif;
+    background: linear-gradient(135deg, #090141, #1a3741, #080350);
     /* background-color: #f0f0f0;
     margin: 0;
     padding: 0;

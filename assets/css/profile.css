@@ -10,8 +10,8 @@ body {
 
 /* Logo container */
 .logo-container {
-  position: absolute;
-  top: 450px;
+  position: fixed;
+  top: 300px;
   left: 750px;
   z-index: 100;
   opacity: 15%;
