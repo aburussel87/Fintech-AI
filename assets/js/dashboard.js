@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             return;
         }
 
-        const response = await fetch('http://localhost:5000/statement/dashboard', {
+        const response = await fetch('http://192.168.0.170:5000/statement/dashboard', {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${token}`
@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             document.getElementById('userid').innerText = user.id;
             document.getElementById('accountBalance').innerText = `৳ ${parseFloat(user.balance).toFixed(2)}`;
             const img = document.getElementById("dashboardProfilePic");
-            img.src = data.image ? `http://localhost:5000${data.image}` : "assets/logo.png";
+            img.src = data.image ? `http://192.168.0.170:5000${data.image}` : "assets/logo.png";
             const summary = getTransactionSummaryByType(transactions, 7);
         } else {
             alert("Failed to fetch statement. Redirecting to login page.");

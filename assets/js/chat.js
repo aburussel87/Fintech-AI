@@ -7,7 +7,7 @@ async function sendMessageAi() {
     inputField.value = "";
 
     try {
-      const res = await fetch("http://localhost:5000/chat", {
+      const res = await fetch("http://192.168.0.170:5000/chat", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

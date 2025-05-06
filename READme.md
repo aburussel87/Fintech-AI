@@ -29,7 +29,10 @@ FinGuard-AI/
 │   ├── fonts/
 │   └── images/
 ├── data/                     # Data files (transactions, categories, etc.)
-├── main/                     # Backend services and API logic
+├── main/
+|   ──auth/                   # Backend services and API logic
+|   ──server.py               # Server
+|   ──images/                   #images
 ├── fraud_detection_model.pkl # Pretrained ML model
 ├── requirements.txt          # Python dependencies
 └── .vscode/, .hintrc, etc.   # Configuration files

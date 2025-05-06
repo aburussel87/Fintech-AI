@@ -8,7 +8,7 @@ async function submitRecharge() {
       return;
   }
 
-  const res = await fetch("http://localhost:5000/recharge", {
+  const res = await fetch("http://192.168.0.170:5000/recharge", {
       method: "POST",
       headers: {
           "Content-Type": "application/json",

@@ -253,7 +253,7 @@ async function signup(event) {
     id
   };
 
-  fetch("http://localhost:5000/register", {
+  fetch("http://192.168.0.170:5000/register", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"

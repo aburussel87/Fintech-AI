@@ -12,7 +12,7 @@ async function loadTransactions() {
             return;
         }
 
-        const response = await fetch('http://localhost:5000/statement', {
+        const response = await fetch('http://192.168.0.170:5000/statement', {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${token}`

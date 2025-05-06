@@ -12,7 +12,7 @@ async function login(e) {
   }
 
   try {
-    const res = await fetch("http://localhost:5000/login", {
+    const res = await fetch("http://192.168.0.170:5000/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

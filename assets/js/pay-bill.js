@@ -21,7 +21,7 @@ async function verifyReceiver() {
     }
   
     try {
-      const response = await fetch("http://localhost:5000/verifyReceiver", {
+      const response = await fetch("http://192.168.0.170:5000/verifyReceiver", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -100,7 +100,7 @@ async function verifyReceiver() {
     };
   
   
-    const res = await fetch("http://localhost:5000/payment/paybill", {
+    const res = await fetch("http://192.168.0.170:5000/payment/paybill", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

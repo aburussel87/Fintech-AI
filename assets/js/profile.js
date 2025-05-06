@@ -8,7 +8,7 @@ window.onload = async () => {
             return;
         }
 
-        const response = await fetch('http://localhost:5000/profile', {
+        const response = await fetch('http://192.168.0.170:5000/profile', {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${token}`  // Send the token with the request
@@ -40,7 +40,7 @@ window.onload = async () => {
             document.getElementById("user-email").textContent = user.email;
 
             const img = document.getElementById("profileImage");
-            img.src = data.image ? `http://localhost:5000${data.image}` : "assets/logo.png";
+            img.src = data.image ? `http://192.168.0.170:5000${data.image}` : "assets/logo.png";
         } else {
             alert("Failed to fetch profile. Redirecting to login page.");
             localStorage.removeItem("access_token");
@@ -69,7 +69,7 @@ document.getElementById("uploadInput").addEventListener("change", function () {
     formData.append("file", file); // Append the file to FormData object
 
     // Send the image to the server
-    fetch('http://localhost:5000/profile/uploadImage', {
+    fetch('http://192.168.0.170:5000/profile/uploadImage', {
         method: 'POST',
         body: formData,  // FormData automatically sets content-type
         headers: {

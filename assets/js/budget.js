@@ -68,7 +68,7 @@ async function saveBudget() {
     console.log("Budget Data:", budgetData); // Check the collected data
 
     try {
-        const res = await fetch('http://localhost:5000/save_budget', {
+        const res = await fetch('http://192.168.0.170:5000/save_budget', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -109,7 +109,7 @@ async function generateBudget() {
         // const token = localStorage.getItem('token');
 
 
-        const res = await fetch('http://localhost:5000/generate_budget', {
+        const res = await fetch('http://192.168.0.170:5000/generate_budget', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', 
                 "Authorization": "Bearer " + localStorage.getItem("access_token")  // ✅ Add this line
@@ -401,7 +401,7 @@ async function loadPreviousBudgets() {
     }
 
     try {
-        const res = await fetch('http://localhost:5000/get_budget', {
+        const res = await fetch('http://192.168.0.170:5000/get_budget', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

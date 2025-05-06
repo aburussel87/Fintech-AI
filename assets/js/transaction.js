@@ -44,7 +44,7 @@ window.onload = async () => {
             return;
         }
 
-        const response = await fetch('http://localhost:5000/profile', {
+        const response = await fetch('http://192.168.0.170:5000/profile', {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${token}`  // Send the token with the request
@@ -76,7 +76,7 @@ window.onload = async () => {
             document.getElementById("number").textContent = user.phone || "N/A";
             const img = document.getElementById("profile");
             console.log(data.image);
-            img.src = data.image ? `http://localhost:5000${data.image}` : "assets/logo.png";
+            img.src = data.image ? `http://192.168.0.170:5000${data.image}` : "assets/logo.png";
             // document.getElementById("user-email").textContent = user.email;
         } else {
             alert("Failed to fetch profile. Redirecting to login page.");
