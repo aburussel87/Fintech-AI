@@ -51,7 +51,7 @@
             </select>
           </div>
           <div class="col-md-6">
-            <label for="blood-group" class="form-label">Blood Group</label>
+            <label for="blood-group" class="form-label">Blood Group</label>   <!-- This section is for  information -->
             <select class="form-select" id="blood-group" required>
               <option value="">Select</option>
               <option value="A+">A+</option>
@@ -64,30 +64,46 @@
               <option value="O-">O-</option>
             </select>
           </div>
+          <div class="col-md-6">
+            <label for="gender" class="form-label">Gender</label>
+            <select class="form-select" id="gender" required>
+              <option value="">Select</option>
+              <option value="Female">Female</option>
+              <option value="Male">Male</option>
+            </select>
+          </div>
         </div>
         <button type="button" class="btn-next" onclick="validatePersonalInfo()">Next</button>
       </section>
 
-      <!-- Address Section -->
-      <section class="section" id="address-info-section">
-        <h2>Address</h2>
-        <div class="row g-3">
-          <div class="col-md-4">
-            <input type="text" class="form-control" id="country" value="Bangladesh" disabled />
-          </div>
-          <div class="col-md-4">
-            <select class="form-select" id="division" required>
-              <option>Select Division</option>
-            </select>
-          </div>
-          <div class="col-md-4">
-            <select class="form-select" id="district" required>
-              <option>Select District</option>
-            </select>
-          </div>
-        </div>
-        <button type="button" class="btn-next" onclick="validateAddressInfo()">Next</button>
-      </section>
+    <!-- Address Section -->
+<section class="section" id="address-info-section">
+  <h2>Address</h2>
+  <div class="row g-3">
+    <div class="col-md-4">
+      <input type="text" class="form-control" id="country" value="Bangladesh" disabled />
+    </div>
+    <div class="col-md-4">
+      <select class="form-select" id="division" required>
+        <option>Select Division</option>
+      </select>
+    </div>
+    <div class="col-md-4">
+      <select class="form-select" id="district" required>
+        <option>Select District</option>
+      </select>
+    </div>
+    <div class="col-md-4">
+      <select class="form-select" id="area" required>
+        <option>Select Area</option>
+        <option value="rural">Rural</option>
+        <option value="urban">Urban</option>
+      </select>
+    </div>
+  </div>
+  <button type="button" class="btn-next" onclick="validateAddressInfo()">Next</button>
+</section>
+
 
       <!-- Verification Section -->
       <section class="section" id="verification-info-section">

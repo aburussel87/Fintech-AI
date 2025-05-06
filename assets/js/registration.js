@@ -10,8 +10,9 @@ function validatePersonalInfo() {
   const mobile = document.getElementById("mobile").value;
   const maritalStatus = document.getElementById("marry").value;
   const bloodGroup = document.getElementById("blood-group").value;
+  const gender = document.getElementById("gender").value;
 
-  if (firstName && lastName && age && dateOfBirth && mobile && maritalStatus && bloodGroup) {
+  if (firstName && lastName && age && dateOfBirth && mobile && maritalStatus && bloodGroup && gender) {
     showNextSection('address-info-section');
   } else {
     alert("Please fill in all the fields.");
@@ -21,8 +22,13 @@ function validatePersonalInfo() {
 function validateAddressInfo() {
   const division = document.getElementById("division").value;
   const district = document.getElementById("district").value;
+  const area = document.getElementById("area").value;
 
-  if (division && district && district !== "District") {
+  if (
+    division && 
+    district && district !== "District" && 
+    area && area !== "Select Area"
+  ) {
     showNextSection('verification-info-section');
   } else {
     alert("Please fill in all the fields.");
@@ -48,7 +54,6 @@ function showNextSection(nextSectionId) {
   nextSection.classList.add('active');
   nextSection.scrollIntoView({ behavior: "smooth" });
 }
-
 
 function sendVerificationCode() {
   const email = document.getElementById("email").value.trim();
@@ -145,24 +150,58 @@ function generateUniqueId(joiningYear) {
   return yearPart + randomPart;
 }
 
+// Standardization Functions
+
+function standardizePhoneNumber(phone) {
+  const sanitized = phone.replace(/\D/g, '');  // Remove non-numeric characters
+  const formatted = `+${sanitized.slice(0, 3)}-${sanitized.slice(3, 6)}-${sanitized.slice(6)}`;
+  return formatted;
+}
+
+function standardizeEmail(email) {
+  return email.trim().toLowerCase();
+}
+
+function standardizeName(name) {
+  return name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
+}
+
+function standardizeGender(gender) {
+  const validGenders = ['Male', 'Female', 'Other'];
+  if (validGenders.includes(gender)) {
+    return gender;
+  }
+  return 'Other';  // Default value
+}
+
+function standardizeAddressField(value, defaultValue) {
+  return value === defaultValue ? '' : value;
+}
+
+function standardizePassword(password) {
+  return password.trim();  // Remove any leading/trailing spaces
+}
 
 async function signup(event) {
   event.preventDefault();
 
-  const firstName = document.getElementById("first-name").value.trim();
-  const lastName = document.getElementById("last-name").value.trim();
+  const firstName = standardizeName(document.getElementById("first-name").value.trim());
+  const lastName = standardizeName(document.getElementById("last-name").value.trim());
   const age = document.getElementById("age").value.trim();
   const dob = document.getElementById("date").value;
   const maritalStatus = document.getElementById("marry").value;
   const bloodGroup = document.getElementById("blood-group").value;
+  const gender = standardizeGender(document.getElementById("gender").value);
   const country = document.getElementById("country").value.trim();
-  const division = document.getElementById("division").options[document.getElementById("division").selectedIndex].text;
-  const district = document.getElementById("district").options[document.getElementById("district").selectedIndex].text;
-  const email = document.getElementById("email").value.trim();
-  const password = document.getElementById("password").value;
+  const division = standardizeAddressField(document.getElementById("division").options[document.getElementById("division").selectedIndex].text, "Select Division");
+  const district = standardizeAddressField(document.getElementById("district").options[document.getElementById("district").selectedIndex].text, "District");
+  const area = standardizeAddressField(document.getElementById("area").value, "Select Area");
+  const email = standardizeEmail(document.getElementById("email").value.trim());
+  const password = standardizePassword(document.getElementById("password").value);
   const confirmPassword = document.getElementById("confirm-password").value;
-  const phone = document.getElementById("mobile").value.trim();
+  const phone = standardizePhoneNumber(document.getElementById("mobile").value.trim());
 
+  // Validation
   if (password !== confirmPassword) {
     alert("Passwords do not match.");
     return;
@@ -177,6 +216,11 @@ async function signup(event) {
     return;
   }
 
+  if (!gender || !area) {
+    alert("Please select both gender and area.");
+    return;
+  }
+
   if (localStorage.getItem("verified") !== "true") {
     alert("Please verify your email before signing up.");
     return;
@@ -188,6 +232,7 @@ async function signup(event) {
 
   const id = generateUniqueId(today.getFullYear());
   const balance = 0;
+
   const newUser = {
     firstName,
     lastName,
@@ -196,9 +241,11 @@ async function signup(event) {
     dob,
     maritalStatus,
     bloodGroup,
+    gender,
     country,
     division,
     district,
+    area,
     email,
     password,
     phone,
@@ -206,7 +253,6 @@ async function signup(event) {
     id
   };
 
-  
   fetch("http://localhost:5000/register", {
     method: "POST",
     headers: {
@@ -219,7 +265,7 @@ async function signup(event) {
     if (data.success) {
       alert("Sign up successful!");
       localStorage.removeItem("verified");
-      window.location.href = "index.html"; // ✅ correct here
+      window.location.href = "index.html";
     } else {
       alert(data.message || "Sign up failed.");
     }
@@ -228,5 +274,4 @@ async function signup(event) {
     console.error("Registration error:", error);
     alert("Something went wrong. Please try again.");
   });
-  
 }
