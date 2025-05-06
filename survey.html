@@ -13,14 +13,14 @@
 </head>
 
 <body>
-    <div class="container shadow mt-5">
+    <div class="container shadow mt-5 col-md-7">
         <div class="text-center mb-4">
-            <img src="assets/logo.png" alt="Finguard AI Logo" class="logo" />
+            <!-- <img src="assets/logo.png" alt="Finguard AI Logo" class="logo" /> -->
             <h1 class="header">User Survey</h1>
             <p>Please fill out this survey to help us understand your financial habits and goals.</p>
         </div>
 
-        <form onsubmit="submitSurvey(event)">
+        <form onsubmit="submitSurvey()" class="col-md-10 self-align-center mx-auto mb-5">
             <!-- Income & Household Basics -->
             <section class="mb-4">
                 <h2 style="color: white;">1. Income & Household Basics</h2>
@@ -28,11 +28,11 @@
                     <label class="form-label">What is your average monthly income?</label>
                     <select class="form-select" id="monthly-income" required>
                         <option value="">Select</option>
-                        <option value="৳10,000–20,000">৳10,000–20,000</option>
-                        <option value="৳20,001–40,000">৳20,001–40,000</option>
-                        <option value="৳40,001–70,000">৳40,001–70,000</option>
-                        <option value="৳70,001–1,00,000">৳70,001–1,00,000</option>
-                        <option value="> ৳1,00,000">> ৳1,00,000</option>
+                        <option value="10,000–20,000">10,000–20,000</option>
+                        <option value="20,001–40,000">20,001–40,000</option>
+                        <option value="40,001–70,000">40,001–70,000</option>
+                        <option value="70,001–1,00,000">70,001–1,00,000</option>
+                        <option value="> 1,00,000">> 1,00,000</option>
                     </select>
                 </div>
                 <div class="mb-3">
@@ -66,7 +66,7 @@
                 </div>
                 <div class="mb-3">
                     <label class="form-label">If you pay rent, how much do you pay monthly?</label>
-                    <input type="number" class="form-control" id="rent" placeholder="Enter amount in ৳" />
+                    <input type="number" class="form-control" id="rent" placeholder="Enter amount in " />
                 </div>
             </section>
 
@@ -84,7 +84,7 @@
                 </div>
                 <div class="mb-3">
                     <label class="form-label">What is your average monthly spending on transport?</label>
-                    <input type="number" class="form-control" id="transport-cost" placeholder="Enter amount in ৳"
+                    <input type="number" class="form-control" id="transport-cost" placeholder="Enter amount in "
                         required />
                 </div>
             </section>
@@ -103,7 +103,7 @@
                 </div>
                 <div class="mb-3">
                     <label class="form-label">What is your approximate monthly spending on groceries?</label>
-                    <input type="number" class="form-control" id="grocery-cost" placeholder="Enter amount in ৳"
+                    <input type="number" class="form-control" id="grocery-cost" placeholder="Enter amount in "
                         required />
                 </div>
             </section>
@@ -114,11 +114,11 @@
                 <div class="mb-3">
                     <label class="form-label">What do you pay monthly for these utilities?</label>
                     <input type="number" class="form-control" id="utilities-cost"
-                        placeholder="Electricity + Gas + Water (৳)" required />
+                        placeholder="Electricity + Gas + Water ()" required />
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Mobile + Internet</label>
-                    <input type="number" class="form-control" id="mobile-internet-cost" placeholder="Enter amount in ৳"
+                    <input type="number" class="form-control" id="mobile-internet-cost" placeholder="Enter amount in "
                         required />
                 </div>
                 <div class="mb-3">
@@ -166,7 +166,7 @@
                 </div>
                 <div class="mb-3">
                     <label class="form-label">If yes, how much do you pay per month?</label>
-                    <input type="number" class="form-control" id="loan-payment" placeholder="Enter amount in ৳" />
+                    <input type="number" class="form-control" id="loan-payment" placeholder="Enter amount in " />
                 </div>
             </section>
 
@@ -176,16 +176,20 @@
                 <div class="mb-3">
                     <label class="form-label">Which of these do you spend on regularly?</label>
                     <div>
-                        <label style="color : white;">
-                            <input type="checkbox" name="spending" value="Shopping" /> Shopping (clothes, gadgets)
-                        <input type="checkbox" name="spending" value="Health & Medicine" /> Health & Medicine
-                        <input type="checkbox" name="spending" value="Education" /> Education (self/kids)
-                        <input type="checkbox" name="spending" value="Entertainment" /> Entertainment
-                        <input type="checkbox" name="spending" value="Shopping" /> Shopping (clothes, gadgets)
-                        <input type="checkbox" name="spending" value="Health & Medicine" /> Health & Medicine
-                        <input type="checkbox" name="spending" value="Education" /> Education (self/kids)
-                        <input type="checkbox" name="spending" value="Entertainment" /> Entertainment
-                        </label>
+                        <div class="d-flex flex-wrap gap-3 text-white">
+                            <label class="d-flex align-items-center gap-2">
+                                <input type="checkbox" name="spending" value="Shopping" /> Shopping (clothes, gadgets)
+                            </label>
+                            <label class="d-flex align-items-center gap-2">
+                                <input type="checkbox" name="spending" value="Health & Medicine" /> Health & Medicine
+                            </label>
+                            <label class="d-flex align-items-center gap-2">
+                                <input type="checkbox" name="spending" value="Education" /> Education (self/kids)
+                            </label>
+                            <label class="d-flex align-items-center gap-2">
+                                <input type="checkbox" name="spending" value="Entertainment" /> Entertainment
+                            </label>
+                        </div>
                        
                     </div>
                 </div>
@@ -210,7 +214,54 @@
     </div>
 
     <!-- External Scripts -->
-    <script src="assets/js/survey.js"></script>
+    <!-- <script src="assets/js/survey.js"></script> -->
+    <script>
+        function submitSurvey() {
+            event.preventDefault(); // Prevent the default form submission
+
+            // Collect form data
+            const formData = {
+                monthlyIncome: document.getElementById('monthly-income').value,
+                earningMember: document.querySelector('input[name="earning-member"]:checked').value,
+                dependents: document.getElementById('dependents').value,
+                livingSituation: document.getElementById('living-situation').value,
+                rent: document.getElementById('rent').value,
+                transportMode: document.getElementById('transport-mode').value,
+                transportCost: document.getElementById('transport-cost').value,
+                eatingOutFrequency: document.getElementById('eating-out-frequency').value,
+                groceryCost: document.getElementById('grocery-cost').value,
+                utilitiesCost: document.getElementById('utilities-cost').value,
+                mobileInternetCost: document.getElementById('mobile-internet-cost').value,
+                subscriptions: document.getElementById('subscriptions').value,
+                savings: document.getElementById('savings').value,
+                investments: document.getElementById('investments').value,
+                loans: document.querySelector('input[name="loans"]:checked').value,
+                loanPayment: document.getElementById('loan-payment').value,
+                spendingHabits: Array.from(document.querySelectorAll('input[name="spending"]:checked')).map(
+                    (checkbox) => checkbox.value
+                ),
+                financialGoal: document.getElementById('financial-goal').value
+            };
+            console.log(formData)
+
+            // Send data to server (example using fetch API)
+            fetch('/submit-survey', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert("Survey submitted successfully!");
+            })
+            .catch(error => {
+                console.error("Error submitting survey:", error);
+            });
+        }
+
+    </script>
 </body>
 
 </html>
