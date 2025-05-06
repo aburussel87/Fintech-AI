@@ -1,0 +1,113 @@
+/* General Body */
+body {
+  font-family: 'Share Tech Mono', monospace; /* Match dashboard font */
+  background: linear-gradient(135deg, #090141, #1a3741, #080350); /* Match dashboard background */
+  color: #ffffff;
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Container */
+.container {
+  background: rgba(255, 255, 255, 0.05); /* Glassmorphic effect */
+  border-radius: 15px;
+  padding: 20px 30px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* Header */
+.header {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #ffca70; /* Highlighted color */
+  margin-bottom: 10px;
+}
+
+p {
+  color: #b0b0b0; /* Subtle text color */
+}
+
+/* Section Titles */
+h2 {
+  font-size: 1.5rem;
+  color: #90caf9; /* Match dashboard section titles */
+  margin-bottom: 15px;
+}
+
+/* Form Labels */
+.form-label {
+  font-size: 1rem;
+  color: #ffffff;
+  margin-bottom: 5px;
+}
+
+/* Inputs and Selects */
+.form-control,
+.form-select {
+  background: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.form-control::placeholder,
+.form-select option {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.form-control:focus,
+.form-select:focus {
+  outline: none;
+  border-color: #90caf9;
+  box-shadow: 0 0 5px rgba(144, 202, 249, 0.5);
+}
+
+/* Dropdown Options */
+.form-select option {
+  background: #ffffff; /* White background for dropdown options */
+  color: #000000; /* Black text for dropdown options */
+}
+
+/* Radio Buttons and Checkboxes */
+input[type="radio"],
+input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+/* Submit Button */
+button[type="submit"] {
+  background: linear-gradient(135deg, #1e3c72, #2a5298); /* Match dashboard button */
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 24px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  filter: brightness(1.2);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    padding: 15px;
+  }
+
+  .header {
+    font-size: 1.5rem;
+  }
+
+  h2 {
+    font-size: 1.2rem;
+  }
+
+  button[type="submit"] {
+    width: 100%;
+  }
+}
