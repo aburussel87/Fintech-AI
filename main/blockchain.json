@@ -1,87 +1,56 @@
 [
   {
-    "index": 1,
-    "timestamp": 123456789,
-    "data": "some data",
-    "previous_hash": "abc123",
-    "hash": "def456"
+    "index": 0,
+    "type": "Genesis",
+    "timestamp": "2025-01-01 00:00:00",
+    "transaction": {},
+    "previous_hash": "0",
+    "hash": "00000000000000000000000000000000"
   },
   {
     "index": 1,
-    "timestamp": "2025-05-03 23:51:42.880710",
+    "type": "Pay Bill",
+    "timestamp": "2025-05-05 10:00:00",
     "transaction": {
-      "invoice_id": "RUFZ5U18E49",
-      "amount": "1000",
-      "payment_method": "card",
-      "time": "2025-05-03 23:46:18",
-      "sender_id": "25MHRI2HUPSM",
-      "sender_info": {
-        "name": "Abu Russel",
-        "phone": "01303501932",
-        "email": "aburussel87@gmail.com",
-        "location": "Bangladesh University of Engineering & Technology, Azimpur- Lalbagh road, Sheikh Shaheb Bazar, Azimpur, Dhaka, Dhaka Metropolitan, Dhaka District, Dhaka Division, 1211, Bangladesh"
-      },
-      "receiver_id": "253JWHKCKFKJ",
-      "receiver_info": {
-        "name": "Abu Russel",
-        "phone": "01303501932",
-        "email": "xyz@"
-      },
-      "note": "hi"
+      "invoice_id": "INV1001",
+      "amount": 250,
+      "payment_method": "Card",
+      "sender_id": "user123",
+      "sender_current_balance": 750,
+      "receiver_id": "merchant001",
+      "receiver_current_balance": 1250
     },
-    "previous_hash": "def456",
-    "hash": "8fd289e0ad96cfa3fbe385871bab44d6d9de976feba873eeef2a73a5586bb963"
+    "previous_hash": "00000000000000000000000000000000",
+    "hash": "abcd1234efgh5678ijkl9012mnop3456"
   },
   {
     "index": 2,
-    "timestamp": "2025-05-04 01:17:25.263768",
+    "type": "Send Money",
+    "timestamp": "2025-05-05 10:05:00",
     "transaction": {
-      "invoice_id": "F0VQ3UIVRPF",
-      "amount": "1000",
-      "payment_method": "wallet",
-      "time": "2025-05-04 01:17:25",
-      "sender_id": "253JWHKCKFKJ",
-      "sender_info": {
-        "name": "Abu Russel",
-        "phone": "01303501932",
-        "email": "xyz@",
-        "location": "Bangladesh University of Engineering & Technology, Unmesh Datta Road, Chankharpul, Bokshibazar, Dhaka, Dhaka Metropolitan, Dhaka District, Dhaka Division, 1211, Bangladesh"
-      },
-      "receiver_id": "25MHRI2HUPSM",
-      "receiver_info": {
-        "name": "Abu Russel",
-        "phone": "01303501932",
-        "email": "aburussel87@gmail.com"
-      },
-      "note": "hi"
+      "invoice_id": "INV1002",
+      "amount": 100,
+      "payment_method": "Wallet",
+      "sender_id": "user456",
+      "sender_current_balance": 400,
+      "receiver_id": "user789",
+      "receiver_current_balance": 600
     },
-    "previous_hash": "8fd289e0ad96cfa3fbe385871bab44d6d9de976feba873eeef2a73a5586bb963",
-    "hash": "cfee113deb1bcb5490eef9dc60223c682aa048c6a2b6ebdfbaea6a7f98b542a9"
+    "previous_hash": "abcd1234efgh5678ijkl9012mnop3456",
+    "hash": "mnop3456qrst7890uvwx1234yzab5678"
   },
   {
     "index": 3,
-    "timestamp": "2025-05-05 19:10:14.337733",
+    "type": "Recharge",
+    "timestamp": "2025-05-05 10:10:00",
     "transaction": {
-      "invoice_id": "SP0EZAF4ZPB",
-      "amount": "10",
-      "payment_method": "wallet",
-      "time": "2025-05-05 19:10:09",
-      "sender_id": "253JWHKCKFKJ",
-      "sender_info": {
-        "name": "Abu Russel",
-        "phone": "01303501932",
-        "email": "xyz@",
-        "location": "Bangladesh University of Engineering & Technology, Azimpur- Lalbagh road, Sheikh Shaheb Bazar, Azimpur, Dhaka, Dhaka Metropolitan, Dhaka District, Dhaka Division, 1211, Bangladesh"
-      },
-      "receiver_id": "25MHRI2HUPSM",
-      "receiver_info": {
-        "name": "Abu Russel",
-        "phone": "01303501932",
-        "email": "aburussel87@gmail.com"
-      },
-      "note": "ggfhgf"
+      "user_id": "user789",
+      "amount": 200,
+      "current_balance": 800,
+      "method": "Bkash",
+      "time": "2025-05-05 10:10:00"
     },
-    "previous_hash": "cfee113deb1bcb5490eef9dc60223c682aa048c6a2b6ebdfbaea6a7f98b542a9",
-    "hash": "23ab6a32588af2d76b293e7ca68b222c240a48c1cc752e2227a501b8b0f1c0f8"
+    "previous_hash": "mnop3456qrst7890uvwx1234yzab5678",
+    "hash": "zxyw9876vuts5432rqpo1098nmkl3210"
   }
 ]

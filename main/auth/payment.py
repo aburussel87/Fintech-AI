@@ -10,7 +10,7 @@ from .fraud import check_fraud
 from utils import load_users, save_users
 from auth.blockchain import add_block
 from auth.budgetAi import verify_transaction
-
+from auth.blockchain import check_balance_integrity
 
 payment_bp = Blueprint('payment', __name__)
 
@@ -27,7 +27,7 @@ def verify_receiver():
         return jsonify({"success": False, "message": "Receiver's ID and Mobile do not match"}), 404
     curr = get_jwt_identity()  # Get current user's identity (user_id)
     if curr == receiver_id:
-        return jsonify({"success": False, "message": "You cannot send money to yourself"}), 400
+        return jsonify({"success": False, "message": "Self-transaction is not allowed"}), 400
     return jsonify({"success": True, "message": "Receiver verified successfully"}), 200
 
 
@@ -69,9 +69,17 @@ def submit_payment():
     # Find the sender using sender_id
     sender = next((u for u in users if u["id"] == sender_id), None)
     if sender is None:
-        return jsonify({"success": False, "message": "Sender not found"}), 404
+        return jsonify({"success": False,"fraud":False, "message": "Sender not found"}), 404
+    
+
+    verification = check_balance_integrity(sender_id, sender["balance"], sender["email"], sender["phone"])
+    if verification["success"] == False:
+        return jsonify({"success": False,"fraud":True, "message": verification["message"]}), 403
+    
+
     if (sender["balance"]- float(amount)-float(amount)*.0018) < 0:
-        return jsonify({"success": False, "message": "Insufficient Balance"}), 404
+        return jsonify({"success": False,"fraud":False, "message": "Insufficient Balance"}), 404
+    
     invoice = {
         "invoice_id": invoice_id,
         "amount": amount,
@@ -103,9 +111,17 @@ def submit_payment():
         sender["balance"] -= float(amount) + transaction_fee
         receiver["balance"] += float(amount)
         save_users(users)  # Save updated user balances
-        add_block(invoice)
+        add_block("Send Money", {
+            "invoice_id": invoice_id,
+            "amount": amount,   
+            "payment_method": paymentmethod,
+            "sender_id": sender_id,
+            "sender_current_balance": sender["balance"],
+            "receiver_id": receiver_id,
+            "receiver_current_balance": receiver["balance"]
+        })  # Save to blockchain
         success = True
-        return jsonify({"success": success, "invoice": invoice, "message":"payment successful"}), 201
+        return jsonify({"success": success,"fraud":False, "invoice": invoice, "message":"payment successful"}), 201
 
 
 
@@ -138,14 +154,22 @@ def submit_payment():
         sender["balance"] -= float(amount) + transaction_fee
         receiver["balance"] += float(amount)
         save_users(users)  # Save updated user balances
-        add_block(invoice)
+        add_block("Send Money", {
+            "invoice_id": invoice_id,
+            "amount": amount,   
+            "payment_method": paymentmethod,
+            "sender_id": sender_id,
+            "sender_current_balance": sender["balance"],
+            "receiver_id": receiver_id,
+            "receiver_current_balance": receiver["balance"]
+        })  # Save to blockchain
         success = True
     elif(fraud_check['flag']=='red'):
-        return jsonify({"success": "red", "invoice": invoice, "message":fraud_check['message']}), 403
+        return jsonify({"success": "red","fraud":False, "invoice": invoice, "message":fraud_check['message']}), 403
     if(budget_check['flag']=='red' and fraud_check['flag']=='green'):
-        return jsonify({"success": "red", "invoice": invoice, "message":budget_check['message']}), 403
+        return jsonify({"success": "red","fraud":False, "invoice": invoice, "message":budget_check['message']}), 403
 
-    return jsonify({"success": success, "invoice": invoice, "message":fraud_check['message']}), 201
+    return jsonify({"success": success,"fraud":False ,"invoice": invoice, "message":fraud_check['message']}), 201
 
 
 
@@ -184,9 +208,14 @@ def paybill():
     # Find the sender using sender_id
     sender = next((u for u in users if u["id"] == sender_id), None)
     if sender is None:
-        return jsonify({"success": False, "message": "Sender not found"}), 404
+        return jsonify({"success": False,"fraud":False, "message": "Sender not found"}), 404
+    
+    verification = check_balance_integrity(sender_id, sender["balance"], sender["email"], sender["phone"])
+    if verification["success"] == False:
+        return jsonify({"success": False,"fraud":True, "message": verification["message"]}), 403
+    
     if (sender["balance"]- float(amount)-float(amount)*.0018) < 0:
-        return jsonify({"success": False, "message": "Insufficient Balance"}), 404
+        return jsonify({"success": False,"fraud":False, "message": "Insufficient Balance"}), 404
     invoice = {
         "invoice_id": invoice_id,
         "amount": amount,
@@ -218,9 +247,17 @@ def paybill():
         sender["balance"] -= float(amount) + transaction_fee
         receiver["balance"] += float(amount)
         save_users(users)  # Save updated user balances
-        add_block(invoice)
+        add_block("Pay Bill", {
+            "invoice_id": invoice_id,
+            "amount": amount,   
+            "payment_method": paymentmethod,
+            "sender_id": sender_id,
+            "sender_current_balance": sender["balance"],
+            "receiver_id": receiver_id,
+            "receiver_current_balance": receiver["balance"]
+        })  # Save to blockchain
         success = True
-        return jsonify({"success": success, "invoice": invoice, "message":"payment successful"}), 201
+        return jsonify({"success": success,"fraud":False, "invoice": invoice, "message":"payment successful"}), 201
 
 
 
@@ -253,11 +290,19 @@ def paybill():
         sender["balance"] -= float(amount) + transaction_fee
         receiver["balance"] += float(amount)
         save_users(users)  # Save updated user balances
-        add_block(invoice)
+        add_block("Pay Bill", {
+            "invoice_id": invoice_id,
+            "amount": amount,   
+            "payment_method": paymentmethod,
+            "sender_id": sender_id,
+            "sender_current_balance": sender["balance"],
+            "receiver_id": receiver_id,
+            "receiver_current_balance": receiver["balance"]
+        })  # Save to blockchainadd_block(invoice)
         success = True
     elif(fraud_check['flag']=='red'):
-        return jsonify({"success": "red", "invoice": invoice, "message":fraud_check['message']}), 403
+        return jsonify({"success": "red","fraud":False, "invoice": invoice, "message":fraud_check['message']}), 403
     if(budget_check['flag']=='red' and fraud_check['flag']=='green'):
-        return jsonify({"success": "red", "invoice": invoice, "message":budget_check['message']}), 403
+        return jsonify({"success": "red","fraud":False, "invoice": invoice, "message":budget_check['message']}), 403
 
-    return jsonify({"success": success, "invoice": invoice, "message":fraud_check['message']}), 201
+    return jsonify({"success": success,"fraud":False, "invoice": invoice, "message":fraud_check['message']}), 201
