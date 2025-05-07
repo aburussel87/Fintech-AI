@@ -1,0 +1,23 @@
+[
+    {
+      "dependents": "5",
+      "earningMember": "Yes",
+      "eatingOutFrequency": "Rarely (0–1 times)",
+      "financialGoal": "Monthly expense control",
+      "groceryCost": "5000",
+      "investments": "dps",
+      "livingSituation": "Shared accommodation",
+      "loanPayment": "",
+      "loans": "No",
+      "mobileInternetCost": "1000",
+      "monthlyIncome": "10,000–20,000",
+      "rent": "10000",
+      "savings": "< 10% of income",
+      "spendingHabits": ["Shopping"],
+      "subscriptions": "no",
+      "transportCost": "3000",
+      "transportMode": "Public transport",
+      "utilitiesCost": "10000"
+    }
+  ]
+  
