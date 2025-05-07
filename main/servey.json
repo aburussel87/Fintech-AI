@@ -33,7 +33,7 @@
             "earningMember": "Yes",
             "dependents": "5",
             "livingSituation": "Own home (no rent)",
-            "rent": "",
+            "rent": "0",
             "transportMode": "Public transport",
             "transportCost": "255",
             "eatingOutFrequency": "Rarely (0\u20131 times)",
