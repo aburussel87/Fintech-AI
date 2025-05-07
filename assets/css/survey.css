@@ -111,3 +111,17 @@ button[type="submit"]:hover {
     width: 100%;
   }
 }
+
+#watermark {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: url('../logo.png') no-repeat center center;
+  background-size: 400px;
+  opacity: .2;
+  width: 400px;
+  height: 400px;
+  z-index: 0;
+  pointer-events: none;
+}

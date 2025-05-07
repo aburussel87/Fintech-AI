@@ -306,3 +306,20 @@ def paybill():
         return jsonify({"success": "red","fraud":False, "invoice": invoice, "message":budget_check['message']}), 403
 
     return jsonify({"success": success,"fraud":False, "invoice": invoice, "message":fraud_check['message']}), 201
+
+
+
+@payment_bp.route("/payment/verify", methods=["POST"])
+@jwt_required()  # Protect this endpoint with JWT token
+def verify():
+    data = request.get_json()
+    receiver_id = data.get("id")
+    users = load_users()
+    user = next((u for u in users if u["id"] == receiver_id), None)
+
+    if user is None:
+        return jsonify({"success": False, "message": "Invalid Reciever"}), 404
+    curr = get_jwt_identity()  # Get current user's identity (user_id)
+    if curr == receiver_id:
+        return jsonify({"success": False, "message": "Self-transaction is not allowed"}), 400
+    return jsonify({"success": True, "message": "Receiver verified successfully"}), 200

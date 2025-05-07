@@ -6,6 +6,8 @@ DATA_FILE = os.path.join(os.path.dirname(__file__), "users.json")
 RECHARGE_FILE = os.path.join(os.path.dirname(__file__), "recharge.json")
 BLOCKCHAIN_FILE = os.path.join(os.path.dirname(__file__), "blockchain.json")
 BANNED_USERS = os.path.join(os.path.dirname(__file__), "banned_users.json")
+SURVEY = os.path.join(os.path.dirname(__file__), "servey.json")
+
 
 def load_users():
     if not os.path.exists(DATA_FILE):
@@ -57,3 +59,12 @@ def load_blockchain():
 def save_blockchain(chain):
     with open(BLOCKCHAIN_FILE, 'w') as f:
         json.dump(chain, f, indent=2)
+
+def load_survey():
+    if not os.path.exists(SURVEY):
+        return []
+    with open(SURVEY, "r") as f:
+        return json.load(f)
+def save_survey(servey):
+    with open(SURVEY, "w") as f:
+        json.dump(servey, f, indent=4)

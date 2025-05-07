@@ -29,6 +29,7 @@ from auth.fraud import fraud_bp
 from auth.recharge import recharge_bp
 from auth.statement import statement_bp
 from auth.budget import budget_bp
+from auth.survey import survey_bp
 
 app.register_blueprint(login_bp)
 app.register_blueprint(register_bp)
@@ -41,6 +42,7 @@ app.register_blueprint(recharge_bp)
 app.register_blueprint(statement_bp)
 app.register_blueprint(budget_bp)
 app.register_blueprint(blockchain_bp)
+app.register_blueprint(survey_bp)
 
 # Routes
 @app.route('/')
