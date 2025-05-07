@@ -1,5 +1,5 @@
 import json
-# import sentence_transformers
+import sentence_transformers
 from .budjetAiHelper import generate_budget_from_user_data
 
 file_path="main\\auth\\budgets.json"
