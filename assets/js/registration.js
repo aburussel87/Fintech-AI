@@ -77,7 +77,6 @@ function sendVerificationCode() {
   emailjs.send("service_w48xx69", "template_k9y37ol", templateParams)
     .then(function (response) {
       alert("Verification code sent!");
-      console.log("SUCCESS!", response.status, response.text);
       document.getElementById("verificationCodeButton").disabled = true;
       document.getElementById("verificationCodeButton").textContent = "Verification Code Sent";
       document.getElementById("email").disabled = true;
@@ -265,7 +264,8 @@ async function signup(event) {
     if (data.success) {
       alert("Sign up successful!");
       localStorage.removeItem("verified");
-      window.location.href = "index.html";
+      localStorage.setItem("id", id);
+      window.location.href = "survey.html";
     } else {
       alert(data.message || "Sign up failed.");
     }

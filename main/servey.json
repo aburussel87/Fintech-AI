@@ -1,0 +1,54 @@
+[
+    {
+        "id": "25ZYIOMQE3CA",
+        "time": "2025-05-07 07:42:35",
+        "form": {
+            "monthlyIncome": "20,001\u201340,000",
+            "earningMember": "Yes",
+            "dependents": "5",
+            "livingSituation": "Own home (no rent)",
+            "rent": "",
+            "transportMode": "Public transport",
+            "transportCost": "255",
+            "eatingOutFrequency": "Rarely (0\u20131 times)",
+            "groceryCost": "255",
+            "utilitiesCost": "87487",
+            "mobileInternetCost": "25",
+            "subscriptions": "no",
+            "savings": "< 10% of income",
+            "investments": "",
+            "loans": "Yes",
+            "loanPayment": "25",
+            "spendingHabits": [
+                "Shopping"
+            ],
+            "financialGoal": "Business reinvestment"
+        }
+    },
+    {
+        "id": "25ZYIOMQE3CA",
+        "time": "2025-05-07 07:42:44",
+        "form": {
+            "monthlyIncome": "20,001\u201340,000",
+            "earningMember": "Yes",
+            "dependents": "5",
+            "livingSituation": "Own home (no rent)",
+            "rent": "",
+            "transportMode": "Public transport",
+            "transportCost": "255",
+            "eatingOutFrequency": "Rarely (0\u20131 times)",
+            "groceryCost": "255",
+            "utilitiesCost": "87487",
+            "mobileInternetCost": "25",
+            "subscriptions": "no",
+            "savings": "< 10% of income",
+            "investments": "",
+            "loans": "Yes",
+            "loanPayment": "25",
+            "spendingHabits": [
+                "Shopping"
+            ],
+            "financialGoal": "Business reinvestment"
+        }
+    }
+]
