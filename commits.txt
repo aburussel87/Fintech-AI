@@ -1,0 +1,127 @@
+33f7a78 | Abu Russel | Add files via upload
+dd2a562 | gagradebnath | updated file arrangements
+93887fe | Abu Russel | Update index.html
+201af52 | gagradebnath | added dashboard page
+7f5b025 | gagradebnath | Merge branch 'main' of https://github.com/aburussel87/Fintech-AI
+666f85b | gagradebnath | updated dashboard
+20d5d43 | gagradebnath | updated dashboard
+bfc432a | gagradebnath | redirected to dashboard on successful login
+d01f47f | Abu Russel | Add files via upload
+9af1acc | Abu Russel | Add files via upload
+1ac827d | Abu Russel | Add files via upload
+f322565 | Abu Russel | Update dashboard.html
+cb6bc52 | Abu Russel | dashboard to login and sign_in
+52e80b8 | Abu Russel | updated css file path
+eb932da | Abu Russel | Update chat.html
+e3737a6 | Abu Russel | Linked Chatbot to dashboard logo
+e1474d6 | nihal101010 | Update chat.css
+710e25a | gagradebnath | backend structure
+94a988d | gagradebnath | Merge branch 'main' of https://github.com/aburussel87/Fintech-AI
+e531877 | Abu Russel | Favicon addition
+6cfc3e8 | Abu Russel | responsive registration
+cce3eb9 | Abu Russel | Add files via upload
+d84cdd6 | Abu Russel | Rename IMG_1476.png to logo.png
+113c827 | Abu Russel | Update index.html
+cf1f896 | Abu Russel | Update registration.html
+2ac0b08 | Abu Russel | Update login.css
+4a74626 | Abu Russel | Update dashboard.html
+c61102d | Abu Russel | Update chat.html
+c7bf17e | Abu Russel | Update chat.css
+7a177b3 | Abu Russel | profile added
+c7fb6ea | Abu Russel | Merge branch 'main' of https://github.com/aburussel87/Fintech-AI
+555c9ba | Abu Russel | nothing important
+8f48ae6 | Abu Russel | css updated
+cfec7cc | Abu Russel | nothing important
+797662c | provat71 | updated registration and payment
+d4f6496 | provat71 | test
+a7adb7b | provat71 | backend demo
+6ad67fe | Abu Russel | reverted back to prev reg_css
+1c279d1 | Abu Russel | Merge branch 'main' of https://github.com/aburussel87/Fintech-AI
+d6e56f4 | Abu Russel | Update dashboard.html
+3077f94 | Abu Russel |  backend
+048b398 | Abu Russel | gui
+a13e41f | Abu Russel | ....
+91b32c6 | Abu Russel | Directory of all backend files
+2c31510 | Abu Russel | auto generated invoice(pdf) + json
+7f3d0dc | gagradebnath | added chate bot but couldnt connect it to the server
+ca47c79 | gagradebnath | Merge branch 'main' of https://github.com/aburussel87/Fintech-AI
+4cc30ff | gagradebnath | added code for testing
+10c67e5 | Abu Russel | chat to backend
+4f8c3fd | gagradebnath | updated chat.css
+a5a8c71 | gagradebnath | fixed chat part
+94fb2f0 | Abu Russel | zwt tocken with chatbot
+8ab3900 | gagradebnath | budget page added, need work to be done to beautify it
+a748871 | Abu Russel | must pull this
+fccd060 | Abu Russel | Merge branch 'main' of https://github.com/aburussel87/Fintech-AI
+bf34c1a | Abu Russel | redirecting to login for unauthenticated access
+231c206 | provat71 | incomplete budget.js + html
+bac2f97 | nihal101010 | chatbot and budget colour changed
+650dd06 | gagradebnath | reverted the budget.html page back to previous version
+396fd68 | gagradebnath | fixed the budgeting part, but needs redo of styling
+50801c5 | gagradebnath | budgert json reference
+d6b9391 | gagradebnath | added ai to budget and fraud detection
+a897a2f | gagradebnath | fraud and payment updated to generate invoice
+7366502 | gagradebnath | fined tuned context
+7dac48d | gagradebnath | fixed fraud detec tion
+6a8c54b | gagradebnath | updated fraud.py for testing purposes
+1371492 | Abu Russel | documentation and transactoion updated
+8a99f99 | Abu Russel | updated
+775df9b | gagradebnath | upadated
+b968bff | nihal101010 | dashboard made dynamic, budget colour changed
+da53b6f | nihal101010 | Merge branch 'main' of https://github.com/aburussel87/Fintech-AI
+7344837 | Abu Russel | statement updated
+183394b | Abu Russel | updated dashboard- duplicate removed(nihal)
+dccceab | gagradebnath | functionality to save budget added
+77b08f6 | nihal101010 | documentation colour changed
+84395c0 | gagradebnath | functionality to save and change budget added
+d7a30f8 | gagradebnath | Merge branch 'main' of https://github.com/aburussel87/Fintech-AI
+29cd0cf | Abu Russel | Payment uses realtime balance from users.json
+c293758 | Abu Russel | Mainly BlockChain and Payment
+9f650f6 | gagradebnath | trained anda dded a model to detect fraud but the pyment page gets refresgre at the very moment sub mit page is clicked, no invoice is generated, need to solve it
+39f8008 | gagradebnath | Merge branch 'main' of https://github.com/aburussel87/Fintech-AI
+ba30802 | Abu Russel | payment fixed
+15ef1b4 | Abu Russel | Merge branch 'main' of https://github.com/aburussel87/Fintech-AI
+8777373 | Abu Russel | This version is working properly
+82159d0 | Abu Russel | Update documentation.html
+6f45e36 | Abu Russel | documentation updated+requirements added
+10b212e | nihal101010 | new dasgboard added
+f1feb32 | nihal101010 | Merge branch 'main' of https://github.com/aburussel87/Fintech-AI
+37a1be6 | gagradebnath | added functionality to check over spending
+f63a149 | gagradebnath | updated budgeting and related stuff
+ff3bc75 | gagradebnath | prompt update
+a0ff963 | Abu Russel | dashboard + backend
+13f82a0 | Abu Russel | requirements.txt
+ab9fc45 | provat71 | fixed date problem
+765ca22 | provat71 | UI mainly
+14de398 | gagradebnath | Merge branch 'main' of https://github.com/aburussel87/Fintech-AI
+c98e4ca | provat71 | updated some info
+3f5bce3 | provat71 | Merge branch 'main' of https://github.com/aburussel87/Fintech-AI
+8dd569f | gagradebnath | addaed balance
+57760aa | gagradebnath | Merge branch 'main' of https://github.com/aburussel87/Fintech-AI
+52c63e0 | provat71 | chart text color + balance fixed
+26b7f7c | provat71 | Merge branch 'main' of https://github.com/aburussel87/Fintech-AI
+83c404b | gagradebnath | lillte tweaks
+1034cb4 | gagradebnath | Merge branch 'main' of https://github.com/aburussel87/Fintech-AI
+d31ed00 | nihal101010 | dashboard and profile made consistent
+c8e96d3 | nihal101010 | Chat bot fixed
+b80587b | nihal101010 | Log in page
+7a334bf | nihal101010 | dashboard and profile made consistent
+f39a311 | gagradebnath | Merge commit 'd31ed00fcf5bca1fad3ae56e8aaeb34cd005444c'
+611613c | gagradebnath | Merge branch 'main' of https://github.com/aburussel87/Fintech-AI
+3219e48 | provat71 | paybill added
+ba0ac2f | gagradebnath | feat: Implement Pay Bill feature with verification and fraud detection
+efd8b4c | gagradebnath | fixed budgetig issue (prompt)
+bd3a163 | Abu Russel | blockchain updated
+8bc5cbf | nihal101010 | survey added
+530745e | provat71 | reg
+172607f | provat71 | changed structure of project
+b47f49d | provat71 | Merge branch 'main' of https://github.com/aburussel87/Fintech-AI
+71a2167 | provat71 | index + readme
+defc385 | gagradebnath | fixed some styles
+ed391bb | gagradebnath | for budget spliting
+0c117c0 | gagradebnath | for budget spliting
+f09ffa3 | provat71 | Merge branch 'main' of https://github.com/aburussel87/Fintech-AI
+618542b | provat71 | deployed on local network
+5d11761 | provat71 | survey.json
+b4a01c4 | provat71 | survey + split(partial)
+f966100 | provat71 | servey + area

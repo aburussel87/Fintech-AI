@@ -45,13 +45,11 @@
         <div class="feature-grid">
           <div class="feature-item collapsible">
             <button class="collapse-header" title="Plan and optimize your monthly budget">💰 Budget Planner <span class="toggle-icon">▼</span></button>
-             <div class="collapse-content">
+            <div class="collapse-content">
               <p>Track and manage your budget seamlessly. Automatically categorize expenses and receive suggestions to optimize your spending.
                 Easily set monthly spending limits and compare actual vs. planned expenses.
                 FinGuard AI adapts to your habits over time, making budget adjustments smarter and more personalized.</p>
             </div> 
-           
-            
           </div>
     
           <div class="feature-item collapsible">
@@ -68,9 +66,7 @@
             <div class="collapse-content">
               <p>Detailed transaction tracking with category analysis. Visual charts and timelines to help users understand their financial behavior.
                 Search, filter, and review your spending history by category, merchant, or date.
-                Daily, weekly, and monthly summaries help you stay informed without overwhelming you.
-                
-                </p>
+                Daily, weekly, and monthly summaries help you stay informed without overwhelming you.</p>
             </div>
           </div>
     
@@ -91,17 +87,51 @@
                 Data security and privacy are prioritized with encrypted syncing and biometric login options.</p>
             </div>
           </div>
+    
+          <div class="feature-item collapsible">
+            <button class="collapse-header" title="Split your budget into specific categories">💡 Budget Splitting <span class="toggle-icon">▼</span></button>
+            <div class="collapse-content">
+              <p>Divide your monthly budget into customizable categories such as food, transportation, rent, and entertainment.
+                Set specific limits for each category and receive alerts when nearing limits.
+                Get visual summaries to easily track which categories consume the most of your budget and adjust accordingly.</p>
+            </div>
+          </div>
+    
         </div>
       </div>
     </section>
     
     
+    
+<!-- Project Structure -->
+<section id="project-structure">
+  <h1>📁 Project Structure</h1>
+  <pre><code>
+    FinGuard-AI/
+│
+├── Frontend/                  # All HTML frontend pages
+├── assets/                   # CSS, JS, images, fonts
+│   ├── css/
+│   ├── js/
+│   ├── fonts/
+│   └── images/
+├── data/                     # Data files (transactions, categories, etc.)
+├── main/
+|   ──auth/                   # Backend services and API logic
+|   ──server.py               # Server
+|   ──images/                   #images
+├── fraud_detection_model.pkl # Pretrained ML model
+├── requirements.txt          # Python dependencies
+└── .vscode/, .hintrc, etc.   # Configuration files
+</section>
+
+
 
     <!-- Setup -->
     <section id="setup">
       <h1>⚙️ Setup</h1>
       <pre><code># Clone the repo
-git clone https://github.com/your-repo/finguard-ai.git
+git clone https://github.com/aburussel87/Fintech-AI.git
 
 # Navigate into backend
 cd backend
@@ -120,74 +150,29 @@ python server.py</code></pre>
       <p>To run the server, use <code>python server.py</code>. The app will be available at <code>http://
     </section>
 
-    <!-- Requirements -->
     <section id="requirements">
       <h1>📦 Requirements</h1>
       <p>Dependencies listed in <code>requirements.txt</code>:</p>
-      <pre><ul>
-        <li><strong>annotated-types==0.7.0</strong> – Support for Python type annotations with metadata</li>
-        <li><strong>anyio==4.9.0</strong> – Async library supporting async/await and structured concurrency</li>
-        <li><strong>blinker==1.9.0</strong> – Fast, simple object-to-object and signal/event dispatching</li>
-        <li><strong>certifi==2025.4.26</strong> – Provides Mozilla's trusted CA certificates</li>
-        <li><strong>charset-normalizer==3.4.2</strong> – Character encoding auto-detection (like chardet)</li>
-        <li><strong>click==8.1.8</strong> – Command-line interface creation toolkit</li>
-        <li><strong>colorama==0.4.6</strong> – Colored terminal text on Windows</li>
-        <li><strong>Faker==37.1.0</strong> – Generates fake data for testing or seeding databases</li>
-        <li><strong>fastapi==0.115.12</strong> – Fast web framework for APIs based on standard Python type hints</li>
-        <li><strong>filelock==3.18.0</strong> – Platform-independent file locking</li>
-        <li><strong>Flask==3.1.0</strong> – Micro web framework for Python</li>
-        <li><strong>flask-cors==5.0.1</strong> – Enables Cross-Origin Resource Sharing (CORS) in Flask</li>
-        <li><strong>Flask-JWT-Extended==4.7.1</strong> – Adds JWT (JSON Web Token) support to Flask</li>
-        <li><strong>fsspec==2025.3.2</strong> – Filesystem interface for local, cloud, and remote storage</li>
-        <li><strong>h11==0.16.0</strong> – HTTP/1.1 protocol implementation used by HTTP clients/servers</li>
-        <li><strong>httpcore==1.0.9</strong> – Low-level HTTP networking for httpx</li>
-        <li><strong>httpx==0.28.1</strong> – HTTP client for Python with async support</li>
-        <li><strong>huggingface-hub==0.30.2</strong> – Interface to Hugging Face model and dataset hub</li>
-        <li><strong>idna==3.10</strong> – Internationalized Domain Names in Applications (IDNA) support</li>
-        <li><strong>itsdangerous==2.2.0</strong> – Safe data serialization for Flask sessions and tokens</li>
-        <li><strong>Jinja2==3.1.6</strong> – Templating engine for Python (used in Flask)</li>
-        <li><strong>joblib==1.4.2</strong> – Enables easy caching and parallel computation</li>
-        <li><strong>MarkupSafe==3.0.2</strong> – Safely handles strings with embedded HTML/XML</li>
-        <li><strong>mpmath==1.3.0</strong> – Arbitrary-precision floating-point arithmetic library</li>
-        <li><strong>networkx==3.4.2</strong> – Graph algorithms and network analysis toolkit</li>
-        <li><strong>numpy==2.2.5</strong> – Fundamental package for numerical computations</li>
-        <li><strong>ollama==0.4.8</strong> – Interface to run and manage large language models locally</li>
-        <li><strong>packaging==25.0</strong> – Handles Python package version and requirement parsing</li>
-        <li><strong>pandas==2.2.3</strong> – Data analysis and manipulation library</li>
-        <li><strong>pillow==11.2.1</strong> – Python Imaging Library for opening and manipulating images</li>
-        <li><strong>pydantic==2.11.3</strong> – Data validation and settings management using Python type hints</li>
-        <li><strong>pydantic_core==2.33.1</strong> – Core utilities for Pydantic (performance-critical parts)</li>
-        <li><strong>PyJWT==2.10.1</strong> – Encode and decode JSON Web Tokens</li>
-        <li><strong>python-dateutil==2.9.0.post0</strong> – Extensions to the standard <code>datetime</code> module</li>
-        <li><strong>pytz==2025.2</strong> – World timezone definitions for Python</li>
-        <li><strong>PyYAML==6.0.2</strong> – Parses and writes YAML format</li>
-        <li><strong>regex==2024.11.6</strong> – Alternative regular expression module with better Unicode support</li>
-        <li><strong>requests==2.32.3</strong> – Simple and elegant HTTP library for Python</li>
-        <li><strong>safetensors==0.5.3</strong> – Safe and fast tensor serialization format</li>
-        <li><strong>scikit-learn==1.6.1</strong> – Machine learning algorithms and tools</li>
-        <li><strong>scipy==1.15.2</strong> – Scientific and technical computing tools</li>
-        <li><strong>sentence-transformers==4.1.0</strong> – Sentence and text embedding models from Hugging Face</li>
-        <li><strong>setuptools==80.3.1</strong> – Tools for packaging and distributing Python packages</li>
-        <li><strong>six==1.17.0</strong> – Python 2 and 3 compatibility utilities</li>
-        <li><strong>sniffio==1.3.1</strong> – Detects current async library in use</li>
-        <li><strong>starlette==0.46.2</strong> – Lightweight ASGI toolkit used in FastAPI</li>
-        <li><strong>sympy==1.14.0</strong> – Symbolic mathematics library</li>
-        <li><strong>threadpoolctl==3.6.0</strong> – Controls thread pools in Python libraries like NumPy or SciPy</li>
-        <li><strong>tokenizers==0.21.1</strong> – Fast tokenizer library for natural language processing</li>
-        <li><strong>torch==2.7.0</strong> – PyTorch deep learning framework</li>
-        <li><strong>tqdm==4.67.1</strong> – Fast, extensible progress bar library</li>
-        <li><strong>transformers==4.51.3</strong> – State-of-the-art NLP models from Hugging Face</li>
-        <li><strong>typing-inspection==0.4.0</strong> – Utilities for runtime inspection of typing module objects</li>
-        <li><strong>typing_extensions==4.13.2</strong> – Backports for newer typing features for older Python versions</li>
-        <li><strong>tzdata==2025.2</strong> – Timezone database used with <code>pytz</code></li>
-        <li><strong>urllib3==2.4.0</strong> – Powerful HTTP client for Python (used by <code>requests</code>)</li>
-        <li><strong>uvicorn==0.34.2</strong> – ASGI server for FastAPI and other async frameworks</li>
-        <li><strong>Werkzeug==3.1.3</strong> – WSGI utility library used by Flask</li>
-      </ul>
-
-    </pre>
-      
+      <pre style="white-space: pre-wrap; font-size: 12px; line-height: 1.2;">
+    annotated-types==0.7.0, anyio==4.9.0, blinker==1.9.0, certifi==2025.4.26,
+    charset-normalizer==3.4.2, click==8.1.8, colorama==0.4.6, Faker==37.1.0,
+    fastapi==0.115.12, filelock==3.18.0, Flask==3.1.0, flask-cors==5.0.1,
+    Flask-JWT-Extended==4.7.1, fsspec==2025.3.2, h11==0.16.0, httpcore==1.0.9,
+    httpx==0.28.1, huggingface-hub==0.30.2, idna==3.10, itsdangerous==2.2.0,
+    Jinja2==3.1.6, joblib==1.4.2, MarkupSafe==3.0.2, mpmath==1.3.0,
+    networkx==3.4.2, numpy==2.2.5, ollama==0.4.8, packaging==25.0,
+    pandas==2.2.3, pillow==11.2.1, pydantic==2.11.3, pydantic_core==2.33.1,
+    PyJWT==2.10.1, python-dateutil==2.9.0.post0, pytz==2025.2,
+    PyYAML==6.0.2, regex==2024.11.6, requests==2.32.3, safetensors==0.5.3,
+    scikit-learn==1.6.1, scipy==1.15.2, sentence-transformers==4.1.0,
+    setuptools==80.3.1, six==1.17.0, sniffio==1.3.1, starlette==0.46.2,
+    sympy==1.14.0, threadpoolctl==3.6.0, tokenizers==0.21.1, torch==2.7.0,
+    tqdm==4.67.1, transformers==4.51.3, typing-inspection==0.4.0,
+    typing_extensions==4.13.2, tzdata==2025.2, urllib3==2.4.0,
+    uvicorn==0.34.2, Werkzeug==3.1.3
+      </pre>
     </section>
+    
 
     <!-- API -->
     <section id="api">
@@ -306,7 +291,7 @@ Headers: Authorization: Bearer &lt;JWT_TOKEN&gt;
         <li>Ghagra Salem Debnath: <a href="mailto:2205181@cse.buet.ac.bd">2205181@cse.buet.ac.bd</a></li>
         <li>Mahmud Nihal: <a href="mailto:2205158@cse.buet.ac.bd">2205158@cse.buet.ac.bd</a></li>
         <li>Provat Roy: <a href="mailto:2205160@cse.buet.ac.bd">2205160@cse.buet.ac.bd</a></li>
-        <li>Project GitHub: <a href="https://github.com/your-repo/finguard-ai" target="_blank" rel="noopener">GitHub Repo</a></li>
+        <li>Project GitHub: <a href="https://github.com/aburussel87/Fintech-AI.git" target="_blank" rel="noopener">GitHub Repo</a></li>
       </ul>
     </section>
 
